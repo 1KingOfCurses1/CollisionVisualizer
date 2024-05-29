@@ -50,12 +50,16 @@ abstract public class AbstractShape implements Shape {
         return velocity;
     }
 
-    public void setMass(int mass) {
+    public void setMass(double mass) {
         this.mass = mass;
     }
 
     public void setVelocity(double velocity) {
         this.velocity = velocity;
+    }
+
+    public boolean equals(AbstractShape s) {
+        return s.xPos == xPos && s.yPos == yPos && s.mass == mass && s.velocity == velocity;
     }
 
     public String toString() {
