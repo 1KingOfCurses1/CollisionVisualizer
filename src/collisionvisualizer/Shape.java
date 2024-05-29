@@ -23,9 +23,5 @@ public interface Shape {
     
     public void setVelocity(double velocity);
     
-    public Shape clone();
-    
-    public boolean equals(Shape s);
-    
     public String toString();
 }
