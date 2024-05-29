@@ -1,15 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+Shan Truong
+May 29, 2024
+Interface for all Shapes
+*/
 package collisionvisualizer;
 
-/**
- *
- * @author shtru6553
- */
 public interface Shape {
-    
     
     public int getXPos();
     
