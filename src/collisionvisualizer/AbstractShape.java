@@ -1,13 +1,65 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ *
+ *
  */
 package collisionvisualizer;
 
-/**
- *
- * @author shtru6553
- */
-public class AbstractShape {
-    
+abstract public class AbstractShape implements Shape {
+
+    int xPos;
+    int yPos;
+    double mass;
+    double velocity;
+
+    public AbstractShape() {
+        xPos = 0;
+        yPos = 0;
+        mass = 0;
+        velocity = 0;
+    }
+
+    public AbstractShape(int xPos, int yPos, double mass, double velocity) {
+        this();
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.mass = mass;
+        this.velocity = velocity;
+    }
+
+    public int getXPos() {
+        return xPos;
+    }
+
+    public int getYPos() {
+        return yPos;
+    }
+
+    public void setXPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public void setYPos(int yPos) {
+        this.yPos = yPos;
+    }
+
+    public double getMass() {
+        return mass;
+    }
+
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setMass(int mass) {
+        this.mass = mass;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    public String toString() {
+        return "X-position: " + xPos + "\nY-position: " + yPos + "\nMass: " + mass + "\nVelocity: " + velocity;
+    }
+
 }
