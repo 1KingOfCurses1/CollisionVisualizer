@@ -5,26 +5,35 @@ Square class with all square functions
  */
 package collisionvisualizer;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 public class Square extends AbstractShape{
     
-    private double length;
+    private int length;
     
-    private double width;
+    private int width;
+    
+    private Color colour;
     
     public Square(){
         
         length = 0;
         
         width = 0;
+        
+        colour = new Color(0,0,0);
     }
     
-    public Square(double length, double width){
+    public Square(int length, int width, Color colour){
         
         this();
         
         this.length = length;
         
         this.width = width;
+        
+        this.colour = colour;
     }
     
     public double getLength(){
@@ -35,17 +44,17 @@ public class Square extends AbstractShape{
         return width;
     }
     
-    public void setLength(double length){
+    public void setLength(int length){
         this.length = length;
     }
     
-    public void setWidth(double width){
+    public void setWidth(int width){
         this.width = width;
     }
     
     public Square clone(){
         
-        Square s = new Square(length, width);
+        Square s = new Square(length, width, colour);
         
         return s;
     }
@@ -57,6 +66,17 @@ public class Square extends AbstractShape{
     public String toString(){
         
         return super.toString() + "\nLength: " + length + "\nWidth: " + width;
+    }
+    
+    public void draw(Graphics2D g) {
+        
+        Graphics2D g2d = (Graphics2D) g;
+        
+        g2d.setPaint(colour);
+        
+        g2d.fillRect(xPos,yPos,length,width);
+        
+        
     }
 
 }
