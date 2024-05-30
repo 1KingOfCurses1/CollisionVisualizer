@@ -52,6 +52,14 @@ public class Square extends AbstractShape{
         this.width = width;
     }
     
+    public Color getColour() {
+        return colour;
+    }
+
+    public void setColour(Color colour) {
+        this.colour = colour;
+    }
+    
     public Square clone(){
         
         Square s = new Square(length, width, colour);
