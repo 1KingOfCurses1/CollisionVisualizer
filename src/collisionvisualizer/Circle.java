@@ -4,19 +4,26 @@
  */
 package collisionvisualizer;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Circle extends AbstractShape {
 
-    int radius;
+    private int radius;
 
+    private Color colour;
+    
     public Circle() {
         radius = 0;
+        
+        colour = new Color(0,0,0);
     }
 
-    public Circle(int radius) {
+    public Circle(int radius, Color colour) {
         this();
         this.radius = radius;
+        
+        this.colour = colour;
     }
 
     public int getRadius() {
@@ -27,8 +34,16 @@ public class Circle extends AbstractShape {
         this.radius = radius;
     }
 
+    public Color getColour(){
+        return colour;
+    }
+    
+    public void setColour(Color colour){
+        this.colour = colour;
+    }
+    
     public Circle clone() {
-        Circle c = new Circle(radius);
+        Circle c = new Circle(radius, colour);
         return c;
     }
 
@@ -40,8 +55,12 @@ public class Circle extends AbstractShape {
         return super.toString() + "\nRadius: " + radius;
     }
 
-    
     public void draw(Graphics2D g) {
+        
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setPaint(colour);
+        
         g.fillOval(xPos, yPos, radius, radius);
     }
 
