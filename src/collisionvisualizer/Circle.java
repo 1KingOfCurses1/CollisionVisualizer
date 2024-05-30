@@ -4,24 +4,26 @@
  */
 package collisionvisualizer;
 
+import java.awt.Graphics2D;
+
 public class Circle extends AbstractShape {
 
-    double radius;
+    int radius;
 
     public Circle() {
         radius = 0;
     }
 
-    public Circle(double radius) {
+    public Circle(int radius) {
         this();
         this.radius = radius;
     }
 
-    public double getRadius() {
+    public int getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) {
+    public void setRadius(int radius) {
         this.radius = radius;
     }
 
@@ -36,6 +38,11 @@ public class Circle extends AbstractShape {
 
     public String toString(){
         return super.toString() + "\nRadius: " + radius;
+    }
+
+    
+    public void draw(Graphics2D g) {
+        g.fillOval(xPos, yPos, radius, radius);
     }
 
 
