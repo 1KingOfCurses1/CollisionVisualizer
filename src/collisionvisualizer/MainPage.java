@@ -18,7 +18,6 @@ public class MainPage extends javax.swing.JFrame {
      */
     public MainPage() {
         initComponents();
-        this.getContentPane().setBackground(new Color(253, 251, 196));
     }
 
     /**
@@ -39,6 +38,8 @@ public class MainPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(650,500);
         setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(253, 251, 196));
 
         titleLbl.setFont(new java.awt.Font("Heyam", 0, 48)); // NOI18N
         titleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
