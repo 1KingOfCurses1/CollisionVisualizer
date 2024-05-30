@@ -4,6 +4,8 @@
  */
 package collisionvisualizer;
 
+import java.awt.Graphics2D;
+
 abstract public class AbstractShape implements Shape {
 
     int xPos;
@@ -26,6 +28,8 @@ abstract public class AbstractShape implements Shape {
         this.velocity = velocity;
     }
 
+    abstract public void draw(Graphics2D g);
+    
     public int getXPos() {
         return xPos;
     }
