@@ -33,7 +33,7 @@ public class Square extends AbstractShape{
      * @param width - width of the square
      */
     
-    public Square(int length, int width, Color colour){
+    public Square(int length, int width){
         
         this();
         
@@ -82,7 +82,7 @@ public class Square extends AbstractShape{
      */
     public Square clone(){
         
-        Square s = new Square(length, width, colour);
+        Square s = new Square(length, width);
         
         return s;
     }
