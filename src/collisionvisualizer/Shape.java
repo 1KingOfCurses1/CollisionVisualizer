@@ -5,6 +5,7 @@ Interface for all Shapes
 */
 package collisionvisualizer;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public interface Shape {
@@ -19,6 +20,8 @@ public interface Shape {
     
     public double getVelocity();
     
+    public Color getColour();
+    
     public void setXPos(int xPos);
     
     public void setYPos(int yPos);
@@ -26,6 +29,8 @@ public interface Shape {
     public void setMass(double mass);
     
     public void setVelocity(double velocity);
+    
+    public void setColour(Color colour);
     
     public String toString();
 }

@@ -4,28 +4,32 @@
  */
 package collisionvisualizer;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 abstract public class AbstractShape implements Shape {
 
-    int xPos;
-    int yPos;
-    double mass;
-    double velocity;
+    protected int xPos;
+    protected int yPos;
+    protected double mass;
+    protected double velocity;
+    protected Color colour;
 
     public AbstractShape() {
         xPos = 0;
         yPos = 0;
         mass = 0;
         velocity = 0;
+        colour = new Color(0,0,0);
     }
 
-    public AbstractShape(int xPos, int yPos, double mass, double velocity) {
+    public AbstractShape(int xPos, int yPos, double mass, double velocity, Color colour) {
         this();
         this.xPos = xPos;
         this.yPos = yPos;
         this.mass = mass;
         this.velocity = velocity;
+        this.colour = colour;
     }
 
     abstract public void draw(Graphics2D g);
@@ -62,6 +66,14 @@ abstract public class AbstractShape implements Shape {
         this.velocity = velocity;
     }
 
+    public Color getColour() {
+        return colour;
+    }
+    
+    public void setColour(Color colour) {
+        this.colour = colour;
+    }
+    
     public boolean equals(AbstractShape s) {
         return s.xPos == xPos && s.yPos == yPos && s.mass == mass && s.velocity == velocity;
     }

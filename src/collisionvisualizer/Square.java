@@ -14,26 +14,20 @@ public class Square extends AbstractShape{
     
     private int width;
     
-    private Color colour;
-    
     public Square(){
         
         length = 0;
         
         width = 0;
-        
-        colour = new Color(0,0,0);
     }
     
-    public Square(int length, int width, Color colour){
+    public Square(int length, int width){
         
         this();
         
         this.length = length;
         
         this.width = width;
-        
-        this.colour = colour;
     }
     
     public double getLength(){
@@ -52,17 +46,9 @@ public class Square extends AbstractShape{
         this.width = width;
     }
     
-    public Color getColour() {
-        return colour;
-    }
-
-    public void setColour(Color colour) {
-        this.colour = colour;
-    }
-    
     public Square clone(){
         
-        Square s = new Square(length, width, colour);
+        Square s = new Square(length, width);
         
         return s;
     }
