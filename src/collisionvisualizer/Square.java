@@ -12,9 +12,9 @@ public class Square extends AbstractShape{
     /**
      * Encapsulation of attributes
      */
-    private int length;
+    private int length; // length of the square
 
-    private int width;
+    private int width; // width of the square
 
     /**
      * Primary Constructor that initialize the attributes of a square
