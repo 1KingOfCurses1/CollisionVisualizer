@@ -5,7 +5,6 @@ Square class with all square functions
  */
 package collisionvisualizer;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Square extends AbstractShape{
