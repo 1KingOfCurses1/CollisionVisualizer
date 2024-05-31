@@ -12,7 +12,7 @@ import java.awt.Dimension;
  * @author arver0606
  */
 public class MainPage extends javax.swing.JFrame {
-
+    private InstructionPage instructionsWindow;
     /**
      * Creates new form mainPage
      */
@@ -50,6 +50,11 @@ public class MainPage extends javax.swing.JFrame {
 
         instructionBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         instructionBtn.setText("Instructions");
+        instructionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instructionBtnActionPerformed(evt);
+            }
+        });
 
         exitBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         exitBtn.setText("Exit");
@@ -107,6 +112,15 @@ public class MainPage extends javax.swing.JFrame {
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void instructionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionBtnActionPerformed
+        if (instructionsWindow == null) {
+            instructionsWindow = new InstructionPage(this);
+        }
+        
+        instructionsWindow.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_instructionBtnActionPerformed
 
     /**
      * @param args the command line arguments
