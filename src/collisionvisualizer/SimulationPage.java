@@ -16,6 +16,7 @@ public class SimulationPage extends javax.swing.JFrame {
     public SimulationPage(MainPage m) {
         initComponents();
         mainWindow = m;
+        
     }
 
     /**
@@ -44,6 +45,7 @@ public class SimulationPage extends javax.swing.JFrame {
         lblMass2 = new javax.swing.JLabel();
         lblVelocity1 = new javax.swing.JLabel();
         lblVelocity2 = new javax.swing.JLabel();
+        lblDisplayElas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +80,20 @@ public class SimulationPage extends javax.swing.JFrame {
         jLabel4.setText("Enter Mass:");
 
         jLabel5.setText("Enter Velocity:");
+
+        massSlider1.setMaximum(10);
+        massSlider1.setMinimum(1);
+
+        massSlider2.setMaximum(10);
+        massSlider2.setMinimum(1);
+
+        velocitySlider1.setMaximum(10);
+        velocitySlider1.setMinimum(-10);
+
+        velocitySlider2.setMaximum(10);
+        velocitySlider2.setMinimum(-10);
+
+        elasticitySlider.setSnapToTicks(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +131,9 @@ public class SimulationPage extends javax.swing.JFrame {
                         .addGap(141, 141, 141)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(elasticitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(elasticitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDisplayElas)))
                 .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +157,8 @@ public class SimulationPage extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(elasticitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(elasticitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDisplayElas))
                 .addGap(24, 24, 24)
                 .addComponent(btnRun)
                 .addGap(32, 32, 32)
@@ -195,6 +214,7 @@ public class SimulationPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblDisplayElas;
     private javax.swing.JLabel lblMass2;
     private javax.swing.JLabel lblVelocity1;
     private javax.swing.JLabel lblVelocity2;

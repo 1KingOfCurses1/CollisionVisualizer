@@ -64,6 +64,8 @@
                       <Component id="jLabel1" min="-2" pref="229" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="elasticitySlider" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblDisplayElas" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="26" max="32767" attributes="0"/>
@@ -96,6 +98,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   <Component id="elasticitySlider" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDisplayElas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="btnRun" min="-2" max="-2" attributes="0"/>
@@ -186,14 +189,33 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSlider" name="massSlider1">
+      <Properties>
+        <Property name="maximum" type="int" value="10"/>
+        <Property name="minimum" type="int" value="1"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JSlider" name="massSlider2">
+      <Properties>
+        <Property name="maximum" type="int" value="10"/>
+        <Property name="minimum" type="int" value="1"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JSlider" name="velocitySlider1">
+      <Properties>
+        <Property name="maximum" type="int" value="10"/>
+        <Property name="minimum" type="int" value="-10"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JSlider" name="velocitySlider2">
+      <Properties>
+        <Property name="maximum" type="int" value="10"/>
+        <Property name="minimum" type="int" value="-10"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JSlider" name="elasticitySlider">
+      <Properties>
+        <Property name="snapToTicks" type="boolean" value="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMass1">
       <AuxValues>
@@ -206,6 +228,8 @@
     <Component class="javax.swing.JLabel" name="lblVelocity1">
     </Component>
     <Component class="javax.swing.JLabel" name="lblVelocity2">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDisplayElas">
     </Component>
   </SubComponents>
 </Form>
