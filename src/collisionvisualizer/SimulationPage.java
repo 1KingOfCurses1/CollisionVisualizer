@@ -9,12 +9,13 @@ package collisionvisualizer;
  * @author arver0606
  */
 public class SimulationPage extends javax.swing.JFrame {
-
+     MainPage mainWindow;
     /**
      * Creates new form SimulationPage
      */
-    public SimulationPage() {
+    public SimulationPage(MainPage m) {
         initComponents();
+        mainWindow = m;
     }
 
     /**
@@ -171,7 +172,8 @@ public class SimulationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        mainWindow.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed

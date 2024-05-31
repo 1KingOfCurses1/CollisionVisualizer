@@ -4,7 +4,6 @@
  */
 package collisionvisualizer;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 /**
@@ -12,7 +11,10 @@ import java.awt.Dimension;
  * @author arver0606
  */
 public class MainPage extends javax.swing.JFrame {
+
     private InstructionPage instructionsWindow;
+    private SimulationPage simulationWindow;
+
     /**
      * Creates new form mainPage
      */
@@ -47,6 +49,11 @@ public class MainPage extends javax.swing.JFrame {
 
         simulationBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         simulationBtn.setText("Enter Simulation");
+        simulationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simulationBtnActionPerformed(evt);
+            }
+        });
 
         instructionBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         instructionBtn.setText("Instructions");
@@ -117,10 +124,19 @@ public class MainPage extends javax.swing.JFrame {
         if (instructionsWindow == null) {
             instructionsWindow = new InstructionPage(this);
         }
-        
+
         instructionsWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_instructionBtnActionPerformed
+
+    private void simulationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulationBtnActionPerformed
+        if (simulationWindow == null) {
+            simulationWindow = new SimulationPage(this);
+        }
+
+        simulationWindow.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_simulationBtnActionPerformed
 
     /**
      * @param args the command line arguments
