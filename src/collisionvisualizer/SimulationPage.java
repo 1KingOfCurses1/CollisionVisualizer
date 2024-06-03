@@ -24,6 +24,17 @@ public class SimulationPage extends javax.swing.JFrame {
         mainWindow = m;
     }
 
+    public static void collision(double m1, double m2, double vi1, double vi2, double e) {
+
+        double vf1;
+
+        double vf2;
+
+        vf1 = (((m1 - (e * m2)) / (m1 + m2)) * vi1) + ((((1 + e) * m2) / (m1 + m2)) * vi2);
+
+        vf2 = (((m2 - (e * m1)) / (m1 + m2)) * vi2) + ((((1 + e) * m1) / (m1 + m2)) * vi1);
+    }
+    
     private void initUI() {
         //set title of the JFrame
         setTitle("Collision Visualizer");
