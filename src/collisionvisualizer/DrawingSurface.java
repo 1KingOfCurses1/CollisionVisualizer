@@ -1,10 +1,5 @@
 /*
- * B Cutten
-    May 2022
-    A class which allows drawing, because it extends JPanel, by way of the 
-    Graphics2D class
-    This panel is repainted regulary by implementing the Runnable interface and 
-    running in a Thread. This allows it to be animated
+*
  */
 package collisionvisualizer;
 
@@ -18,6 +13,8 @@ public class DrawingSurface extends JPanel implements Runnable {
 
     private Thread animator;
     private final int DELAY = 25;
+    private Square object1;
+    private Square object2;
 
     public DrawingSurface() { //constructor for the panel
         this.setFocusable(true);
@@ -43,7 +40,7 @@ public class DrawingSurface extends JPanel implements Runnable {
     //update the position of the ball and make it bounce
     //(we could do more complex game updates here)
     public void moveObject() {
-
+        
     }
 
     //this method is called after the JPanel is added to the JFrame
