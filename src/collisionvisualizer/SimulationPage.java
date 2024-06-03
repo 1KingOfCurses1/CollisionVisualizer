@@ -4,20 +4,37 @@
  */
 package collisionvisualizer;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author arver0606
  */
 public class SimulationPage extends javax.swing.JFrame {
-     MainPage mainWindow;
+
+    MainPage mainWindow;
+
     /**
      * Creates new form SimulationPage
+     *
      * @param m
      */
     public SimulationPage(MainPage m) {
         initComponents();
         mainWindow = m;
-        
+    }
+
+    private void initUI() {
+        //set title of the JFrame
+        setTitle("Collision Visualizer");
+        //add a custom JPanel to draw on
+        add(new DrawingSurface());
+        //set the size of the window
+        setSize(300, 200);
+        //tell the JFrame what to do when closed
+        //this is important if our application has multiple windows
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -108,7 +125,7 @@ public class SimulationPage extends javax.swing.JFrame {
         );
         drawDisplayLayout.setVerticalGroup(
             drawDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,7 +225,7 @@ public class SimulationPage extends javax.swing.JFrame {
                             .addComponent(lblVelocityDisplay2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(drawDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMassDisplay1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
