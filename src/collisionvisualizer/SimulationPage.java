@@ -104,12 +104,16 @@ public class SimulationPage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Amount of Elasticity: 0 to 1");
 
+        lblMass1.setForeground(new java.awt.Color(255, 0, 0));
         lblMass1.setText("Enter Mass 1:");
 
+        lblVelocity1.setForeground(new java.awt.Color(255, 0, 0));
         lblVelocity1.setText("Enter Velocity 1:");
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
         jLabel4.setText("Enter Mass 2:");
 
+        lblVelocity2.setForeground(new java.awt.Color(0, 51, 255));
         lblVelocity2.setText("Enter Velocity 2:");
 
         massSlider1.setMaximum(10);
