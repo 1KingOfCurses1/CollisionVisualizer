@@ -12,47 +12,54 @@ public class DrawingSurface extends JPanel implements Runnable {
     private final int DELAY = 25;
 
     private double mass1, mass2, velocity1, velocity2, elasticity;
+    private Square redSquare, blueSquare;
 
     public DrawingSurface() {
         this.setFocusable(true);
         this.requestFocus();
+        // Initialize squares with default values
+        redSquare = new Square(1);  // Default mass, will be updated
+        blueSquare = new Square(1);  // Default mass, will be updated
     }
-
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
         this.mass1 = m1;
         this.mass2 = m2;
         this.velocity1 = v1;
         this.velocity2 = v2;
         this.elasticity = e;
+
+        // Update square sizes based on masses
+        redSquare = new Square(mass1);
+        blueSquare = new Square(mass2);
+
         repaint();
     }
 
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        
+
         // Clear the panel
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
-        // Example: Draw two circles representing the particles
+        // Set positions for squares
+        redSquare.setXPos(getWidth() / 4 - (int)redSquare.getLength() / 2);
+        redSquare.setYPos(getHeight() / 2 - (int)redSquare.getWidth() / 2);
+        blueSquare.setXPos(3 * getWidth() / 4 - (int)blueSquare.getLength() / 2);
+        blueSquare.setYPos(getHeight() / 2 - (int)blueSquare.getWidth() / 2);
+
+        // Draw the squares
         g2d.setColor(Color.RED);
-        int radius1 = (int) (mass1 * 10); // Example scale factor for visualization
-        int radius2 = (int) (mass2 * 10);
-
-        int x1 = getWidth() / 4 - radius1 / 2;
-        int y1 = getHeight() / 2 - radius1 / 2;
-
-        int x2 = 3 * getWidth() / 4 - radius2 / 2;
-        int y2 = getHeight() / 2 - radius2 / 2;
-
-        g2d.fillOval(x1, y1, radius1, radius1);
+        redSquare.draw(g2d);
         g2d.setColor(Color.BLUE);
-        g2d.fillOval(x2, y2, radius2, radius2);
+        blueSquare.draw(g2d);
 
         // Draw velocities as arrows
         g2d.setColor(Color.BLACK);
-        g2d.drawLine(x1 + radius1 / 2, y1 + radius1 / 2, x1 + radius1 / 2 + (int)(velocity1 * 10), y1 + radius1 / 2);
-        g2d.drawLine(x2 + radius2 / 2, y2 + radius2 / 2, x2 + radius2 / 2 + (int)(velocity2 * 10), y2 + radius2 / 2);
+        g2d.drawLine(redSquare.getXPos() + (int)redSquare.getLength() / 2, redSquare.getYPos() + (int)redSquare.getWidth() / 2,
+                redSquare.getXPos() + (int)redSquare.getLength() / 2 + (int) (velocity1 * 10), redSquare.getYPos() + (int)redSquare.getWidth() / 2);
+        g2d.drawLine(blueSquare.getXPos() + (int)blueSquare.getLength() / 2, blueSquare.getYPos() + (int)blueSquare.getWidth() / 2,
+                blueSquare.getXPos() + (int)blueSquare.getLength() / 2 + (int) (velocity2 * 10), blueSquare.getYPos() + (int)blueSquare.getWidth() / 2);
     }
 
     @Override

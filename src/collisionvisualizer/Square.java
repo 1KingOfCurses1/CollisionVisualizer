@@ -1,7 +1,7 @@
 /*
 Shan Truong
 May 29, 2024
-Square class with all square functions 
+Square class with all square functions
  */
 package collisionvisualizer;
 
@@ -12,39 +12,39 @@ public class Square extends AbstractShape{
     /**
      * Encapsulation of attributes
      */
-    private int length; // length of the square
+    private double length; // length of the square
 
-    private int width; // width of the square
-
+    private double width; // width of the square
+    private double mass;
     /**
      * Primary Constructor that initialize the attributes of a square
      */
     public Square() {
 
-        //assigning value to length attribute 
+        //assigning value to length attribute
         length = 0;
 
-        //assigning value to width attribute 
+        //assigning value to width attribute
         width = 0;
 
     }
 
     /**
-     * Secondary constructor that chains the primary constructor. The secondary
-     * constructor takes in values and assign them to the attributes of a square
-     * @param length - length of the square
-     * @param width - width of the square
+     *
+     * @param mass
      */
-    public Square(int length, int width) {
+    public Square(double mass) {
 
-        //invoking primary constructor 
+        //invoking primary constructor
         this();
 
-        //assigning value to length attribute 
-        this.length = length;
+        //assigning value to length attribute
+        this.length = mass * 10;
 
-        //assigning value to width attribute 
-        this.width = width;
+        //assigning value to width attribute
+        this.width = mass * 10;
+
+        this.mass = mass;
 
     }
 
@@ -53,7 +53,7 @@ public class Square extends AbstractShape{
      * @return - the length of a square
      */
     public double getLength() {
-        
+
         //return length attribute
         return length;
     }
@@ -63,7 +63,7 @@ public class Square extends AbstractShape{
      * @return - the width of the square
      */
     public double getWidth() {
-        
+
         //return width attribute
         return width;
     }
@@ -73,8 +73,8 @@ public class Square extends AbstractShape{
      * @param length - length of the square
      */
     public void setLength(int length) {
-        
-        //assigning value to length attribute 
+
+        //assigning value to length attribute
         this.length = length;
     }
 
@@ -84,8 +84,8 @@ public class Square extends AbstractShape{
      * @param width - width of the square
      */
     public void setWidth(int width) {
-        
-        //assigning value to width attribute 
+
+        //assigning value to width attribute
         this.width = width;
     }
 
@@ -96,9 +96,9 @@ public class Square extends AbstractShape{
     public Square clone() {
 
         //cloning Square object with square object attributes
-        Square s = new Square(length, width);
+        Square s = new Square(mass);
 
-        //returning cloned Square object 
+        //returning cloned Square object
         return s;
     }
 
@@ -109,8 +109,8 @@ public class Square extends AbstractShape{
      * @return - boolean
      */
     public boolean equals(Square s) {
-        
-        //returning true or false if objects are equal or not (same attribute values) 
+
+        //returning true or false if objects are equal or not (same attribute values)
         return super.equals(s) && s.length == length && s.width == width;
     }
 
@@ -120,7 +120,7 @@ public class Square extends AbstractShape{
      */
     public String toString() {
 
-        //returning string with all shape and square attributes 
+        //returning string with all shape and square attributes
         return super.toString() + "\nLength: " + length + "\nWidth: " + width;
     }
 
@@ -130,9 +130,9 @@ public class Square extends AbstractShape{
      *
      */
     public void draw(Graphics2D g2d) {
-        
+
         //drawing square
-        g2d.fillRect(xPos,yPos,length,width);
+        g2d.fillRect(xPos,yPos, (int) width, (int) length);
     }
 
 }
