@@ -8,7 +8,8 @@ package collisionvisualizer;
 //imports
 import java.awt.Graphics2D;
 
-public class Square extends AbstractShape{
+public class Square extends AbstractShape {
+
     /**
      * Encapsulation of attributes
      */
@@ -16,6 +17,7 @@ public class Square extends AbstractShape{
 
     private double width; // width of the square
     private double mass;
+
     /**
      * Primary Constructor that initialize the attributes of a square
      */
@@ -50,6 +52,7 @@ public class Square extends AbstractShape{
 
     /**
      * Accessor that gets the length of a square
+     *
      * @return - the length of a square
      */
     public double getLength() {
@@ -59,7 +62,16 @@ public class Square extends AbstractShape{
     }
 
     /**
+     * updates the location of the ball based on the speed
+     */
+    public void update() {
+
+        xPos += velocity;
+    }
+
+    /**
      * Accessor that gets the width of the square
+     *
      * @return - the width of the square
      */
     public double getWidth() {
@@ -70,6 +82,7 @@ public class Square extends AbstractShape{
 
     /**
      * mutator that sets the length of the square
+     *
      * @param length - length of the square
      */
     public void setLength(int length) {
@@ -91,6 +104,7 @@ public class Square extends AbstractShape{
 
     /**
      * a clone method to create an exact copy of the square
+     *
      * @return - a copy of the square
      */
     public Square clone() {
@@ -105,6 +119,7 @@ public class Square extends AbstractShape{
     /**
      * equals method that check if the two square are the same, if the square is
      * the same output true else false
+     *
      * @param s - square object
      * @return - boolean
      */
@@ -116,6 +131,7 @@ public class Square extends AbstractShape{
 
     /**
      * String representation of the square
+     *
      * @return - string representation of the square
      */
     public String toString() {
@@ -126,13 +142,14 @@ public class Square extends AbstractShape{
 
     /**
      * draw method
+     *
      * @param g2d - Graphics2D object
      *
      */
     public void draw(Graphics2D g2d) {
 
         //drawing square
-        g2d.fillRect(xPos,yPos, (int) width, (int) length);
+        g2d.fillRect(xPos, yPos, (int) width, (int) length);
     }
 
 }

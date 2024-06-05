@@ -22,30 +22,21 @@ public class SimulationPage extends javax.swing.JFrame {
     public SimulationPage(MainPage m) {
         initComponents();
         mainWindow = m;
+
+        txtAreaMass1.setText("10 kg");
+        txtAreaMass2.setText("10 kg");
+        txtAreaVelocity1.setText("10m/s");
+        txtAreaVelocity2.setText("10m/s");
+        txtAreaElas.setText("0.5");
     }
 
-    public static void collision(double m1, double m2, double vi1, double vi2, double e) {
-
-        double vf1;
-
-        double vf2;
+    public static void collision(double m1, double m2, double vi1, double vi2, double e, double vf1, double vf2) {
 
         vf1 = (((m1 - (e * m2)) / (m1 + m2)) * vi1) + ((((1 + e) * m2) / (m1 + m2)) * vi2);
 
         vf2 = (((m2 - (e * m1)) / (m1 + m2)) * vi2) + ((((1 + e) * m1) / (m1 + m2)) * vi1);
-    }
-    
-    private void initUI() {
-        //set title of the JFrame
-        setTitle("Collision Visualizer");
-        //add a custom JPanel to draw on
-        add(new DrawingSurface());
-        //set the size of the window
-        setSize(300, 200);
-        //tell the JFrame what to do when closed
-        //this is important if our application has multiple windows
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        
+         System.out.println("v1: " + vf1 + " v2: " + vf2);
     }
 
     /**
@@ -71,7 +62,7 @@ public class SimulationPage extends javax.swing.JFrame {
         velocitySlider2 = new javax.swing.JSlider();
         elasticitySlider = new javax.swing.JSlider();
         lblDisplayElas = new javax.swing.JLabel();
-        drawDisplay = new javax.swing.JPanel();
+        drawDisplay = new DrawingSurface();
         lblEK1 = new javax.swing.JLabel();
         lblEK2 = new javax.swing.JLabel();
         lblVf1 = new javax.swing.JLabel();
@@ -367,15 +358,15 @@ public class SimulationPage extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblVf2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(lblVf1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblVf1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblVf2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(drawDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35))
@@ -416,16 +407,27 @@ public class SimulationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        resetObjects();
         mainWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-        // TODO add your handling code here:
+        displayObjects();
+
+        double vf1 = 0;
+        
+        double vf2 = 0;
+
+        collision(massSlider1.getValue(), massSlider2.getValue(), 
+                velocitySlider1.getValue(), velocitySlider2.getValue(), 
+                elasticitySlider.getValue(), vf1, vf2);
+        
+        
     }//GEN-LAST:event_btnRunActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        resetObjects();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
@@ -448,6 +450,32 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
     }//GEN-LAST:event_elasticitySliderMouseDragged
 
+    private void displayObjects() {
+        int mass1 = massSlider1.getValue();
+        int mass2 = massSlider2.getValue();
+        int velocity1 = velocitySlider1.getValue();
+        int velocity2 = velocitySlider2.getValue();
+        double elasticity = elasticitySlider.getValue() / 100.0;
+
+        ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity);
+    }
+
+    private void resetObjects() {
+
+        massSlider1.setValue(massSlider1.getMaximum());
+        massSlider2.setValue(massSlider2.getMaximum());
+        velocitySlider1.setValue(velocitySlider1.getMaximum());
+        velocitySlider2.setValue(velocitySlider2.getMaximum());
+        elasticitySlider.setValue(50);
+
+        txtAreaMass1.setText("10 kg");
+        txtAreaMass2.setText("10 kg");
+        txtAreaVelocity1.setText("10m/s");
+        txtAreaVelocity2.setText("10m/s");
+        txtAreaElas.setText("0.5");
+
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), velocitySlider1.getMaximum(), massSlider2.getMaximum(), velocitySlider2.getMaximum(), 0.5);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

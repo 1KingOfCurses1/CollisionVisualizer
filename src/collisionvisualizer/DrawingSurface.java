@@ -11,26 +11,21 @@ public class DrawingSurface extends JPanel implements Runnable {
     private Thread animator;
     private final int DELAY = 25;
 
-    private double mass1, mass2, velocity1, velocity2, elasticity;
     private Square redSquare, blueSquare;
 
     public DrawingSurface() {
         this.setFocusable(true);
         this.requestFocus();
         // Initialize squares with default values
-        redSquare = new Square(1);  // Default mass, will be updated
-        blueSquare = new Square(1);  // Default mass, will be updated
+        redSquare = new Square(10);  // Default mass, will be updated
+        blueSquare = new Square(10);  // Default mass, will be updated
     }
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
-        this.mass1 = m1;
-        this.mass2 = m2;
-        this.velocity1 = v1;
-        this.velocity2 = v2;
-        this.elasticity = e;
-
+        redSquare.setVelocity(10);
         // Update square sizes based on masses
-        redSquare = new Square(mass1);
-        blueSquare = new Square(mass2);
+        redSquare = new Square(m1);
+        System.out.println(redSquare.getVelocity());
+        blueSquare = new Square(m2);
 
         repaint();
     }
@@ -54,12 +49,6 @@ public class DrawingSurface extends JPanel implements Runnable {
         g2d.setColor(Color.BLUE);
         blueSquare.draw(g2d);
 
-        // Draw velocities as arrows
-        g2d.setColor(Color.BLACK);
-        g2d.drawLine(redSquare.getXPos() + (int)redSquare.getLength() / 2, redSquare.getYPos() + (int)redSquare.getWidth() / 2,
-                redSquare.getXPos() + (int)redSquare.getLength() / 2 + (int) (velocity1 * 10), redSquare.getYPos() + (int)redSquare.getWidth() / 2);
-        g2d.drawLine(blueSquare.getXPos() + (int)blueSquare.getLength() / 2, blueSquare.getYPos() + (int)blueSquare.getWidth() / 2,
-                blueSquare.getXPos() + (int)blueSquare.getLength() / 2 + (int) (velocity2 * 10), blueSquare.getYPos() + (int)blueSquare.getWidth() / 2);
     }
 
     @Override
@@ -69,7 +58,8 @@ public class DrawingSurface extends JPanel implements Runnable {
     }
 
     public void moveObject() {
-        // Implement your object movement logic here
+      redSquare.update(); 
+      blueSquare.update(); 
     }
 
     @Override
@@ -85,8 +75,11 @@ public class DrawingSurface extends JPanel implements Runnable {
         beforeTime = System.currentTimeMillis();
 
         while (true) {
+            //update the balls position
             moveObject();
+            //redraws the screen (calling the paint component method)
             repaint();
+            
             timeDiff = System.currentTimeMillis() - beforeTime;
             sleep = DELAY - timeDiff;
 
