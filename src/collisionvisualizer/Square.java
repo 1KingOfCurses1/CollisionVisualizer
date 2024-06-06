@@ -36,7 +36,7 @@ public class Square extends AbstractShape {
      * @param mass
      */
     public Square(double mass) {
-
+        
         //invoking primary constructor
         this();
 
