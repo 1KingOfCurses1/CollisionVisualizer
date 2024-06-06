@@ -16,16 +16,27 @@ public class DrawingSurface extends JPanel implements Runnable {
     public DrawingSurface() {
         this.setFocusable(true);
         this.requestFocus();
-        // Initialize squares with default values
-        redSquare = new Square(10);  // Default mass, will be updated
-        blueSquare = new Square(10);  // Default mass, will be updated
+        // Initialize squares with default values and initial positions
+        redSquare = new Square(10);  // Default mass
+        blueSquare = new Square(10);  // Default mass
+        redSquare.setVelocity(5);  // Initial velocity for movement
+        blueSquare.setVelocity(-5);  // Initial velocity for movement
+
+        // Set initial positions
+        redSquare.setXPos(50);  // Example starting position
+        blueSquare.setXPos(300);  // Example starting position
     }
+
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
-        redSquare.setVelocity(10);
-        // Update square sizes based on masses
+        // Update squares with new masses and velocities
         redSquare = new Square(m1);
-        System.out.println(redSquare.getVelocity());
+        redSquare.setVelocity((int) v1);  // Update velocity based on input
         blueSquare = new Square(m2);
+        blueSquare.setVelocity((int) v2);  // Update velocity based on input
+
+        // Set initial positions to separate the squares
+        redSquare.setXPos(50);
+        blueSquare.setXPos(300);
 
         repaint();
     }
@@ -37,18 +48,11 @@ public class DrawingSurface extends JPanel implements Runnable {
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
-        // Set positions for squares
-        redSquare.setXPos(getWidth() / 4 - (int)redSquare.getLength() / 2);
-        redSquare.setYPos(getHeight() / 2 - (int)redSquare.getWidth() / 2);
-        blueSquare.setXPos(3 * getWidth() / 4 - (int)blueSquare.getLength() / 2);
-        blueSquare.setYPos(getHeight() / 2 - (int)blueSquare.getWidth() / 2);
-
-        // Draw the squares
+        // Draw the squares at their updated positions
         g2d.setColor(Color.RED);
         redSquare.draw(g2d);
         g2d.setColor(Color.BLUE);
         blueSquare.draw(g2d);
-
     }
 
     @Override
@@ -58,8 +62,10 @@ public class DrawingSurface extends JPanel implements Runnable {
     }
 
     public void moveObject() {
-      redSquare.update(); 
-      blueSquare.update(); 
+        redSquare.update();
+        blueSquare.update();
+
+        // Add logic to handle collisions or boundaries if needed
     }
 
     @Override
@@ -75,11 +81,11 @@ public class DrawingSurface extends JPanel implements Runnable {
         beforeTime = System.currentTimeMillis();
 
         while (true) {
-            //update the balls position
+            // Update the squares' positions
             moveObject();
-            //redraws the screen (calling the paint component method)
+            // Redraw the screen
             repaint();
-            
+
             timeDiff = System.currentTimeMillis() - beforeTime;
             sleep = DELAY - timeDiff;
 

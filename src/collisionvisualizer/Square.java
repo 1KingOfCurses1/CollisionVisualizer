@@ -1,155 +1,109 @@
-/*
-Shan Truong
-May 29, 2024
-Square class with all square functions
- */
 package collisionvisualizer;
 
-//imports
-import java.awt.Graphics2D;
+import java.awt.*;
 
+/**
+ * A class representing a square in a 1D space with specific attributes and behaviors.
+ */
 public class Square extends AbstractShape {
 
-    /**
-     * Encapsulation of attributes
-     */
-    private double length; // length of the square
-
-    private double width; // width of the square
-    private double mass;
+    // Dimensions of the square
+    private double length;
+    private double width;
 
     /**
-     * Primary Constructor that initialize the attributes of a square
+     * Default constructor initializing the square to default values.
      */
     public Square() {
-
-        //assigning value to length attribute
-        length = 0;
-
-        //assigning value to width attribute
-        width = 0;
-
+        super();
+        this.length = 0.0;
+        this.width = 0.0;
     }
 
     /**
+     * Constructor initializing the square with a specific mass and deriving its dimensions.
      *
-     * @param mass
+     * @param mass - mass of the square
      */
     public Square(double mass) {
-        
-        //invoking primary constructor
         this();
-
-        //assigning value to length attribute
-        this.length = mass * 10;
-
-        //assigning value to width attribute
-        this.width = mass * 10;
-
         this.mass = mass;
-
+        this.length = mass * 10; // Size derived from mass for visualization
+        this.width = mass * 10;  // Size derived from mass for visualization
     }
 
-    /**
-     * Accessor that gets the length of a square
-     *
-     * @return - the length of a square
-     */
+    // Accessor and mutator methods for length and width
     public double getLength() {
-
-        //return length attribute
         return length;
     }
 
-    /**
-     * updates the location of the ball based on the speed
-     */
-    public void update() {
-
-        xPos += velocity;
-    }
-
-    /**
-     * Accessor that gets the width of the square
-     *
-     * @return - the width of the square
-     */
-    public double getWidth() {
-
-        //return width attribute
-        return width;
-    }
-
-    /**
-     * mutator that sets the length of the square
-     *
-     * @param length - length of the square
-     */
-    public void setLength(int length) {
-
-        //assigning value to length attribute
+    public void setLength(double length) {
         this.length = length;
     }
 
-    /**
-     * mutator that sets the width of the square
-     *
-     * @param width - width of the square
-     */
-    public void setWidth(int width) {
+    public double getWidth() {
+        return width;
+    }
 
-        //assigning value to width attribute
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    /**
-     * a clone method to create an exact copy of the square
-     *
-     * @return - a copy of the square
-     */
+    @Override
+    public void update() {
+        this.xPos += this.velocity; // Update position in 1D space
+    }
+
+    @Override
     public Square clone() {
-
-        //cloning Square object with square object attributes
-        Square s = new Square(mass);
-
-        //returning cloned Square object
-        return s;
+        Square clone = new Square(this.mass);
+        clone.setXPos(this.xPos);
+        clone.setLength(this.length);
+        clone.setWidth(this.width);
+        clone.setVelocity(this.velocity);
+        clone.setColor(this.color);
+        return clone;
     }
 
-    /**
-     * equals method that check if the two square are the same, if the square is
-     * the same output true else false
-     *
-     * @param s - square object
-     * @return - boolean
-     */
-    public boolean equals(Square s) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
 
-        //returning true or false if objects are equal or not (same attribute values)
-        return super.equals(s) && s.length == length && s.width == width;
+        Square square = (Square) obj;
+        return Double.compare(square.length, length) == 0 &&
+                Double.compare(square.width, width) == 0;
     }
 
-    /**
-     * String representation of the square
-     *
-     * @return - string representation of the square
-     */
+    @Override
     public String toString() {
-
-        //returning string with all shape and square attributes
         return super.toString() + "\nLength: " + length + "\nWidth: " + width;
     }
 
-    /**
-     * draw method
-     *
-     * @param g2d - Graphics2D object
-     *
-     */
+    @Override
     public void draw(Graphics2D g2d) {
-
-        //drawing square
-        g2d.fillRect(xPos, yPos, (int) width, (int) length);
+        g2d.setColor(this.color);
+        g2d.fillRect(this.xPos, 0, (int) this.width, (int) this.length); // Drawing at y = 0 since it's 1D
     }
 
+    @Override
+    public int getYPos() {
+        return 0;
+    }
+
+    @Override
+    public Color getColour() {
+        return null;
+    }
+
+    @Override
+    public void setYPos(int yPos) {
+
+    }
+
+    @Override
+    public void setColour(Color colour) {
+
+    }
 }

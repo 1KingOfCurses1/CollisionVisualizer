@@ -2,11 +2,11 @@
  * Aryan Verma
  * 5/31/2024
  * Circle Class
- */
+
 package collisionvisualizer;
 
 // Imports
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class Circle extends AbstractShape {
     
@@ -21,7 +21,7 @@ public class Circle extends AbstractShape {
     /**
      * Secondary constructor, if radius and color is provided
      * @param radius - radius of the circle
-     */
+     *
     public Circle(int radius) {
         // Chains to the primary constructor
         this();
@@ -31,21 +31,21 @@ public class Circle extends AbstractShape {
     /**
      * Accessor, to get the radius of the circle
      * @return - radius of the circle
-     */
+     *
     public int getRadius() {
         return radius;
     }
     /**
      * Mutator, sets the radius
      * @param radius - new radius
-     */
+     *
     public void setRadius(int radius) {
         this.radius = radius;
     }
     /**
      * Clone method, to create a copy of a circle
      * @return - circle clone
-     */
+     *
     public Circle clone() {
         Circle c = new Circle(radius);
         return c;
@@ -54,25 +54,50 @@ public class Circle extends AbstractShape {
      * Equal method, checks if two circles are equal
      * @param c - circle to compare to
      * @return - true or false
-     */
+     *
     public boolean equals(Circle c){
         return super.equals(c) && c.radius == radius;
     }
     /**
      * Method that creates a string representation of a circle
      * @return - String representation
-     */
+     *
     public String toString(){
         return super.toString() + "\nRadius: " + radius;
     }
     /**
      * Draw method to draw the circle
      * @param g2d - graphics to create the shape
-     */
+     *
     public void draw(Graphics2D g2d) {
         g2d.fillOval(xPos, yPos, radius, radius);
     }
 
+    @Override
+    public int getYPos() {
+        return 0;
+    }
+
+    @Override
+    public Color getColour() {
+        return null;
+    }
+
+    @Override
+    public void setYPos(int yPos) {
+
+    }
+
+    @Override
+    public void setColour(Color colour) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 
 
 }
+*/
