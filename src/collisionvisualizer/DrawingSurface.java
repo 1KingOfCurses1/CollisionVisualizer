@@ -19,12 +19,14 @@ public class DrawingSurface extends JPanel implements Runnable {
         // Initialize squares with default values and initial positions
         redSquare = new Square(10);  // Default mass
         blueSquare = new Square(10);  // Default mass
-        redSquare.setVelocity(5);  // Initial velocity for movement
-        blueSquare.setVelocity(-5);  // Initial velocity for movement
 
         // Set initial positions
-        redSquare.setXPos(50);  // Example starting position
-        blueSquare.setXPos(300);  // Example starting position
+        redSquare.setXPos(200);  // Example starting position
+        blueSquare.setXPos(400);  // Example starting position
+        
+         // Set initial positions to separate the squares
+        redSquare.setYPos(200);
+        blueSquare.setYPos(400);
     }
 
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
@@ -35,8 +37,12 @@ public class DrawingSurface extends JPanel implements Runnable {
         blueSquare.setVelocity((int) v2);  // Update velocity based on input
 
         // Set initial positions to separate the squares
-        redSquare.setXPos(50);
-        blueSquare.setXPos(300);
+        redSquare.setXPos(200);
+        blueSquare.setXPos(400);
+        
+         // Set initial positions to separate the squares
+        redSquare.setYPos(200);
+        blueSquare.setYPos(400);
 
         repaint();
     }

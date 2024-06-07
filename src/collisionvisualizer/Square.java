@@ -87,23 +87,15 @@ public class Square extends AbstractShape {
         g2d.fillRect(this.xPos, 0, (int) this.width, (int) this.length); // Drawing at y = 0 since it's 1D
     }
 
-    @Override
-    public int getYPos() {
-        return 0;
-    }
 
     @Override
     public Color getColour() {
         return null;
     }
 
-    @Override
-    public void setYPos(int yPos) {
-
-    }
 
     @Override
     public void setColour(Color colour) {
-
+        
     }
 }

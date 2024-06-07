@@ -10,6 +10,9 @@ abstract public class AbstractShape implements Shape {
 
     // Position in 1D space (x-axis)
     protected int xPos;
+    
+    // Position in 1D space (x-axis)
+    protected int yPos;
 
     // Mass and velocity attributes for physics calculations
     protected double mass;
@@ -23,6 +26,7 @@ abstract public class AbstractShape implements Shape {
      */
     public AbstractShape() {
         this.xPos = 0;
+        this.yPos = 0;
         this.mass = 0.0;
         this.velocity = 0.0;
         this.color = Color.BLACK;
@@ -32,13 +36,15 @@ abstract public class AbstractShape implements Shape {
      * Secondary constructor to assign values to attributes.
      *
      * @param xPos - x position variable
+     * @param yPos - y position of the variable
      * @param mass - mass variable
      * @param velocity - velocity variable
      * @param color - color variable
      */
-    public AbstractShape(int xPos, double mass, double velocity, Color color) {
+    public AbstractShape(int xPos, int yPos, double mass, double velocity, Color color) {
         this();
         this.xPos = xPos;
+        this.yPos = yPos;
         this.mass = mass;
         this.velocity = velocity;
         this.color = color;
@@ -54,6 +60,15 @@ abstract public class AbstractShape implements Shape {
 
     public void setXPos(int xPos) {
         this.xPos = xPos;
+    }
+    
+    // Accessor and mutator methods
+    public int getYPos() {
+        return yPos;
+    }
+
+    public void setYPos(int yPos) {
+        this.yPos = yPos;
     }
 
     public double getMass() {

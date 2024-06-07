@@ -4,7 +4,6 @@
  */
 package collisionvisualizer;
 
-import javax.swing.JFrame;
 
 /**
  *
@@ -474,7 +473,7 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaVelocity2.setText("10m/s");
         txtAreaElas.setText("0.5");
 
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), velocitySlider1.getMaximum(), massSlider2.getMaximum(), velocitySlider2.getMaximum(), 0.5);
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), 0, massSlider2.getMaximum(), 0, 0.5);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
