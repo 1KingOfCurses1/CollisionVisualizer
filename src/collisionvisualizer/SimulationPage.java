@@ -31,11 +31,21 @@ public class SimulationPage extends javax.swing.JFrame {
 
     public static void collision(double m1, double m2, double vi1, double vi2, double e, double vf1, double vf2) {
 
-        vf1 = (((m1 - (e * m2)) / (m1 + m2)) * vi1) + ((((1 + e) * m2) / (m1 + m2)) * vi2);
+        if(e == 0 || e == 1){
+            
+            vf1 = (((m1 - (e * m2)) / (m1 + m2)) * vi1) + ((((1 + e) * m2) / (m1 + m2)) * vi2);
 
-        vf2 = (((m2 - (e * m1)) / (m1 + m2)) * vi2) + ((((1 + e) * m1) / (m1 + m2)) * vi1);
+            vf2 = (((m2 - (e * m1)) / (m1 + m2)) * vi2) + ((((1 + e) * m1) / (m1 + m2)) * vi1);
+        }
+
+        else{
+            
+            vf1 = ((m1 * vi1) + (m2 * vi2) + (m2 * e * (vi2 - vi1))) / (m1 + m2);
+            
+            vf2 = ((m1 * vi1) + (m2 * vi2) + (m1 * e * (vi1 - vi2))) / (m1 + m2);
+        }
         
-         System.out.println("v1: " + vf1 + " v2: " + vf2);
+        System.out.println("v1: " + vf1 + " v2: " + vf2);
     }
 
     /**
