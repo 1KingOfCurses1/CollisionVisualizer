@@ -431,22 +431,27 @@ public class SimulationPage extends javax.swing.JFrame {
 
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0, massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider1MouseDragged
 
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged
         txtAreaMass2.setText("" + (massSlider2.getValue()) + " kg");
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0, massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider2MouseDragged
 
     private void velocitySlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider1MouseDragged
         txtAreaVelocity1.setText("" + (velocitySlider1.getValue()) + "m/s");
+        
     }//GEN-LAST:event_velocitySlider1MouseDragged
 
     private void velocitySlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider2MouseDragged
         txtAreaVelocity2.setText("" + (velocitySlider2.getValue()) + "m/s");
+        
     }//GEN-LAST:event_velocitySlider2MouseDragged
 
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), velocitySlider1.getValue(), massSlider2.getValue(), velocitySlider2.getValue(), elasticitySlider.getValue());
     }//GEN-LAST:event_elasticitySliderMouseDragged
 
     private void displayObjects() {
