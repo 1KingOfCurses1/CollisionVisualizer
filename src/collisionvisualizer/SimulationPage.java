@@ -11,6 +11,10 @@ package collisionvisualizer;
  */
 public class SimulationPage extends javax.swing.JFrame {
 
+    private static double vf1;
+    
+    private static double vf2;
+    
     MainPage mainWindow;
 
     /**
@@ -29,7 +33,7 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaElas.setText("0.5");
     }
 
-    public static void collision(double m1, double m2, double vi1, double vi2, double e, double vf1, double vf2) {
+    public static void collision(double m1, double m2, double vi1, double vi2, double e) {
         
         vf1 = ((m1 * vi1) + (m2 * vi2) + (m2 * (e / 100) * (vi2 - vi1))) / (m1 + m2);
 
@@ -414,13 +418,9 @@ public class SimulationPage extends javax.swing.JFrame {
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         displayObjects();
 
-        double vf1 = 0;
-        
-        double vf2 = 0;
-
         collision(massSlider1.getValue(), massSlider2.getValue(), 
                 velocitySlider1.getValue(), velocitySlider2.getValue(), 
-                elasticitySlider.getValue(), vf1, vf2);
+                elasticitySlider.getValue());
         
         
     }//GEN-LAST:event_btnRunActionPerformed
@@ -431,12 +431,14 @@ public class SimulationPage extends javax.swing.JFrame {
 
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0, massSlider2.getValue(), 0, elasticitySlider.getValue());
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
+                massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_massSlider1MouseDragged
 
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged
         txtAreaMass2.setText("" + (massSlider2.getValue()) + " kg");
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0, massSlider2.getValue(), 0, elasticitySlider.getValue());
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
+                massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_massSlider2MouseDragged
 
     private void velocitySlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider1MouseDragged
@@ -451,7 +453,8 @@ public class SimulationPage extends javax.swing.JFrame {
 
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), velocitySlider1.getValue(), massSlider2.getValue(), velocitySlider2.getValue(), elasticitySlider.getValue());
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
+                velocitySlider1.getValue(), massSlider2.getValue(), velocitySlider2.getValue(), elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_elasticitySliderMouseDragged
 
     private void displayObjects() {
@@ -461,7 +464,7 @@ public class SimulationPage extends javax.swing.JFrame {
         int velocity2 = velocitySlider2.getValue();
         double elasticity = elasticitySlider.getValue() / 100.0;
 
-        ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity);
+        ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity, vf1, vf2);
     }
 
     private void resetObjects() {
@@ -478,7 +481,7 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaVelocity2.setText("10m/s");
         txtAreaElas.setText("0.5");
 
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), 0, massSlider2.getMaximum(), 0, 0.5);
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), 0, massSlider2.getMaximum(), 0, 0.5, vf1, vf2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

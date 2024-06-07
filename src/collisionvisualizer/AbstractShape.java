@@ -9,10 +9,10 @@ import java.awt.Graphics2D;
 abstract public class AbstractShape implements Shape {
 
     // Position in 1D space (x-axis)
-    protected int xPos;
+    protected double xPos;
     
     // Position in 1D space (x-axis)
-    protected int yPos;
+    protected double yPos;
 
     // Mass and velocity attributes for physics calculations
     protected double mass;
@@ -41,7 +41,7 @@ abstract public class AbstractShape implements Shape {
      * @param velocity - velocity variable
      * @param color - color variable
      */
-    public AbstractShape(int xPos, int yPos, double mass, double velocity, Color color) {
+    public AbstractShape(double xPos, double yPos, double mass, double velocity, Color color) {
         this();
         this.xPos = xPos;
         this.yPos = yPos;
@@ -54,20 +54,20 @@ abstract public class AbstractShape implements Shape {
     abstract public void draw(Graphics2D g2d);
 
     // Accessor and mutator methods
-    public int getXPos() {
+    public double getXPos() {
         return xPos;
     }
 
-    public void setXPos(int xPos) {
+    public void setXPos(double xPos) {
         this.xPos = xPos;
     }
     
     // Accessor and mutator methods
-    public int getYPos() {
+    public double getYPos() {
         return yPos;
     }
 
-    public void setYPos(int yPos) {
+    public void setYPos(double yPos) {
         this.yPos = yPos;
     }
 
