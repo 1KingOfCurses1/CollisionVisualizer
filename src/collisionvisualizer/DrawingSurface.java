@@ -20,13 +20,9 @@ public class DrawingSurface extends JPanel implements Runnable {
         redSquare = new Square(10);  // Default mass
         blueSquare = new Square(10);  // Default mass
 
-        // Set initial positions
-        redSquare.setXPos(200);  // Example starting position
-        blueSquare.setXPos(400);  // Example starting position
-        
-         // Set initial positions to separate the squares
-        redSquare.setYPos(75);
-        blueSquare.setYPos(75);
+        centerSquare(redSquare, 250, 150);
+        centerSquare(blueSquare, 450, 150);
+
     }
 
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
@@ -37,16 +33,19 @@ public class DrawingSurface extends JPanel implements Runnable {
         blueSquare.setVelocity((int) v2);  // Update velocity based on input
 
         // Set initial positions to separate the squares
-        redSquare.setXPos(200);
-        blueSquare.setXPos(400);
-        
-        
-         // Set initial positions to separate the squares
-        redSquare.setYPos(75);
-        blueSquare.setYPos(75);
+        centerSquare(redSquare, 250, 150);
+        centerSquare(blueSquare, 450, 150);
 
         repaint();
     }
+
+    private void centerSquare(Square square, int centerX, int centerY) {
+        int newXPos = centerX - (int) (square.getWidth() / 2);
+        int newYPos = centerY - (int) (square.getLength() / 2);
+        square.setXPos(newXPos);
+        square.setYPos(newYPos);
+    }
+    
 
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
