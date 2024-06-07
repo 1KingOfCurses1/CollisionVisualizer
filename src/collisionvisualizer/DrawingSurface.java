@@ -25,8 +25,8 @@ public class DrawingSurface extends JPanel implements Runnable {
         blueSquare.setXPos(400);  // Example starting position
         
          // Set initial positions to separate the squares
-        redSquare.setYPos(200);
-        blueSquare.setYPos(400);
+        redSquare.setYPos(75);
+        blueSquare.setYPos(75);
     }
 
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
@@ -40,9 +40,10 @@ public class DrawingSurface extends JPanel implements Runnable {
         redSquare.setXPos(200);
         blueSquare.setXPos(400);
         
+        
          // Set initial positions to separate the squares
-        redSquare.setYPos(200);
-        blueSquare.setYPos(400);
+        redSquare.setYPos(75);
+        blueSquare.setYPos(75);
 
         repaint();
     }
