@@ -1,30 +1,30 @@
-Acceleration
-The rate at which an object's velocity changes over time.
-Amplitude
-The maximum extent of a vibration or displacement of a sinusoidal oscillation, measured from the position of equilibrium.
-Capacitance
-The ability of a system to store an electric charge, measured in farads.
-Electric Field
-A field around charged particles that exerts a force on other charged particles, measured in newtons per coulomb.
-Entropy
-A measure of the disorder or randomness in a system, which tends to increase over time according to the second law of thermodynamics.
-Frequency
-The number of cycles per unit time of a periodic wave or oscillation, measured in hertz.
-Gravitational Potential Energy
-The energy an object possesses because of its position in a gravitational field, calculated as the product of its mass, gravitational acceleration, and height.
-Kinetic Energy
-The energy an object possesses due to its motion, calculated as half the product of its mass and the square of its velocity.
-Magnetic Field
-A field produced by moving electric charges and magnetic dipoles, which exerts a force on other moving charges and magnetic dipoles, measured in teslas.
-Momentum
-The product of an object's mass and velocity, representing the quantity of motion an object has.
-Newton's First Law
-A principle stating that an object at rest will remain at rest, and an object in motion will remain in motion at constant velocity unless acted upon by an external force.
-Photon
-A quantum of electromagnetic radiation, which has zero rest mass and carries energy proportional to the radiation frequency.
-Potential Energy
-The energy stored in an object due to its position, condition, or configuration.
-Quantum Mechanics
-The branch of physics that deals with the behavior of particles on an atomic and subatomic scale, where the principles of wave-particle duality and probability govern.
-Work
-The transfer of energy that occurs when a force is applied to an object over a distance, calculated as the product of the force and the distance in the direction of the force.
+Elastic Collision
+A collision where kinetic energy is conserved, and the objects bounce off each other without lasting deformation or heat generation.
+Inelastic Collision
+A collision where kinetic energy is not conserved, and the objects may stick together or deform, generating heat and sound.
+Perfectly Inelastic Collision
+A type of inelastic collision where the colliding objects stick together after impact, moving with a common velocity.
+Impact Force
+The force exerted by objects on each other during a collision, which can be very large over a short time period.
+Collision Time
+The duration over which a collision occurs, typically very short in high-speed impacts.
+Impulse
+The product of the force applied during a collision and the time over which it is applied, equal to the change in momentum.
+Coefficient of Restitution
+A measure of the elasticity of a collision, defined as the relative velocity of separation divided by the relative velocity of approach.
+Conservation of Momentum
+A principle stating that the total momentum of a closed system remains constant before and after a collision.
+Center of Mass
+The point in a system of bodies or an extended body where the total mass can be considered to be concentrated for the purposes of analyzing motion and collisions.
+Relative Velocity
+The velocity of one object as observed from the reference frame of another object, crucial in determining the dynamics of a collision.
+Shock Wave
+A type of propagating disturbance that carries energy and can form in supersonic impacts, causing sudden and severe pressure changes.
+Crush Zone
+A designated area in a structure designed to deform in a controlled manner during a collision to absorb energy and reduce impact forces.
+Deformation
+The change in shape or size of an object due to the forces exerted during a collision, which can be elastic or plastic.
+Energy Absorption
+The process by which the kinetic energy of colliding objects is transformed into other forms of energy, such as heat, sound, and deformation energy.
+Rebound Velocity
+The speed and direction of an object after it has collided and separated from another object, especially in elastic collisions.
