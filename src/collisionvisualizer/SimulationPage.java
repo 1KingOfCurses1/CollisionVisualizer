@@ -431,8 +431,8 @@ public class SimulationPage extends javax.swing.JFrame {
 
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
-                massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
+        ((DrawingSurface) drawDisplay).updateParameters( massSlider1.getValue(), 0,
+                 massSlider2.getValue(),  0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_massSlider1MouseDragged
 
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged

@@ -8,16 +8,16 @@ import java.awt.*;
 public class Square extends AbstractShape {
 
     // Dimensions of the square
-    private double length;
-    private double width;
+    private int length;
+    private int width;
 
     /**
      * Default constructor initializing the square to default values.
      */
     public Square() {
         super();
-        this.length = 0.0;
-        this.width = 0.0;
+        this.length = 0;
+        this.width = 0;
     }
 
     /**
@@ -28,8 +28,8 @@ public class Square extends AbstractShape {
     public Square(double mass) {
         this();
         this.mass = mass;
-        this.length = mass * 10; // Size derived from mass for visualization
-        this.width = mass * 10;  // Size derived from mass for visualization
+        this.length =  (int) mass * 10; // Size derived from mass for visualization
+        this.width = (int) mass * 10;  // Size derived from mass for visualization
     }
 
     // Accessor and mutator methods for length and width
@@ -37,7 +37,7 @@ public class Square extends AbstractShape {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
@@ -45,7 +45,7 @@ public class Square extends AbstractShape {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
@@ -83,7 +83,7 @@ public class Square extends AbstractShape {
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.fillRect(this.xPos, this.yPos, (int) this.width, (int) this.length); 
+        g2d.fillRect(xPos, yPos, width, length); 
     }
 
 

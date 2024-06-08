@@ -12,9 +12,9 @@ public interface Shape {
     
     public void draw(Graphics2D g);
     
-    public double getXPos();
+    public int getXPos();
     
-    public double getYPos();
+    public int getYPos();
     
     public double getMass();
     
@@ -22,9 +22,9 @@ public interface Shape {
     
     public Color getColour();
     
-    public void setXPos(double xPos);
+    public void setXPos(int xPos);
     
-    public void setYPos(double yPos);
+    public void setYPos(int yPos);
     
     public void setMass(double mass);
     

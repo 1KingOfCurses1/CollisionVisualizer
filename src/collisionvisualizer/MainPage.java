@@ -14,6 +14,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private InstructionPage instructionsWindow;
     private SimulationPage simulationWindow;
+    private DefinitionPage definitionWindow;
 
     /**
      * Creates new form mainPage
@@ -35,10 +36,10 @@ public class MainPage extends javax.swing.JFrame {
         titleLbl = new javax.swing.JLabel();
         simulationBtn = new javax.swing.JButton();
         instructionBtn = new javax.swing.JButton();
+        defBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(650,500);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(253, 251, 196));
@@ -60,6 +61,14 @@ public class MainPage extends javax.swing.JFrame {
         instructionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 instructionBtnActionPerformed(evt);
+            }
+        });
+
+        defBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        defBtn.setText("Definitions");
+        defBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defBtnActionPerformed(evt);
             }
         });
 
@@ -85,6 +94,7 @@ public class MainPage extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(simulationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                             .addComponent(instructionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(defBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
@@ -97,9 +107,11 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(simulationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(instructionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addComponent(defBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,9 +128,14 @@ public class MainPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitBtnActionPerformed
+    private void defBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defBtnActionPerformed
+        if (definitionWindow == null) {
+            definitionWindow = new DefinitionPage(this);
+        }
+
+        definitionWindow.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_defBtnActionPerformed
 
     private void instructionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionBtnActionPerformed
         if (instructionsWindow == null) {
@@ -137,6 +154,10 @@ public class MainPage extends javax.swing.JFrame {
         simulationWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_simulationBtnActionPerformed
+
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,6 +196,7 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton defBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton instructionBtn;
     private javax.swing.JPanel jPanel1;

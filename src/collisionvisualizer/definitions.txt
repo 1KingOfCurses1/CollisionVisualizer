@@ -1,0 +1,30 @@
+Acceleration
+The rate at which an object's velocity changes over time.
+Amplitude
+The maximum extent of a vibration or displacement of a sinusoidal oscillation, measured from the position of equilibrium.
+Capacitance
+The ability of a system to store an electric charge, measured in farads.
+Electric Field
+A field around charged particles that exerts a force on other charged particles, measured in newtons per coulomb.
+Entropy
+A measure of the disorder or randomness in a system, which tends to increase over time according to the second law of thermodynamics.
+Frequency
+The number of cycles per unit time of a periodic wave or oscillation, measured in hertz.
+Gravitational Potential Energy
+The energy an object possesses because of its position in a gravitational field, calculated as the product of its mass, gravitational acceleration, and height.
+Kinetic Energy
+The energy an object possesses due to its motion, calculated as half the product of its mass and the square of its velocity.
+Magnetic Field
+A field produced by moving electric charges and magnetic dipoles, which exerts a force on other moving charges and magnetic dipoles, measured in teslas.
+Momentum
+The product of an object's mass and velocity, representing the quantity of motion an object has.
+Newton's First Law
+A principle stating that an object at rest will remain at rest, and an object in motion will remain in motion at constant velocity unless acted upon by an external force.
+Photon
+A quantum of electromagnetic radiation, which has zero rest mass and carries energy proportional to the radiation frequency.
+Potential Energy
+The energy stored in an object due to its position, condition, or configuration.
+Quantum Mechanics
+The branch of physics that deals with the behavior of particles on an atomic and subatomic scale, where the principles of wave-particle duality and probability govern.
+Work
+The transfer of energy that occurs when a force is applied to an object over a distance, calculated as the product of the force and the distance in the direction of the force.

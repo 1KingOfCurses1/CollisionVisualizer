@@ -25,7 +25,7 @@ public class DrawingSurface extends JPanel implements Runnable {
 
     }
 
-    public void updateParameters(double m1, double v1, double m2, double v2, double e) {
+    public void updateParameters(double m1, double v1, double m2, double v2, double e, double vf1, double vf2) {
         // Update squares with new masses and velocities
         redSquare = new Square(m1);
         redSquare.setVelocity((int) v1);  // Update velocity based on input
