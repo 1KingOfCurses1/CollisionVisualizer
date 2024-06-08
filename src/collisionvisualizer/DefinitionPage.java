@@ -4,18 +4,54 @@
  */
 package collisionvisualizer;
 
+import java.io.InputStream;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author skrs1
  */
 public class DefinitionPage extends javax.swing.JFrame {
+
     MainPage mainWindow;
+
+    public static Term sortedList[];
+
     /**
      * Creates new form DefinitionForm
      */
     public DefinitionPage(MainPage m) {
         initComponents();
         mainWindow = m;
+
+        String name = "";
+        String definition = "";
+        Term list[] = new Term[15];
+        try {
+            InputStream in = DefinitionPage.class.getResourceAsStream("definitions.txt");
+            Scanner s = new Scanner(in);
+
+            for (int i = 0; i < list.length; i++) {
+                name = s.nextLine();
+                definition = s.nextLine();
+
+                list[i] = new Term(name, definition);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: File not found.");
+        }
+        
+        
+        sortedList = quickSort(list, 0, list.length-1);
+        String displayTerms = "";
+        for (int i = 0; i < sortedList.length; i++) {
+            displayTerms += sortedList[i].getName() + "\n";
+        }
+        
+        definitionTxtArea.setText(displayTerms);
+        
     }
 
     /**
@@ -31,7 +67,7 @@ public class DefinitionPage extends javax.swing.JFrame {
         searchTxtField = new javax.swing.JTextField();
         listLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        definitionTxtArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         searchBtn = new javax.swing.JButton();
 
@@ -46,10 +82,10 @@ public class DefinitionPage extends javax.swing.JFrame {
 
         listLbl.setText("List of terms:");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        definitionTxtArea.setEditable(false);
+        definitionTxtArea.setColumns(20);
+        definitionTxtArea.setRows(5);
+        jScrollPane1.setViewportView(definitionTxtArea);
 
         jLabel1.setFont(new java.awt.Font("Heyam", 0, 36)); // NOI18N
         jLabel1.setText("Definitions:");
@@ -117,15 +153,76 @@ public class DefinitionPage extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_searchBtnActionPerformed
 
+    /**
+     * Method sorts unsorted array in ascending order using quick sort. The
+     * method is recursive.
+     *
+     * @param unsorted - unsorted array
+     * @param start - starting index
+     * @param end - ending index
+     * @return - sorted list
+     */
+    private static Term[] quickSort(Term[] unsorted, int start, int end) {
+        // If the start index is greater than or equal to the end index, the array is already sorted or contains only one element
+        if (start >= end) {
+            // Return the sorted array
+            return unsorted;
+        }
+
+        // The variable 'i' is set to start
+        int i = start;
+        // The variable 'j' is set to end
+        int j = end;
+        // Pivot value is set to the middle index of the array
+        Term pivotValue = unsorted[(start + end) / 2];
+
+        // While loop will run as long as 'j' is greater than 'i'
+        while (i <= j) {
+            // Move the 'i' index to the right until we find an element greater than or equal to the pivot
+            while (unsorted[i].getName().compareTo(pivotValue.getName()) < 0) {
+                // Increase 'i' (shift to right)
+                i++;
+            }
+            // Move the 'j' index to the left until we find an element less than or equal to the pivot
+            while (unsorted[j].getName().compareTo(pivotValue.getName()) > 0) {
+                // Decrease 'j' (shift to left)
+                j--;
+            }
+            // If 'i' is less than or equal to 'j'
+            if (i <= j) {
+                // Swap the elements at 'i' and 'j'
+                Term temp = unsorted[i];
+                unsorted[i] = unsorted[j];
+                unsorted[j] = temp;
+                // Increase 'i'
+                i++;
+                // Decrease 'j'
+                j--;
+            }
+        }
+
+        // Recursive call on the left partition
+        if (start < j) {
+            quickSort(unsorted, start, j);
+        }
+
+        // Recursive call on the right partition
+        if (i < end) {
+            quickSort(unsorted, i, end);
+        }
+
+        // Return the sorted array
+        return unsorted;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
+    private javax.swing.JTextArea definitionTxtArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel listLbl;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchTxtField;
