@@ -454,7 +454,7 @@ public class SimulationPage extends javax.swing.JFrame {
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
-                velocitySlider1.getValue(), massSlider2.getValue(), velocitySlider2.getValue(), elasticitySlider.getValue(), vf1, vf2);
+                0, massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_elasticitySliderMouseDragged
 
     private void displayObjects() {
