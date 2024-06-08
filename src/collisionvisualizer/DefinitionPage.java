@@ -42,16 +42,15 @@ public class DefinitionPage extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: File not found.");
         }
-        
-        
-        sortedList = quickSort(list, 0, list.length-1);
+
+        sortedList = quickSort(list, 0, list.length - 1);
         String displayTerms = "";
         for (int i = 0; i < sortedList.length; i++) {
             displayTerms += sortedList[i].getName() + "\n";
         }
-        
+
         definitionTxtArea.setText(displayTerms);
-        
+
     }
 
     /**
@@ -153,8 +152,32 @@ public class DefinitionPage extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        String target = searchTxtField.getText();
+        
+        int location = linearSearch(sortedList, target);
+        
+        
 
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    public int linearSearch(Term[] sortedTerms, String target) {
+        // Examine each element in the array
+        for (int i = 0; i < sortedTerms.length; i++) {
+            // Is this the one we're looking for?
+            if (sortedTerms[i].getName().equals(target)) {
+                // Return the index where the target is found
+                return i;
+            }
+            // Have we gone past where the target should be?
+            if (sortedTerms[i].getName().compareTo(target) > 0) {
+                // Since the array is sorted, if the current term name is greater than the target,
+                // the target is not in the array
+                return -1;
+            }
+        }
+        // The entire array has been searched without finding the target
+        return -1;
+    }
 
     /**
      * Method sorts unsorted array in ascending order using quick sort. The
