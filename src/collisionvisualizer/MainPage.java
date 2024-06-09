@@ -7,8 +7,11 @@ package collisionvisualizer;
 import java.awt.Dimension;
 
 /**
+ * The main page of the Collision Visualizer application. This class provides the
+ * main interface with buttons to navigate to different sections of the application,
+ * including simulation, instructions, and definitions.
+ * It also includes an option to exit the application.
  *
- * @author arver0606
  */
 public class MainPage extends javax.swing.JFrame {
 
@@ -17,7 +20,7 @@ public class MainPage extends javax.swing.JFrame {
     private DefinitionPage definitionWindow;
 
     /**
-     * Creates new form mainPage
+     * Creates new form MainPage and initializes the components.
      */
     public MainPage() {
         initComponents();
@@ -127,7 +130,11 @@ public class MainPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action of the Definitions button, opening the Definitions window.
+     *
+     * @param evt the action event
+     */
     private void defBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defBtnActionPerformed
         if (definitionWindow == null) {
             definitionWindow = new DefinitionPage(this);
@@ -136,7 +143,11 @@ public class MainPage extends javax.swing.JFrame {
         definitionWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_defBtnActionPerformed
-
+    /**
+     * Handles the action of the Instructions button, opening the Instructions window.
+     *
+     * @param evt the action event
+     */
     private void instructionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionBtnActionPerformed
         if (instructionsWindow == null) {
             instructionsWindow = new InstructionPage(this);
@@ -145,7 +156,11 @@ public class MainPage extends javax.swing.JFrame {
         instructionsWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_instructionBtnActionPerformed
-
+    /**
+     * Handles the action of the Simulation button, opening the Simulation window.
+     *
+     * @param evt the action event
+     */
     private void simulationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulationBtnActionPerformed
         if (simulationWindow == null) {
             simulationWindow = new SimulationPage(this);
@@ -154,12 +169,18 @@ public class MainPage extends javax.swing.JFrame {
         simulationWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_simulationBtnActionPerformed
-
+    /**
+     * Handles the action of the Exit button, closing the application.
+     *
+     * @param evt the action event
+     */
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
+     * The main method to run the MainPage form.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
