@@ -140,7 +140,17 @@ public class DrawingSurface extends JPanel implements Runnable {
             moveObject();
             
             System.out.println("red: " + (redSquare.getXPos() + redSquare.getLength()) + " BLue: " + (blueSquare.getXPos() + 1));
-            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos())){
+            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 5)
+                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 5)){
+                
+                redSquare.setVelocity(vf1);
+
+                blueSquare.setVelocity(vf2);
+            }
+            
+            //just a temperary fix not ment to have this when handing in (its just cuz the collision cannot check when they're exactly at the same posistion
+            else if((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 10)
+                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 10)){
                 
                 redSquare.setVelocity(vf1);
 
