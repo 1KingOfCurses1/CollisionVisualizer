@@ -5,14 +5,14 @@
 package collisionvisualizer;
 
 /**
- *
- * @author arver0606
+ * InstructionPage class provides a GUI window to display instructions to the user.
  */
 public class InstructionPage extends javax.swing.JFrame {
     MainPage mainWindow;
 
     /**
      * Creates new form InstructionPage
+     * @param m MainPage instance to return to when 'Back' button is pressed.
      */
     public InstructionPage(MainPage m) {
         initComponents();
@@ -87,7 +87,9 @@ public class InstructionPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Sets up the text area with instructions.
+     */
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         mainWindow.setVisible(true);
         this.setVisible(false);

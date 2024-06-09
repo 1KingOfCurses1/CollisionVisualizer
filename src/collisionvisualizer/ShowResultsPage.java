@@ -5,19 +5,20 @@
 package collisionvisualizer;
 
 /**
- *
- * @author skrs1
+ * ShowResultsPage class provides a GUI window to display the definition of a selected term.
+ * It includes a title label, a text area for the definition, and a back button to return to the main window.
  */
 public class ShowResultsPage extends javax.swing.JFrame {
 
     DefinitionPage mainWindow;
 
     /**
-     * Creates new form ShowResultsPage
+     * Creates new form ShowResultsPage.
+     * Initializes the components and sets the title and definition based on the selected term.
      *
-     * @param d
-     * @param sortedList
-     * @param location
+     * @param d the DefinitionPage instance to return to when 'Back' button is pressed.
+     * @param sortedList the sorted array of terms.
+     * @param location the index of the selected term in the sorted list.
      */
     public ShowResultsPage(DefinitionPage d, Term[] sortedList, int location) {
         initComponents();
@@ -101,7 +102,11 @@ public class ShowResultsPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action of the back button, returning to the main window.
+     *
+     * @param evt the action event
+     */
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
 
         mainWindow.setVisible(true);

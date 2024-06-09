@@ -6,21 +6,21 @@ package collisionvisualizer;
 
 
 /**
- *
- * @author arver0606
+ * SimulationPage class provides a GUI window for running and visualizing collision simulations.
+ * It includes controls for setting the masses and velocities of two objects and for running
+ * the simulation.
  */
 public class SimulationPage extends javax.swing.JFrame {
 
-    private static double vf1;
-    
-    private static double vf2;
-    
-    MainPage mainWindow;
+    private static double vf1;  // Final velocity of the first object
+    private static double vf2;  // Final velocity of the second object
+    MainPage mainWindow;// Reference to the main window
+
 
     /**
      * Creates new form SimulationPage
      *
-     * @param m
+     * @param m MainPage instance to return to when 'Back' button is pressed.
      */
     public SimulationPage(MainPage m) {
         initComponents();
@@ -32,7 +32,16 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaVelocity2.setText("10m/s");
         txtAreaElas.setText("0.5");
     }
-
+    /**
+     * Calculates the final velocities of two objects after a collision based on
+     * their masses, initial velocities, and the coefficient of restitution.
+     *
+     * @param m1 Mass of the first object
+     * @param m2 Mass of the second object
+     * @param vi1 Initial velocity of the first object
+     * @param vi2 Initial velocity of the second object
+     * @param e Coefficient of restitution
+     */
     public static void collision(double m1, double m2, double vi1, double vi2, double e) {
         
         vf1 = ((m1 * vi1) + (m2 * vi2) + (m2 * (e / 100) * (vi2 - vi1))) / (m1 + m2);
@@ -408,13 +417,21 @@ public class SimulationPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action of the back button, returning to the main window.
+     *
+     * @param evt the action event
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetObjects();
         mainWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-
+    /**
+     * Handles the action of the run button, updating the display and running the collision simulation.
+     *
+     * @param evt the action event
+     */
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         displayObjects();
 
@@ -425,38 +442,68 @@ public class SimulationPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRunActionPerformed
 
+    /**
+     * Handles the action of the reset button, resetting the objects to their initial states.
+     *
+     * @param evt the action event
+     */
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         resetObjects();
     }//GEN-LAST:event_btnResetActionPerformed
-
+    /**
+     * Handles the action of dragging the mass slider for the first object, updating its mass value.
+     *
+     * @param evt the mouse event
+     */
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
         ((DrawingSurface) drawDisplay).updateParameters( massSlider1.getValue(), 0,
                  massSlider2.getValue(),  0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_massSlider1MouseDragged
-
+    /**
+     * Handles the action of dragging the mass slider for the second object, updating its mass value.
+     *
+     * @param evt the mouse event
+     */
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged
         txtAreaMass2.setText("" + (massSlider2.getValue()) + " kg");
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
                 massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_massSlider2MouseDragged
-
+    /**
+     * Handles the action of dragging the velocity slider for the first object, updating its velocity value.
+     *
+     * @param evt the mouse event
+     */
     private void velocitySlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider1MouseDragged
         txtAreaVelocity1.setText("" + (velocitySlider1.getValue()) + "m/s");
         
     }//GEN-LAST:event_velocitySlider1MouseDragged
 
+
+    /**
+     * Handles the action of dragging the velocity slider for the second object, updating its velocity value.
+     *
+     * @param evt the mouse event
+     */
     private void velocitySlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider2MouseDragged
         txtAreaVelocity2.setText("" + (velocitySlider2.getValue()) + "m/s");
         
     }//GEN-LAST:event_velocitySlider2MouseDragged
 
+    /**
+     * Handles the action of dragging the elasticity slider, updating its value.
+     *
+     * @param evt the mouse event
+     */
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
                 0, massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
     }//GEN-LAST:event_elasticitySliderMouseDragged
-
+    /**
+     * Updates the display objects with the current parameters from the sliders.
+     */
     private void displayObjects() {
         int mass1 = massSlider1.getValue();
         int mass2 = massSlider2.getValue();
@@ -467,6 +514,9 @@ public class SimulationPage extends javax.swing.JFrame {
         ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity, vf1, vf2);
     }
 
+    /**
+     * Resets the objects to their initial states.
+     */
     private void resetObjects() {
 
         massSlider1.setValue(massSlider1.getMaximum());

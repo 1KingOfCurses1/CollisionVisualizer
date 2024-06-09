@@ -6,13 +6,19 @@ import java.awt.Graphics2D;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * A class representing the drawing surface for visualizing collisions.
+ * This class extends JPanel and implements Runnable to allow for animation.
+ */
 public class DrawingSurface extends JPanel implements Runnable {
 
     private Thread animator;
     private final int DELAY = 25;
 
     private Square redSquare, blueSquare;
-
+    /**
+     * Constructor initializes the drawing surface and the squares.
+     */
     public DrawingSurface() {
         this.setFocusable(true);
         this.requestFocus();
@@ -24,7 +30,17 @@ public class DrawingSurface extends JPanel implements Runnable {
         centerSquare(blueSquare, 450, 150);
 
     }
-
+    /**
+     * Updates the parameters of the squares with new masses and velocities.
+     *
+     * @param m1  mass of the red square
+     * @param v1  velocity of the red square
+     * @param m2  mass of the blue square
+     * @param v2  velocity of the blue square
+     * @param e   coefficient of restitution (unused in this implementation)
+     * @param vf1 final velocity of the red square (unused in this implementation)
+     * @param vf2 final velocity of the blue square (unused in this implementation)
+     */
     public void updateParameters(double m1, double v1, double m2, double v2, double e, double vf1, double vf2) {
         // Update squares with new masses and velocities
         redSquare = new Square(m1);
@@ -38,15 +54,25 @@ public class DrawingSurface extends JPanel implements Runnable {
 
         repaint();
     }
-
+    /**
+     * Centers the square at the specified coordinates.
+     *
+     * @param square  the square to be centered
+     * @param centerX the x-coordinate of the center position
+     * @param centerY the y-coordinate of the center position
+     */
     private void centerSquare(Square square, int centerX, int centerY) {
         int newXPos = centerX - (int) (square.getWidth() / 2);
         int newYPos = centerY - (int) (square.getLength() / 2);
         square.setXPos(newXPos);
         square.setYPos(newYPos);
     }
-    
 
+    /**
+     * Performs the drawing operations for the squares.
+     *
+     * @param g the Graphics object used for drawing
+     */
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
@@ -61,26 +87,38 @@ public class DrawingSurface extends JPanel implements Runnable {
         blueSquare.draw(g2d);
     }
 
+    /**
+     * Overrides the paintComponent method to perform custom painting.
+     *
+     * @param g the Graphics object used for painting
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         doDrawing(g);
     }
-
+    /**
+     * Updates the positions of the squares.
+     */
     public void moveObject() {
         redSquare.update();
         blueSquare.update();
 
         // Add logic to handle collisions or boundaries if needed
     }
-
+    /**
+     * Overrides the addNotify method to start the animation thread.
+     */
     @Override
     public void addNotify() {
         super.addNotify();
         animator = new Thread(this);
         animator.start();
     }
-
+    /**
+     * The run method for the animation thread.
+     * This method updates the squares' positions and repaints the screen at regular intervals.
+     */
     @Override
     public void run() {
         long beforeTime, timeDiff, sleep;
