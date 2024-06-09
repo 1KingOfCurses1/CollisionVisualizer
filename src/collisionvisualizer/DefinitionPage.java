@@ -9,8 +9,10 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author skrs1
+ * A class representing a definition page in the collision visualizer application.
+ * This class displays a list of terms and their definitions, and allows for searching
+ * specific terms.
+ * @author jewu
  */
 public class DefinitionPage extends javax.swing.JFrame {
 
@@ -21,7 +23,7 @@ public class DefinitionPage extends javax.swing.JFrame {
     public static Term sortedList[];
 
     /**
-     * Creates new form DefinitionForm
+     * Creates new form DefinitionFormQ
      */
     public DefinitionPage(MainPage m) {
         initComponents();
@@ -158,7 +160,11 @@ public class DefinitionPage extends javax.swing.JFrame {
         mainWindow.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_backBtnActionPerformed
-
+    /**
+     * Handles the action of the search button.
+     *
+     * @param evt the action event
+     */
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         String target = searchTxtField.getText();
 
@@ -179,7 +185,13 @@ public class DefinitionPage extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_searchBtnActionPerformed
-
+    /**
+     * Searches for a target term in the sorted list using linear search.
+     *
+     * @param sortedTerms the sorted array of terms
+     * @param target the target term to search for
+     * @return the index of the target term if found, -1 otherwise
+     */
     public int linearSearch(Term[] sortedTerms, String target) {
         // Examine each element in the array
         for (int i = 0; i < sortedTerms.length; i++) {
@@ -200,13 +212,13 @@ public class DefinitionPage extends javax.swing.JFrame {
     }
 
     /**
-     * Method sorts unsorted array in ascending order using quick sort. The
+     * Method sorts an unsorted array in ascending order using quicksort. The
      * method is recursive.
      *
-     * @param unsorted - unsorted array
-     * @param start - starting index
-     * @param end - ending index
-     * @return - sorted list
+     * @param unsorted the unsorted array
+     * @param start the starting index
+     * @param end the ending index
+     * @return the sorted list
      */
     private static Term[] quickSort(Term[] unsorted, int start, int end) {
         // If the start index is greater than or equal to the end index, the array is already sorted or contains only one element
