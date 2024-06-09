@@ -12,6 +12,9 @@ import javax.swing.JPanel;
  */
 public class DrawingSurface extends JPanel implements Runnable {
 
+    private double vf1;
+    private double vf2;
+    
     private Thread animator;
     private final int DELAY = 25;
 
@@ -41,19 +44,27 @@ public class DrawingSurface extends JPanel implements Runnable {
      * @param vf1 final velocity of the red square (unused in this implementation)
      * @param vf2 final velocity of the blue square (unused in this implementation)
      */
-    public void updateParameters(double m1, double v1, double m2, double v2, double e, double vf1, double vf2) {
+    public void updateParameters(double m1, double v1, double m2, double v2, double e) {
         // Update squares with new masses and velocities
         redSquare = new Square(m1);
         redSquare.setVelocity((int) v1);  // Update velocity based on input
         blueSquare = new Square(m2);
         blueSquare.setVelocity((int) v2);  // Update velocity based on input
-
+        
         // Set initial positions to separate the squares
         centerSquare(redSquare, 250, 150);
         centerSquare(blueSquare, 450, 150);
 
         repaint();
     }
+    
+    public void drawCollision(double vf1, double vf2) {
+
+        this.vf1 = vf1;
+        
+        this.vf2 = vf2;
+    }
+    
     /**
      * Centers the square at the specified coordinates.
      *
@@ -127,6 +138,15 @@ public class DrawingSurface extends JPanel implements Runnable {
         while (true) {
             // Update the squares' positions
             moveObject();
+            
+            System.out.println("red: " + (redSquare.getXPos() + redSquare.getLength()) + " BLue: " + (blueSquare.getXPos() + 1));
+            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos())){
+                
+                redSquare.setVelocity(vf1);
+
+                blueSquare.setVelocity(vf2);
+            }
+            
             // Redraw the screen
             repaint();
 

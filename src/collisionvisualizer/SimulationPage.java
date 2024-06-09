@@ -4,6 +4,8 @@
  */
 package collisionvisualizer;
 
+import java.text.DecimalFormat;
+
 
 /**
  * SimulationPage class provides a GUI window for running and visualizing collision simulations.
@@ -14,9 +16,12 @@ public class SimulationPage extends javax.swing.JFrame {
 
     private static double vf1;  // Final velocity of the first object
     private static double vf2;  // Final velocity of the second object
+    private static double Eki1;
+    private static double Eki2;
+    private static double Ekf1;
+    private static double Ekf2;
     MainPage mainWindow;// Reference to the main window
-
-
+    
     /**
      * Creates new form SimulationPage
      *
@@ -26,6 +31,12 @@ public class SimulationPage extends javax.swing.JFrame {
         initComponents();
         mainWindow = m;
 
+        txtAreaEki1.setText("0J");
+        txtAreaEki2.setText("0J");
+        txtAreaEkf1.setText("0J");
+        txtAreaEkf2.setText("0J");
+        txtAreaVf1.setText("0m/s");
+        txtAreaVf2.setText("0m/s");
         txtAreaMass1.setText("10 kg");
         txtAreaMass2.setText("10 kg");
         txtAreaVelocity1.setText("10m/s");
@@ -48,7 +59,13 @@ public class SimulationPage extends javax.swing.JFrame {
 
         vf2 = ((m1 * vi1) + (m2 * vi2) + (m1 * (e / 100) * (vi1 - vi2))) / (m1 + m2);
         
-        System.out.println("v1: " + vf1 + " v2: " + vf2);
+        Eki1 = 0.5 * m1 * (Math.pow(vi1, 2));
+        
+        Eki2 = 0.5 * m2 * (Math.pow(vi2, 2));
+        
+        Ekf1 = 0.5 * m1 * (Math.pow(vf1, 2));
+        
+        Ekf2 = 0.5 * m2 * (Math.pow(vf2, 2));
     }
 
     /**
@@ -75,8 +92,8 @@ public class SimulationPage extends javax.swing.JFrame {
         elasticitySlider = new javax.swing.JSlider();
         lblDisplayElas = new javax.swing.JLabel();
         drawDisplay = new DrawingSurface();
-        lblEK1 = new javax.swing.JLabel();
-        lblEK2 = new javax.swing.JLabel();
+        lblEki1 = new javax.swing.JLabel();
+        lblEki2 = new javax.swing.JLabel();
         lblVf1 = new javax.swing.JLabel();
         lblVf2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -90,13 +107,19 @@ public class SimulationPage extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         txtAreaElas = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
-        txtAreaEk1 = new javax.swing.JTextArea();
+        txtAreaEki1 = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
-        txtAreaEk2 = new javax.swing.JTextArea();
+        txtAreaEki2 = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
         txtAreaVf2 = new javax.swing.JTextArea();
         jScrollPane9 = new javax.swing.JScrollPane();
         txtAreaVf1 = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        txtAreaEkf2 = new javax.swing.JTextArea();
+        lblEkf3 = new javax.swing.JLabel();
+        lblEkf4 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        txtAreaEkf1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,18 +204,18 @@ public class SimulationPage extends javax.swing.JFrame {
         drawDisplay.setLayout(drawDisplayLayout);
         drawDisplayLayout.setHorizontalGroup(
             drawDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
+            .addGap(0, 615, Short.MAX_VALUE)
         );
         drawDisplayLayout.setVerticalGroup(
             drawDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 199, Short.MAX_VALUE)
         );
 
-        lblEK1.setForeground(new java.awt.Color(255, 0, 0));
-        lblEK1.setText("EK1");
+        lblEki1.setForeground(new java.awt.Color(255, 0, 0));
+        lblEki1.setText("EKI1");
 
-        lblEK2.setForeground(new java.awt.Color(0, 0, 255));
-        lblEK2.setText("EK2");
+        lblEki2.setForeground(new java.awt.Color(0, 0, 255));
+        lblEki2.setText("EKI2");
 
         lblVf1.setForeground(new java.awt.Color(255, 0, 0));
         lblVf1.setText("VF1");
@@ -243,18 +266,18 @@ public class SimulationPage extends javax.swing.JFrame {
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        txtAreaEk1.setEditable(false);
-        txtAreaEk1.setColumns(20);
-        txtAreaEk1.setRows(5);
-        jScrollPane6.setViewportView(txtAreaEk1);
+        txtAreaEki1.setEditable(false);
+        txtAreaEki1.setColumns(20);
+        txtAreaEki1.setRows(5);
+        jScrollPane6.setViewportView(txtAreaEki1);
 
         jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        txtAreaEk2.setEditable(false);
-        txtAreaEk2.setColumns(20);
-        txtAreaEk2.setRows(5);
-        jScrollPane7.setViewportView(txtAreaEk2);
+        txtAreaEki2.setEditable(false);
+        txtAreaEki2.setColumns(20);
+        txtAreaEki2.setRows(5);
+        jScrollPane7.setViewportView(txtAreaEki2);
 
         jScrollPane8.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane8.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -272,17 +295,32 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaVf1.setRows(5);
         jScrollPane9.setViewportView(txtAreaVf1);
 
+        jScrollPane10.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane10.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtAreaEkf2.setEditable(false);
+        txtAreaEkf2.setColumns(20);
+        txtAreaEkf2.setRows(5);
+        jScrollPane10.setViewportView(txtAreaEkf2);
+
+        lblEkf3.setForeground(new java.awt.Color(255, 0, 0));
+        lblEkf3.setText("EKF1");
+
+        lblEkf4.setForeground(new java.awt.Color(0, 0, 255));
+        lblEkf4.setText("EKF2");
+
+        jScrollPane11.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtAreaEkf1.setEditable(false);
+        txtAreaEkf1.setColumns(20);
+        txtAreaEkf1.setRows(5);
+        jScrollPane11.setViewportView(txtAreaEkf1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(431, 431, 431)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblVf2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEK2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
-                .addGap(393, 393, 393)
-                .addComponent(lblDisplayElas))
             .addGroup(layout.createSequentialGroup()
                 .addGap(219, 219, 219)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,58 +328,76 @@ public class SimulationPage extends javax.swing.JFrame {
                 .addComponent(elasticitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(drawDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                    .addGap(57, 57, 57)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnBack)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblMass1)
-                                .addComponent(lblVelocity1))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(velocitySlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(massSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(32, 32, 32)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblMass2)
-                                    .addGap(33, 33, 33)
-                                    .addComponent(massSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblVelocity2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(velocitySlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnRun)
-                                .addComponent(btnReset))
-                            .addGap(108, 108, 108)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblEK1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                                .addComponent(lblVf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(141, 141, 141)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(141, 141, 141)
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRun)
+                            .addComponent(btnReset))
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblEki1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                            .addComponent(lblVf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblEkf3, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(199, 199, 199)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblEkf4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblEki2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(89, 89, 89)
+                                        .addComponent(lblVf2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMass1)
+                    .addComponent(lblVelocity1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(velocitySlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(massSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMass2)
+                        .addGap(33, 33, 33)
+                        .addComponent(massSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblVelocity2)
+                        .addGap(18, 18, 18)
+                        .addComponent(velocitySlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDisplayElas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(drawDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,36 +411,49 @@ public class SimulationPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(61, 61, 61)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEki1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblEki2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(22, 22, 22)
                 .addComponent(lblDisplayElas)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblEK1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblEK2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                                    .addComponent(btnRun)
+                                    .addComponent(lblEkf3))
+                                .addGap(24, 24, 24))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEkf4))
+                                .addGap(26, 26, 26)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18))
+                                        .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblVf1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lblVf2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(drawDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35))
+                                                .addComponent(lblVf1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblVf2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)))
+                                .addComponent(drawDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnReset)
-                                .addGap(322, 322, 322)))
+                                .addGap(233, 233, 233)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,9 +478,9 @@ public class SimulationPage extends javax.swing.JFrame {
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))
+                        .addGap(138, 138, 138))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -434,11 +503,21 @@ public class SimulationPage extends javax.swing.JFrame {
      */
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         displayObjects();
-
+        
+        DecimalFormat num = new DecimalFormat("###,###.##");
+        
         collision(massSlider1.getValue(), massSlider2.getValue(), 
                 velocitySlider1.getValue(), velocitySlider2.getValue(), 
                 elasticitySlider.getValue());
         
+        ((DrawingSurface) drawDisplay).drawCollision(vf1, vf2);
+        
+        txtAreaEki1.setText(num.format(Eki1) + "J");
+        txtAreaEki2.setText(num.format(Eki2) + "J");
+        txtAreaEkf1.setText(num.format(Ekf1) + "J");
+        txtAreaEkf2.setText(num.format(Ekf2) + "J");
+        txtAreaVf1.setText(num.format(vf1) + "m/s");
+        txtAreaVf2.setText(num.format(vf2) + "m/s");
         
     }//GEN-LAST:event_btnRunActionPerformed
 
@@ -458,7 +537,7 @@ public class SimulationPage extends javax.swing.JFrame {
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
         ((DrawingSurface) drawDisplay).updateParameters( massSlider1.getValue(), 0,
-                 massSlider2.getValue(),  0, elasticitySlider.getValue(), vf1, vf2);
+                 massSlider2.getValue(),  0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider1MouseDragged
     /**
      * Handles the action of dragging the mass slider for the second object, updating its mass value.
@@ -468,7 +547,7 @@ public class SimulationPage extends javax.swing.JFrame {
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged
         txtAreaMass2.setText("" + (massSlider2.getValue()) + " kg");
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
-                massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
+                massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider2MouseDragged
     /**
      * Handles the action of dragging the velocity slider for the first object, updating its velocity value.
@@ -499,7 +578,7 @@ public class SimulationPage extends javax.swing.JFrame {
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
-                0, massSlider2.getValue(), 0, elasticitySlider.getValue(), vf1, vf2);
+                0, massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_elasticitySliderMouseDragged
     /**
      * Updates the display objects with the current parameters from the sliders.
@@ -511,7 +590,7 @@ public class SimulationPage extends javax.swing.JFrame {
         int velocity2 = velocitySlider2.getValue();
         double elasticity = elasticitySlider.getValue() / 100.0;
 
-        ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity, vf1, vf2);
+        ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity);
     }
 
     /**
@@ -530,8 +609,14 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaVelocity1.setText("10m/s");
         txtAreaVelocity2.setText("10m/s");
         txtAreaElas.setText("0.5");
-
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), 0, massSlider2.getMaximum(), 0, 0.5, vf1, vf2);
+        txtAreaEki1.setText("0J");
+        txtAreaEki2.setText("0J");
+        txtAreaEkf1.setText("0J");
+        txtAreaEkf2.setText("0J");
+        txtAreaVf1.setText("0m/s");
+        txtAreaVf2.setText("0m/s");
+        
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), 0, massSlider2.getMaximum(), 0, 0.5);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -541,6 +626,8 @@ public class SimulationPage extends javax.swing.JFrame {
     private javax.swing.JPanel drawDisplay;
     private javax.swing.JSlider elasticitySlider;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -550,8 +637,10 @@ public class SimulationPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblDisplayElas;
-    private javax.swing.JLabel lblEK1;
-    private javax.swing.JLabel lblEK2;
+    private javax.swing.JLabel lblEkf3;
+    private javax.swing.JLabel lblEkf4;
+    private javax.swing.JLabel lblEki1;
+    private javax.swing.JLabel lblEki2;
     private javax.swing.JLabel lblMass1;
     private javax.swing.JLabel lblMass2;
     private javax.swing.JLabel lblVelocity1;
@@ -561,8 +650,10 @@ public class SimulationPage extends javax.swing.JFrame {
     private javax.swing.JSlider massSlider1;
     private javax.swing.JSlider massSlider2;
     private javax.swing.JLabel title;
-    private javax.swing.JTextArea txtAreaEk1;
-    private javax.swing.JTextArea txtAreaEk2;
+    private javax.swing.JTextArea txtAreaEkf1;
+    private javax.swing.JTextArea txtAreaEkf2;
+    private javax.swing.JTextArea txtAreaEki1;
+    private javax.swing.JTextArea txtAreaEki2;
     private javax.swing.JTextArea txtAreaElas;
     private javax.swing.JTextArea txtAreaMass1;
     private javax.swing.JTextArea txtAreaMass2;
