@@ -10,26 +10,28 @@ abstract public class AbstractShape implements Shape {
     // Encapsulation of attributes
     // Position in 2D space (x-axis)
     protected int xPos;
-    
-    // Position in 2D space (x-axis)
+
+    // Position in 2D space (y-axis)
     protected int yPos;
 
-    // Mass and velocity attributes for physics calculations
+    // Mass attribute for physics calculations
     protected double mass;
+
+    // Velocity attribute for physics calculations
     protected double velocity;
 
-    // Color for drawing the shape
+    // Color attribute for drawing the shape
     protected Color color;
 
     /**
      * Primary constructor setting attributes to default values.
      */
     public AbstractShape() {
-        this.xPos = 0;
-        this.yPos = 0;
-        this.mass = 0.0;
-        this.velocity = 0.0;
-        this.color = Color.BLACK;
+        this.xPos = 0;          // Initialize x position to 0
+        this.yPos = 0;          // Initialize y position to 0
+        this.mass = 0.0;        // Initialize mass to 0.0
+        this.velocity = 0.0;    // Initialize velocity to 0.0
+        this.color = Color.BLACK; // Initialize color to black
     }
 
     /**
@@ -42,12 +44,12 @@ abstract public class AbstractShape implements Shape {
      * @param color - color variable
      */
     public AbstractShape(int xPos, int yPos, double mass, double velocity, Color color) {
-        this();
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.mass = mass;
-        this.velocity = velocity;
-        this.color = color;
+        this();                 // Call the primary constructor to initialize default values
+        this.xPos = xPos;       // Set the x position
+        this.yPos = yPos;       // Set the y position
+        this.mass = mass;       // Set the mass
+        this.velocity = velocity; // Set the velocity
+        this.color = color;     // Set the color
     }
 
     /**
@@ -63,7 +65,7 @@ abstract public class AbstractShape implements Shape {
      * @return the x position of the shape
      */
     public int getXPos() {
-        return xPos;
+        return xPos;// Return the x position
     }
     /**
      * Sets the x position of the shape.
@@ -71,7 +73,7 @@ abstract public class AbstractShape implements Shape {
      * @param xPos the x position to set
      */
     public void setXPos(int xPos) {
-        this.xPos = xPos;
+        this.xPos = xPos; // Set the x position
     }
     /**
      * Gets the y position of the shape.
@@ -80,7 +82,7 @@ abstract public class AbstractShape implements Shape {
      */
 
     public int getYPos() {
-        return yPos;
+        return yPos;// Return the y position
     }
     /**
      * Sets the y position of the shape.
@@ -88,7 +90,7 @@ abstract public class AbstractShape implements Shape {
      * @param yPos the y position to set
      */
     public void setYPos(int yPos) {
-        this.yPos = yPos;
+        this.yPos = yPos;// Set the y position
     }
 
     /**
@@ -97,7 +99,7 @@ abstract public class AbstractShape implements Shape {
      * @return the mass of the shape
      */
     public double getMass() {
-        return mass;
+        return mass;// Return the mass
     }
     /**
      * Sets the mass of the shape.
@@ -105,7 +107,7 @@ abstract public class AbstractShape implements Shape {
      * @param mass the mass to set
      */
     public void setMass(double mass) {
-        this.mass = mass;
+        this.mass = mass; // Set the mass
     }
     /**
      * Gets the velocity of the shape.
@@ -113,7 +115,7 @@ abstract public class AbstractShape implements Shape {
      * @return the velocity of the shape
      */
     public double getVelocity() {
-        return velocity;
+        return velocity; // Return the velocity
     }
     /**
      * Sets the velocity of the shape.
@@ -121,7 +123,7 @@ abstract public class AbstractShape implements Shape {
      * @param velocity the velocity to set
      */
     public void setVelocity(double velocity) {
-        this.velocity = velocity;
+        this.velocity = velocity;// Set the velocity
     }
     /**
      * Gets the color of the shape.
@@ -129,7 +131,7 @@ abstract public class AbstractShape implements Shape {
      * @return the color of the shape
      */
     public Color getColor() {
-        return color;
+        return color;// Return the color
     }
     /**
      * Sets the color of the shape.
@@ -137,7 +139,7 @@ abstract public class AbstractShape implements Shape {
      * @param color the color to set
      */
     public void setColor(Color color) {
-        this.color = color;
+        this.color = color; // Set the color
     }
     /**
      * Abstract method to be implemented by subclasses for updating the shape's position.
@@ -151,15 +153,16 @@ abstract public class AbstractShape implements Shape {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) return true; // If the objects are the same instance, they are equal
+        if (obj == null || getClass() != obj.getClass()) return false; // If the object is null or not the same class, they are not equal
 
-        AbstractShape that = (AbstractShape) obj;
+        AbstractShape that = (AbstractShape) obj; // Cast the object to AbstractShape
 
-        return xPos == that.xPos &&
-                Double.compare(that.mass, mass) == 0 &&
-                Double.compare(that.velocity, velocity) == 0 &&
-                color.equals(that.color);
+        return xPos == that.xPos && // Compare x positions
+                yPos == that.yPos && // Compare y positions
+                Double.compare(that.mass, mass) == 0 && // Compare masses
+                Double.compare(that.velocity, velocity) == 0 && // Compare velocities
+                color.equals(that.color);// Compare colors
     }
     /**
      * Provides a string representation of the shape.
@@ -168,9 +171,10 @@ abstract public class AbstractShape implements Shape {
      */
     @Override
     public String toString() {
-        return "X-position: " + xPos +
-                "\nMass: " + mass +
-                "\nVelocity: " + velocity +
-                "\nColor: " + color.toString();
+        return "X-position: " + xPos +           // Include x position in the string
+                "\nY-position: " + yPos +         // Include y position in the string
+                "\nMass: " + mass +               // Include mass in the string
+                "\nVelocity: " + velocity +       // Include velocity in the string
+                "\nColor: " + color.toString();   // Include color in the string
     }
 }
