@@ -22,7 +22,7 @@ public class DrawingSurface extends JPanel implements Runnable {
     private double e;
     
     private Thread animator; // Thread for handling animation
-    private final int DELAY = 10; // Delay between animation frames in milliseconds
+    private final int DELAY = 25; // Delay between animation frames in milliseconds
 
     private Square redSquare, blueSquare; // Two squares representing the objects in the simulation
 
