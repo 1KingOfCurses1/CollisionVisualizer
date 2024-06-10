@@ -95,7 +95,7 @@ public class Circle extends AbstractShape {
     @Override
     public void draw(Graphics2D g2d) {
         g2d.setColor(color); // Set the color for drawing
-        g2d.fillOval(xPos, yPos, radius * 2, radius * 2); // Draw a filled oval representing the circle
+        g2d.fillOval(((int)(Math.round(xPos))), ((int)(Math.round(yPos))), radius * 2, radius * 2); // Draw a filled oval representing the circle
     }
 
     /**
@@ -112,7 +112,7 @@ public class Circle extends AbstractShape {
      * @return the y position of the shape
      */
     @Override
-    public int getYPos() {
+    public double getYPos() {
         return yPos; // Return the y position
     }
 
@@ -132,7 +132,7 @@ public class Circle extends AbstractShape {
      * @param yPos the y position to set
      */
     @Override
-    public void setYPos(int yPos) {
+    public void setYPos(double yPos) {
         this.yPos = yPos; // Set the y position
     }
 

@@ -9,10 +9,10 @@ import java.awt.Graphics2D;
 abstract public class AbstractShape implements Shape {
     // Encapsulation of attributes
     // Position in 2D space (x-axis)
-    protected int xPos;
+    protected double xPos;
 
     // Position in 2D space (y-axis)
-    protected int yPos;
+    protected double yPos;
 
     // Mass attribute for physics calculations
     protected double mass;
@@ -64,7 +64,7 @@ abstract public class AbstractShape implements Shape {
      *
      * @return the x position of the shape
      */
-    public int getXPos() {
+    public double getXPos() {
         return xPos;// Return the x position
     }
     /**
@@ -72,7 +72,7 @@ abstract public class AbstractShape implements Shape {
      *
      * @param xPos the x position to set
      */
-    public void setXPos(int xPos) {
+    public void setXPos(double xPos) {
         this.xPos = xPos; // Set the x position
     }
     /**
@@ -81,7 +81,7 @@ abstract public class AbstractShape implements Shape {
      * @return the y position of the shape
      */
 
-    public int getYPos() {
+    public double getYPos() {
         return yPos;// Return the y position
     }
     /**
@@ -89,7 +89,7 @@ abstract public class AbstractShape implements Shape {
      *
      * @param yPos the y position to set
      */
-    public void setYPos(int yPos) {
+    public void setYPos(double yPos) {
         this.yPos = yPos;// Set the y position
     }
 

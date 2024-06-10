@@ -12,11 +12,17 @@ import javax.swing.JPanel;
  */
 public class DrawingSurface extends JPanel implements Runnable {
 
-    private double vf1; // Final velocity of the first square
-    private double vf2; // Final velocity of the second square
-
+    //Final velocity of the first square
+    private double vf1; 
+    
+    //Final velocity of the second square
+    private double vf2; 
+    
+    //Elasticity (determines type of elasticity) 
+    private double e;
+    
     private Thread animator; // Thread for handling animation
-    private final int DELAY = 25; // Delay between animation frames in milliseconds
+    private final int DELAY = 10; // Delay between animation frames in milliseconds
 
     private Square redSquare, blueSquare; // Two squares representing the objects in the simulation
 
@@ -63,9 +69,10 @@ public class DrawingSurface extends JPanel implements Runnable {
      * @param vf1 final velocity of the red square
      * @param vf2 final velocity of the blue square
      */
-    public void drawCollision(double vf1, double vf2) {
+    public void drawCollision(double vf1, double vf2,double e) {
         this.vf1 = vf1; // Set final velocity for red square
         this.vf2 = vf2; // Set final velocity for blue square
+        this.e = e;
     }
 
     /**
@@ -141,21 +148,26 @@ public class DrawingSurface extends JPanel implements Runnable {
         long beforeTime, timeDiff, sleep;
         beforeTime = System.currentTimeMillis(); // Record the start time
 
+        //loop while true
         while (true) {
             // Update the squares' positions
             moveObject();
 
-            // Check for collision and update velocities accordingly
-            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 5)
-                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 5)){
+            // Check squares are within a +-20 range of each other 
+            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 20)
+                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 20)){
+                
+                //if the square values are not equal and the collision is completely inelastic 
+                if((redSquare.getXPos() + redSquare.getLength()) !=  blueSquare.getXPos() && e == 0){
+                    
+                    //set red square to blue square posision (right side of red square to left side of blue square) 
+                    redSquare.setXPos(blueSquare.getXPos() - (int)(redSquare.getLength()));
+                }
+                
+                //setting red square velocity to its finial velocity 
                 redSquare.setVelocity(vf1);
-                blueSquare.setVelocity(vf2);
-            }
-
-            // Temporary fix for handling near-collision
-            else if((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 10)
-                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 10)){
-                redSquare.setVelocity(vf1);
+                
+                //setting blue square velocity to its finial velocity 
                 blueSquare.setVelocity(vf2);
             }
 

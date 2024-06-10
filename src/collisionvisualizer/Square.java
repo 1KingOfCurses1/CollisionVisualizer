@@ -122,7 +122,7 @@ public class Square extends AbstractShape {
      */
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.fillRect(xPos, yPos, width, length); 
+        g2d.fillRect(((int)(Math.round(xPos))), ((int)(Math.round(yPos))), width, length); 
     }
 
     /**
