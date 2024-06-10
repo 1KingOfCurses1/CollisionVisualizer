@@ -172,9 +172,9 @@ public class DefinitionPage extends javax.swing.JFrame {
         if (location != -1) {
             errorLbl.setText("");
             searchTxtField.setText("");
-            
+            resultsWindow = null;
             if (resultsWindow == null) {
-                resultsWindow = new ShowResultsPage(this, sortedList, location);
+                resultsWindow = new ShowResultsPage(this, sortedList[location].getName(), sortedList[location].getDefinition());
             }
 
             resultsWindow.setVisible(true);
@@ -196,7 +196,7 @@ public class DefinitionPage extends javax.swing.JFrame {
         // Examine each element in the array
         for (int i = 0; i < sortedTerms.length; i++) {
             // Is this the one we're looking for?
-            if (sortedTerms[i].getName().equals(target)) {
+            if (sortedTerms[i].getName().equalsIgnoreCase(target)) {
                 // Return the index where the target is found
                 return i;
             }
