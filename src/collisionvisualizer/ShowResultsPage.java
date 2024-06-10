@@ -17,15 +17,15 @@ public class ShowResultsPage extends javax.swing.JFrame {
      * Initializes the components and sets the title and definition based on the selected term.
      *
      * @param d the DefinitionPage instance to return to when 'Back' button is pressed.
-     * @param sortedList the sorted array of terms.
-     * @param location the index of the selected term in the sorted list.
+     * @param name
+     * @param definition
      */
-    public ShowResultsPage(DefinitionPage d, Term[] sortedList, int location) {
+    public ShowResultsPage(DefinitionPage d, String name, String definition) {
         initComponents();
         mainWindow = d;
 
-        titleLbl.setText(sortedList[location].getName());
-        definitionTxtArea.setText(sortedList[location].getDefinition());
+        titleLbl.setText(name);
+        definitionTxtArea.setText(definition);
     }
 
     /**
@@ -108,9 +108,11 @@ public class ShowResultsPage extends javax.swing.JFrame {
      * @param evt the action event
      */
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-
+        
         mainWindow.setVisible(true);
         this.setVisible(false);
+        titleLbl.setText("");
+        definitionTxtArea.setText("");
     }//GEN-LAST:event_backBtnActionPerformed
 
 
