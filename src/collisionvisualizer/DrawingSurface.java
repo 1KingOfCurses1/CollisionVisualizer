@@ -22,7 +22,7 @@ public class DrawingSurface extends JPanel implements Runnable {
     private double e;
     
     private Thread animator; // Thread for handling animation
-    private final int DELAY = 25; // Delay between animation frames in milliseconds
+    private final int DELAY = 3; // Delay between animation frames in milliseconds
 
     private Square redSquare, blueSquare; // Two squares representing the objects in the simulation
 
@@ -52,9 +52,9 @@ public class DrawingSurface extends JPanel implements Runnable {
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
         // Update squares with new masses and velocities
         redSquare = new Square(m1);
-        redSquare.setVelocity((int) v1); // Update velocity based on input
+        redSquare.setVelocity(v1 / 5); // Update velocity based on input
         blueSquare = new Square(m2);
-        blueSquare.setVelocity((int) v2); // Update velocity based on input
+        blueSquare.setVelocity(v2 / 5); // Update velocity based on input
 
         // Set initial positions to separate the squares
         centerSquare(redSquare, 250, 150);
@@ -147,15 +147,16 @@ public class DrawingSurface extends JPanel implements Runnable {
     public void run() {
         long beforeTime, timeDiff, sleep;
         beforeTime = System.currentTimeMillis(); // Record the start time
-
+        
         //loop while true
         while (true) {
             // Update the squares' positions
             moveObject();
 
+            System.out.println("Red: " + (redSquare.getXPos() + redSquare.getLength()) + " Blue: " + blueSquare.getXPos());
             // Check squares are within a +-20 range of each other 
-            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 20)
-                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 20)){
+            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 5)
+                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 5)){
                 
                 //if the square values are not equal and the collision is completely inelastic 
                 if((redSquare.getXPos() + redSquare.getLength()) !=  blueSquare.getXPos() && e == 0){
@@ -165,10 +166,10 @@ public class DrawingSurface extends JPanel implements Runnable {
                 }
                 
                 //setting red square velocity to its finial velocity 
-                redSquare.setVelocity(vf1);
+                redSquare.setVelocity(vf1 / 5);
                 
                 //setting blue square velocity to its finial velocity 
-                blueSquare.setVelocity(vf2);
+                blueSquare.setVelocity(vf2 / 5);
             }
 
             // Redraw the screen
