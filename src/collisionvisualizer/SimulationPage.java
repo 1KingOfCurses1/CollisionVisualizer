@@ -572,13 +572,13 @@ public class SimulationPage extends javax.swing.JFrame {
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         
-        
+        //invoking resetObjects method 
         resetObjects();
         
-        
+        //display main page
         mainWindow.setVisible(true);
         
-        //removing menu page visibility 
+        //removing page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
     /**
@@ -587,35 +587,47 @@ public class SimulationPage extends javax.swing.JFrame {
      * @param evt the action event
      */
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
+        
+        //invoking displayObjects method
         displayObjects();
 
+        //creating decimal format for numbers
         DecimalFormat num = new DecimalFormat("###,###.##");
 
+        //invoking collision method and passing user selected values 
         collision(massSlider1.getValue(), massSlider2.getValue(),
                 velocitySlider1.getValue(), velocitySlider2.getValue(),
                 elasticitySlider.getValue());
 
+        //invoking drawCollision method
         ((DrawingSurface) drawDisplay).drawCollision(vf1, vf2, elasticitySlider.getValue());
 
-        // Update text areas with calculated values
+        //Updating initial energy of object 1 text area with calculated value
         txtAreaEki1.setText(num.format(Eki1) + "J");
+        
+        //Updating initial energy of object 2 text area with calculated value
         txtAreaEki2.setText(num.format(Eki2) + "J");
+        
+        //Updating final energy of object 1 text area with calculated value
         txtAreaEkf1.setText(num.format(Ekf1) + "J");
+        
+        //Updating final energy of object 2 text area with calculated value
         txtAreaEkf2.setText(num.format(Ekf2) + "J");
+        
+        //Updating final velocity of object 1 text area with calculated value
         txtAreaVf1.setText(num.format(vf1) + "m/s");
+        
+        //Updating final velocity of object 2 text area with calculated value
         txtAreaVf2.setText(num.format(vf2) + "m/s");
-        double redVelocity1, blueVelocity1, redMass, blueMass, coefficientOfRestitution;
-        String redVelocity2, blueVelocity2;
-        redVelocity1 =  (velocitySlider1.getValue ());
-        blueVelocity1 =  (velocitySlider2.getValue ());
-        coefficientOfRestitution =  ((double) elasticitySlider.getValue () /100);
-        redMass =  (massSlider1.getValue ());
-        blueMass =  (massSlider2.getValue ());
-        redVelocity2 = txtAreaVf1.getText ();
-        blueVelocity2 = txtAreaVf2.getText ();
+        
+        //adding to run counter
         run++;
+        
         // Create the log entry for the current run
-        String logEntry = "Run: " + run + "\nCoefficient Of Restitution: " + coefficientOfRestitution + "\nRed Initial Velocity: " + redVelocity1 + "m/s Blue Initial Velocity: " + blueVelocity1 + "m/s\nRed Final Velocity: " + redVelocity2 + "m/s Blue Final Velocity: " + blueVelocity2 + "m/s\nRed Mass: " + redMass + "kg Blue Mass: " + blueMass + "kg";
+        String logEntry = "Run: " + run + "\nCoefficient Of Restitution: " + elasticitySlider.getValue() 
+                + "\nRed Initial Velocity: " + velocitySlider1.getValue() + "m/s Blue Initial Velocity: " 
+                + velocitySlider2.getValue() + "m/s\nRed Final Velocity: " + vf1 + "m/s Blue Final Velocity: " 
+                + vf2 + "m/s\nRed Mass: " + massSlider1.getValue() + "kg Blue Mass: " + massSlider2.getValue() + "kg";
         logs.add(logEntry);
 
         // Write the current log entry to the file
