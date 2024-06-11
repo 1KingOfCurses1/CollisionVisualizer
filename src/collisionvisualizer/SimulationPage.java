@@ -1,5 +1,12 @@
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Simulation page that displays collision to user and all collision functions
+ * IE selection for masses, velocities, and type of collision (perfectly elastic, partially elastic or completely inelastic) and viewing collision
+ */
 package collisionvisualizer;
 
+//imports
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -12,46 +19,97 @@ import java.util.ArrayList;
  */
 public class SimulationPage extends javax.swing.JFrame {
 
-    private double vf1;  // Final velocity of the first object
-    private double vf2;  // Final velocity of the second object
-    private double Eki1; // Initial kinetic energy of the first object
-    private double Eki2; // Initial kinetic energy of the second object
-    private double Ekf1; // Final kinetic energy of the first object
-    private double Ekf2; // Final kinetic energy of the second object
-    private ArrayList<String> logs = new ArrayList<> (); // Array List used for logging data
-    MainPage mainWindow; // Reference to the main window
+    //Final velocity of the first object
+    private double vf1;
+    
+    //Final velocity of the second object
+    private double vf2;
+    
+    //Initial kinetic energy of the first object
+    private double Eki1;
+    
+    //Initial kinetic energy of the second object
+    private double Eki2;
+    
+    //Final kinetic energy of the first object
+    private double Ekf1;
+    
+    //Final kinetic energy of the second object
+    private double Ekf2;
+    
+    //Array List used for logging data
+    private ArrayList<String> logs = new ArrayList<> (); 
+    
+    //Reference to the main window
+    MainPage mainWindow; 
 
-    private int run; // Counter used to count the number of runs
+    //Counter used to count the number of runs
+    private int run; 
 
     /**
      * Creates new form SimulationPage
-     *
-     * @param m MainPage instance to return to when 'Back' button is pressed.
+     * @param m - MainPage instance to return to when 'Back' button is pressed.
      */
     public SimulationPage(MainPage m) {
+        
+        //Display GUI
         initComponents();
+        
+        //assigning value to reference
         mainWindow = m;
+        
+        //setting run counter to default value of zero 
         run = 0;
-        // Initialize text areas with default values
+        
+        //Initialize first object initial energy value text area with default value
         txtAreaEki1.setText("0J");
+        
+        //Initialize second object initial energy value text area with default value
         txtAreaEki2.setText("0J");
+        
+        //Initialize first object final energy value text area with default value
         txtAreaEkf1.setText("0J");
+        
+        //Initialize second object final energy value text area with default value
         txtAreaEkf2.setText("0J");
+        
+        //Initialize first object final velocity text area with default value
         txtAreaVf1.setText("0m/s");
+        
+        //Initialize second object final velocity text area with default value
         txtAreaVf2.setText("0m/s");
+        
+        //Initialize first object mass text area with default value
         txtAreaMass1.setText("10 kg");
+        
+        //Initialize second object mass text area with default value
         txtAreaMass2.setText("10 kg");
+        
+        //Initialize first object initial velocity text area with default value
         txtAreaVelocity1.setText("10m/s");
+        
+        //Initialize second object initial velocity text area with default value
         txtAreaVelocity2.setText("10m/s");
+        
+        //Initialize type of collision between objects text area with default value
         txtAreaElas.setText("0.5");
     }
     /**
      * Writes the current run log data to a text file.
      */
     public void writeCurrentLogToFile(String logEntry) {
-        try (FileWriter writer = new FileWriter("collision_logs.txt", true)) { // true to append to the file
-            writer.write(logEntry + "\n"); // Write the current log entry followed by a newline
-        } catch (IOException e) {
+        
+        //true to append to the file
+        try (FileWriter writer = new FileWriter("collision_logs.txt", true)) {
+            
+            // Write the current log entry followed by a newline
+            writer.write(logEntry + "\n");
+        } 
+        
+        //If an error occurs
+        catch (IOException e) {
+            
+            //display error message
             System.out.println("An error occurred while writing to the log file: " + e.getMessage());
         }
     }
@@ -59,23 +117,30 @@ public class SimulationPage extends javax.swing.JFrame {
      * Calculates the final velocities of two objects after a collision based on
      * their masses, initial velocities, and the coefficient of restitution.
      *
-     * @param m1 Mass of the first object
-     * @param m2 Mass of the second object
-     * @param vi1 Initial velocity of the first object
-     * @param vi2 Initial velocity of the second object
-     * @param e Coefficient of restitution
+     * @param m1 - Mass of the first object
+     * @param m2 - Mass of the second object
+     * @param vi1 - Initial velocity of the first object
+     * @param vi2 - Initial velocity of the second object
+     * @param e - Coefficient of restitution
      */
     public void collision(double m1, double m2, double vi1, double vi2, double e) {
-        // Calculate final velocities
+        
+        //Calculating final velocity of mass 1
         vf1 = ((m1 * vi1) + (m2 * vi2) + (m2 * (e / 100) * (vi2 - vi1))) / (m1 + m2);
+        
+        //Calculating final velocity of mass 2
         vf2 = ((m1 * vi1) + (m2 * vi2) + (m1 * (e / 100) * (vi1 - vi2))) / (m1 + m2);
 
-        // Calculate initial kinetic energies
+        //Calculating initial kinetic energy of mass 1
         Eki1 = 0.5 * m1 * (Math.pow(vi1, 2));
+        
+        //Calculating initial kinetic energy of mass 2
         Eki2 = 0.5 * m2 * (Math.pow(vi2, 2));
 
-        // Calculate final kinetic energies
+        //Calculating final kinetic energy of mass 1
         Ekf1 = 0.5 * m1 * (Math.pow(vf1, 2));
+        
+        //Calculating final kinetic energy of mass 2
         Ekf2 = 0.5 * m2 * (Math.pow(vf2, 2));
     }
 
@@ -502,8 +567,14 @@ public class SimulationPage extends javax.swing.JFrame {
      * @param evt the action event
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        
+        
         resetObjects();
+        
+        
         mainWindow.setVisible(true);
+        
+        //removing menu page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
     /**
