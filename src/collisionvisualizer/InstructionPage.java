@@ -1,6 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Instruction page that displays instructions to user
  */
 package collisionvisualizer;
 
@@ -8,6 +9,8 @@ package collisionvisualizer;
  * InstructionPage class provides a GUI window to display instructions to the user.
  */
 public class InstructionPage extends javax.swing.JFrame {
+    
+    //reference to main window
     MainPage mainWindow;
 
     /**
@@ -15,8 +18,14 @@ public class InstructionPage extends javax.swing.JFrame {
      * @param m MainPage instance to return to when 'Back' button is pressed.
      */
     public InstructionPage(MainPage m) {
+        
+        //displaying GUI
         initComponents();
+        
+        //assigning value to reference
         mainWindow = m;
+        
+        //putting text in the text area
         txtArea.setText("Instructions could include on how to use the program "
                 + "and what each button does or means. Can include pictures of "
                 + "the buttons to make it easier for the user to know which "
@@ -91,7 +100,11 @@ public class InstructionPage extends javax.swing.JFrame {
      * Sets up the text area with instructions.
      */
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        
+        //display main page
         mainWindow.setVisible(true);
+        
+        //removing menu page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_backBtnActionPerformed
 
