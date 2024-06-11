@@ -38,6 +38,7 @@ public class InstructionPage extends javax.swing.JFrame {
                 + "box shows the initial amount of energy for each object. The EKF "
                 + "box shows the final amount energy for each object. The VF box shows the final velocity of each object."
                 + " Use the run button to run the simulation and use the reset button to reset all values. "
+                + "Red coloured text are the attributes for the red shape and the blue coloured text are the attributes for the blue shape"
                 + "\n\nDEFINITION PAGE:\n\nIn the definition page user can search "
                 + "for different terms in the search bar. The terms that can be searched are displayed in on the page.");
     }
@@ -111,7 +112,7 @@ public class InstructionPage extends javax.swing.JFrame {
         //display main page
         mainWindow.setVisible(true);
         
-        //removing menu page visibility 
+        //removing page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_backBtnActionPerformed
 
