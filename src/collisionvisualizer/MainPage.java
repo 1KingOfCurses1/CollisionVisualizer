@@ -22,16 +22,16 @@ import java.awt.Dimension;
  */
 public class MainPage extends javax.swing.JFrame {
 
-    //private attribute for instructions page
+    //private reference for instructions page
     private InstructionPage instructionsWindow;
     
-    //private attribute for simulation page
+    //private reference for simulation page
     private SimulationPage simulationWindow;
     
-    //private attribute for definitions page
+    //private reference for definitions page
     private DefinitionPage definitionWindow;
     
-    //private attribute for credit page
+    //private reference for credit page
     private CreditsPage creditWindow;
 
     /**
@@ -174,7 +174,7 @@ public class MainPage extends javax.swing.JFrame {
      */
     private void defBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defBtnActionPerformed
         
-        //if the definition attribute is null
+        //if the definition reference is null
         if (definitionWindow == null) {
             
             //swaping pages
@@ -194,7 +194,7 @@ public class MainPage extends javax.swing.JFrame {
      */
     private void instructionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionBtnActionPerformed
         
-        //if the instructions attribute is null
+        //if the instructions reference is null
         if (instructionsWindow == null) {
             
             //swaping pages
@@ -214,7 +214,7 @@ public class MainPage extends javax.swing.JFrame {
      */
     private void simulationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulationBtnActionPerformed
         
-        //if the simulation attribute is null
+        //if the simulation reference is null
         if (simulationWindow == null) {
             
             //swaping pages
@@ -244,7 +244,7 @@ public class MainPage extends javax.swing.JFrame {
      */
     private void creditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditBtnActionPerformed
         
-        //if the credit attribute is null
+        //if the credit reference is null
         if (creditWindow == null) {
              
              //swaping pages

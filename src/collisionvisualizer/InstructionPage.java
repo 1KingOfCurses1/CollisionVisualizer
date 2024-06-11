@@ -5,6 +5,8 @@
  */
 package collisionvisualizer;
 
+import java.awt.Color;
+
 /**
  * InstructionPage class provides a GUI window to display instructions to the user.
  */
@@ -21,6 +23,9 @@ public class InstructionPage extends javax.swing.JFrame {
         
         //displaying GUI
         initComponents();
+        
+        //changing background colour to cream
+        getContentPane().setBackground(new Color(255, 253, 208));
         
         //assigning value to reference
         mainWindow = m;

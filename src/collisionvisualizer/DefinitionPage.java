@@ -4,6 +4,7 @@
  */
 package collisionvisualizer;
 
+import java.awt.Color;
 import java.io.InputStream;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -27,6 +28,10 @@ public class DefinitionPage extends javax.swing.JFrame {
      */
     public DefinitionPage(MainPage m) {
         initComponents();
+        
+        //changing background colour to cream
+        getContentPane().setBackground(new Color(255, 253, 208));
+        
         mainWindow = m;
 
         String name = "";

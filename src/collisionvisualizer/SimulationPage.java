@@ -7,6 +7,7 @@
 package collisionvisualizer;
 
 //imports
+import java.awt.Color;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -54,6 +55,9 @@ public class SimulationPage extends javax.swing.JFrame {
         
         //Display GUI
         initComponents();
+        
+        //changing background colour to cream
+        getContentPane().setBackground(new Color(255,253,208));
         
         //assigning value to reference
         mainWindow = m;

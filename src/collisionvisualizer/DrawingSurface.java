@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package collisionvisualizer;
 
 import java.awt.Color;

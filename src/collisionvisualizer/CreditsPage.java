@@ -4,6 +4,8 @@
  */
 package collisionvisualizer;
 
+import java.awt.Color;
+
 /**
  *
  * @author arver0606
@@ -16,6 +18,9 @@ public class CreditsPage extends javax.swing.JFrame {
      */
     public CreditsPage(MainPage m) {
         initComponents();
+        
+        //changing background colour to cream
+        getContentPane().setBackground(new Color(255, 253, 208));
         mainWindow = m;
     }
 
