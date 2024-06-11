@@ -1,9 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Collision program that displays linear (1D) collisions from user inputs
+ * User selects the 2 masses, velocities, and type of collision (perfectly elastic, partially elastic or completely inelastic)
+ * The user can look up collision related terms (physics terms)
+ * The user can look at the instructions to see how the program is supposed to be operated 
+ * The user can look at the credits on who created the program
+ * The user can exit the program
  */
 package collisionvisualizer;
 
+//imports
 import java.awt.Dimension;
 
 /**
@@ -15,15 +22,24 @@ import java.awt.Dimension;
  */
 public class MainPage extends javax.swing.JFrame {
 
+    //private attribute for instructions page
     private InstructionPage instructionsWindow;
+    
+    //private attribute for simulation page
     private SimulationPage simulationWindow;
+    
+    //private attribute for definitions page
     private DefinitionPage definitionWindow;
+    
+    //private attribute for credit page
     private CreditsPage creditWindow;
 
     /**
      * Creates new form MainPage and initializes the components.
      */
     public MainPage() {
+        
+        //displaying GUI
         initComponents();
     }
 
@@ -151,60 +167,94 @@ public class MainPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     /**
      * Handles the action of the Definitions button, opening the Definitions window.
-     *
-     * @param evt the action event
+     * @param evt - The action event
      */
     private void defBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defBtnActionPerformed
+        
+        //if the definition attribute is null
         if (definitionWindow == null) {
+            
+            //swaping pages
             definitionWindow = new DefinitionPage(this);
         }
 
+        //displaying new page
         definitionWindow.setVisible(true);
+        
+        //removing menu page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_defBtnActionPerformed
+    
     /**
      * Handles the action of the Instructions button, opening the Instructions window.
-     *
-     * @param evt the action event
+     * @param evt - The action event
      */
     private void instructionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionBtnActionPerformed
+        
+        //if the instructions attribute is null
         if (instructionsWindow == null) {
+            
+            //swaping pages
             instructionsWindow = new InstructionPage(this);
         }
 
+        //displaying new page
         instructionsWindow.setVisible(true);
+        
+        //removing menu page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_instructionBtnActionPerformed
+    
     /**
      * Handles the action of the Simulation button, opening the Simulation window.
-     *
-     * @param evt the action event
+     * @param evt - The action event
      */
     private void simulationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulationBtnActionPerformed
+        
+        //if the simulation attribute is null
         if (simulationWindow == null) {
+            
+            //swaping pages
             simulationWindow = new SimulationPage(this);
         }
 
+        //displaying new page
         simulationWindow.setVisible(true);
+        
+        //removing menu page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_simulationBtnActionPerformed
+    
     /**
      * Handles the action of the Exit button, closing the application.
-     *
-     * @param evt the action event
+     * @param evt - The action event
      */
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        
+        //exit program
         System.exit(0);
     }//GEN-LAST:event_exitBtnActionPerformed
 
+    /**
+     * Handles the action of the credit button, opening the credit window.
+     * @param evt - The action event
+     */
     private void creditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditBtnActionPerformed
-         if (creditWindow == null) {
+        
+        //if the credit attribute is null
+        if (creditWindow == null) {
+             
+             //swaping pages
             creditWindow = new CreditsPage(this);
         }
 
+         //displaying new page
         creditWindow.setVisible(true);
+        
+        //removing menu page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_creditBtnActionPerformed
 
@@ -241,6 +291,8 @@ public class MainPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                //displaying main page
                 new MainPage().setVisible(true);
             }
         });
@@ -257,7 +309,14 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Method to set size of windows
+     * @param length - length of the window 
+     * @param width - width of the window
+     */
     private void setPreferredSize(int length, int width) {
+        
+        //setting preffered size of window 
         setPreferredSize(new Dimension(length, width));
     }
 
