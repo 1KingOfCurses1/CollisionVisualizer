@@ -31,13 +31,15 @@ public class InstructionPage extends javax.swing.JFrame {
         mainWindow = m;
         
         //putting text in the text area
-        txtArea.setText("Instructions could include on how to use the program "
-                + "and what each button does or means. Can include pictures of "
-                + "the buttons to make it easier for the user to know which "
-                + "buttons we are talking about.\n\nEx:\n\nMoving slider for object "
-                + "one’s velocity, increases its velocity which increases it’s "
-                + "momentum. Making its velocity positive will make it move right "
-                + "and negative will make it move left.");
+        txtArea.setText("SIMULATION PAGE:\n\nUse slider to select values. Elasticity slider determines "
+                + "type of collision whether it is perfectly elastic, partially "
+                + "elastic or completely inelastic. The mass slider determines the mass of the object"
+                + " the velocity slider determines the value of velocity. The EKI "
+                + "box shows the initial amount of energy for each object. The EKF "
+                + "box shows the final amount energy for each object. The VF box shows the final velocity of each object."
+                + " Use the run button to run the simulation and use the reset button to reset all values. "
+                + "\n\nDEFINITION PAGE:\n\nIn the definition page user can search "
+                + "for different terms in the search bar. The terms that can be searched are displayed in on the page.");
     }
 
     /**
