@@ -1,6 +1,9 @@
 package collisionvisualizer;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  * SimulationPage class provides a GUI window for running and visualizing collision simulations.
@@ -15,7 +18,10 @@ public class SimulationPage extends javax.swing.JFrame {
     private double Eki2; // Initial kinetic energy of the second object
     private double Ekf1; // Final kinetic energy of the first object
     private double Ekf2; // Final kinetic energy of the second object
+    private ArrayList<String> logs = new ArrayList<> (); // Array List used for logging data
     MainPage mainWindow; // Reference to the main window
+
+    private int run; // Counter used to count the number of runs
 
     /**
      * Creates new form SimulationPage
@@ -25,7 +31,7 @@ public class SimulationPage extends javax.swing.JFrame {
     public SimulationPage(MainPage m) {
         initComponents();
         mainWindow = m;
-
+        run = 0;
         // Initialize text areas with default values
         txtAreaEki1.setText("0J");
         txtAreaEki2.setText("0J");
@@ -39,7 +45,16 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaVelocity2.setText("10m/s");
         txtAreaElas.setText("0.5");
     }
-
+    /**
+     * Writes the current run log data to a text file.
+     */
+    public void writeCurrentLogToFile(String logEntry) {
+        try (FileWriter writer = new FileWriter("collision_logs.txt", true)) { // true to append to the file
+            writer.write(logEntry + "\n"); // Write the current log entry followed by a newline
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the log file: " + e.getMessage());
+        }
+    }
     /**
      * Calculates the final velocities of two objects after a collision based on
      * their masses, initial velocities, and the coefficient of restitution.
@@ -514,7 +529,22 @@ public class SimulationPage extends javax.swing.JFrame {
         txtAreaEkf2.setText(num.format(Ekf2) + "J");
         txtAreaVf1.setText(num.format(vf1) + "m/s");
         txtAreaVf2.setText(num.format(vf2) + "m/s");
+        double redVelocity1, blueVelocity1, redMass, blueMass, coefficientOfRestitution;
+        String redVelocity2, blueVelocity2;
+        redVelocity1 =  (velocitySlider1.getValue ());
+        blueVelocity1 =  (velocitySlider2.getValue ());
+        coefficientOfRestitution =  ((double) elasticitySlider.getValue () /100);
+        redMass =  (massSlider1.getValue ());
+        blueMass =  (massSlider2.getValue ());
+        redVelocity2 = txtAreaVf1.getText ();
+        blueVelocity2 = txtAreaVf2.getText ();
+        run++;
+        // Create the log entry for the current run
+        String logEntry = "Run: " + run + "\nCoefficient Of Restitution: " + coefficientOfRestitution + "\nRed Initial Velocity: " + redVelocity1 + "m/s Blue Initial Velocity: " + blueVelocity1 + "m/s\nRed Final Velocity: " + redVelocity2 + "m/s Blue Final Velocity: " + blueVelocity2 + "m/s\nRed Mass: " + redMass + "kg Blue Mass: " + blueMass + "kg";
+        logs.add(logEntry);
 
+        // Write the current log entry to the file
+        writeCurrentLogToFile(logEntry);
     }//GEN-LAST:event_btnRunActionPerformed
 
     /**

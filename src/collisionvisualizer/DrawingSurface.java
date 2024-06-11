@@ -25,7 +25,7 @@ public class DrawingSurface extends JPanel implements Runnable {
     private final int DELAY = 3; // Delay between animation frames in milliseconds
 
     private Square redSquare, blueSquare; // Two squares representing the objects in the simulation
-
+    private String logXPos; // Logs for the two x position of two square
     /**
      * Constructor initializes the drawing surface and the squares.
      */
@@ -38,6 +38,29 @@ public class DrawingSurface extends JPanel implements Runnable {
 
         centerSquare(redSquare, 250, 150); // Center red square at (250, 150)
         centerSquare(blueSquare, 450, 150); // Center blue square at (450, 150)
+    }
+
+    /**
+     * Accessor that gets the current x location of the red square
+     * @return Current x position of the red square
+     */
+    public double getRedXPos(){
+        return redSquare.getXPos ();
+    }
+
+    /**
+     * Accessor that gets the current y location of the blue square
+     * @return Current x position of the blue square
+     */
+    public double getBlueXPos(){
+        return blueSquare.getXPos ();
+    }
+    /**
+     * Accessor that returns the log of x positions
+     * @return - string presentation of x position of the squares
+     */
+    public String getLogXPos(){
+        return logXPos;
     }
 
     /**
@@ -152,8 +175,8 @@ public class DrawingSurface extends JPanel implements Runnable {
         while (true) {
             // Update the squares' positions
             moveObject();
+            logXPos += "Red: " + redSquare.getXPos () + " Blue: " + redSquare.getXPos () + "\n";// keeping a log of the positions not implemented
 
-            System.out.println("Red: " + (redSquare.getXPos() + redSquare.getLength()) + " Blue: " + blueSquare.getXPos());
             // Check squares are within a +-20 range of each other 
             if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 5)
                     && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 5)){
