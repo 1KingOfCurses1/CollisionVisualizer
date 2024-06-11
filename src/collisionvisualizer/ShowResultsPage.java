@@ -4,6 +4,8 @@
  */
 package collisionvisualizer;
 
+import java.awt.Color;
+
 /**
  * ShowResultsPage class provides a GUI window to display the definition of a selected term.
  * It includes a title label, a text area for the definition, and a back button to return to the main window.
@@ -22,6 +24,10 @@ public class ShowResultsPage extends javax.swing.JFrame {
      */
     public ShowResultsPage(DefinitionPage d, String name, String definition) {
         initComponents();
+        
+        //changing background colour to cream
+        getContentPane().setBackground(new Color(255, 253, 208));
+        
         mainWindow = d;
 
         titleLbl.setText(name);
