@@ -39,7 +39,6 @@ public interface Shape {
     //Mutator that sets the mass of the shape
     public void setMass(double mass);
     
-    
     //Mutator that sets the velocity of the shape
     public void setVelocity(double velocity);
     
