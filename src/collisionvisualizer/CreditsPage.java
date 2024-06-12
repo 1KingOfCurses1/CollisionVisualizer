@@ -8,10 +8,6 @@ package collisionvisualizer;
 //imports
 import java.awt.Color;
 
-/**
- *credit page class that extands from a j frame
- * @author arver0606
- */
 public class CreditsPage extends javax.swing.JFrame {
     
     //main window reference

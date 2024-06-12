@@ -1,6 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 12, 2024
+ * Results page that shows the definition to the user of the term they inputted
  */
 package collisionvisualizer;
 
@@ -114,11 +115,9 @@ public class ShowResultsPage extends javax.swing.JFrame {
      * @param evt the action event
      */
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        
+        // Sets this window to not visible and sets the main page to visible
         mainWindow.setVisible(true);
         this.setVisible(false);
-        titleLbl.setText("");
-        definitionTxtArea.setText("");
     }//GEN-LAST:event_backBtnActionPerformed
 
 

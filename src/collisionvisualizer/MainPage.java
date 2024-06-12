@@ -10,8 +10,6 @@
  */
 package collisionvisualizer;
 
-//imports
-import java.awt.Dimension;
 
 /**
  * The main page of the Collision Visualizer application. This class provides the
@@ -309,15 +307,5 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * Method to set size of windows
-     * @param length - length of the window 
-     * @param width - width of the window
-     */
-    private void setPreferredSize(int length, int width) {
-        
-        //setting preffered size of window 
-        setPreferredSize(new Dimension(length, width));
-    }
 
 }

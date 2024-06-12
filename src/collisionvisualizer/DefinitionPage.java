@@ -11,12 +11,6 @@ import java.io.InputStream;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-/**
- * A class representing a definition page in the collision visualizer application.
- * This class displays a list of terms and their definitions, and allows for searching
- * specific terms.
- * @author jewu
- */
 public class DefinitionPage extends javax.swing.JFrame {
 
     //main window reference
@@ -29,7 +23,8 @@ public class DefinitionPage extends javax.swing.JFrame {
     public static Term sortedList[];
 
     /**
-     * Creates new form DefinitionFormQ
+     * Creates new form DefinitionForm
+     * @param m - reference to main page
      */
     public DefinitionPage(MainPage m) {
         initComponents();
@@ -38,31 +33,39 @@ public class DefinitionPage extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(255, 253, 208));
         
         mainWindow = m;
-
+        // Holds attributes of a term
         String name = "";
         String definition = "";
+        // New term array to hold all the terms in the data file
         Term list[] = new Term[15];
         try {
+            // Instantiates InputStream object to get the definition file
             InputStream in = DefinitionPage.class.getResourceAsStream("definitions.txt");
+            // Instantiates scanner to scan the object
             Scanner s = new Scanner(in);
-
+            // For loops run for the length of the list
             for (int i = 0; i < list.length; i++) {
+                // First line is name
                 name = s.nextLine();
+                // Second line is the definition
                 definition = s.nextLine();
-
+                // Adds the object to the array
                 list[i] = new Term(name, definition);
             }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: File not found.");
         }
-
+        // To sort the list
         sortedList = quickSort(list, 0, list.length - 1);
+        // String to hold all the terms in the definition
         String displayTerms = "";
+        // For loop runs in the length of the list
         for (int i = 0; i < sortedList.length; i++) {
+            // Holds the term names
             displayTerms += sortedList[i].getName() + "\n";
         }
-
+        // Display the term names in the text area
         definitionTxtArea.setText(displayTerms);
 
     }
@@ -180,12 +183,17 @@ public class DefinitionPage extends javax.swing.JFrame {
      * @param evt the action event
      */
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // Gets the target or what the user wants the definition for
         String target = searchTxtField.getText();
-
+        // Gets the location of the target in the sorted list
+        // Uses the linear search method
         int location = linearSearch(sortedList, target);
+        // If location is not equal to -1, it does have the term
         if (location != -1) {
+            // Sets all the error messages to blank
             errorLbl.setText("");
             searchTxtField.setText("");
+            // Shows the term definition in a new GUI page
             resultsWindow = null;
             if (resultsWindow == null) {
                 resultsWindow = new ShowResultsPage(this, sortedList[location].getName(), sortedList[location].getDefinition());
@@ -193,7 +201,10 @@ public class DefinitionPage extends javax.swing.JFrame {
 
             resultsWindow.setVisible(true);
             this.setVisible(false);
-        } else {
+            
+        }
+        // Else an error happened
+        else {
             errorLbl.setText("Error: No term has that name");
         }
 

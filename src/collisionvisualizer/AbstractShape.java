@@ -9,9 +9,6 @@ package collisionvisualizer;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-/**
- * Abstract class representing a 1D shape with basic attributes and behaviors.
- */
 abstract public class AbstractShape implements Shape {
     
     // Encapsulation of attributes

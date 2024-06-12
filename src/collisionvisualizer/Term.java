@@ -1,12 +1,10 @@
-/*
- *
- * 
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Term class that holds the term name and definitions
  */
 package collisionvisualizer;
-/**
- * Term class represents a term with its name and definition.
- * Implements Cloneable interface to allow cloning of Term objects.
- */
+
 public class Term implements Cloneable {
 
     private String name;        // Name of the term

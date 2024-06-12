@@ -5,12 +5,9 @@
  */
 package collisionvisualizer;
 
-//imports
-import java.awt.*;
+import java.awt.Graphics2D;
 
-/**
- * A class representing a square in a 1D space with specific attributes and behaviors.
- */
+
 public class Square extends AbstractShape {
 
     // Encapsulation of attributes of a square
@@ -34,8 +31,8 @@ public class Square extends AbstractShape {
 
     /**
      * Secondary constructor initializing the square with a specific length and width
-     * @param length - inputed length value
-     * @param width  - inputed width value
+     * @param length - inputted length value
+     * @param width  - inputted width value
      */
     public Square(int length, int width) {
         
@@ -116,7 +113,7 @@ public class Square extends AbstractShape {
     }
     /**
      * Checks if the current square is equal to another object.
-     * @param obj the object to compare with
+     * @param s - shape to check equals
      * @return true if the objects are equal, false otherwise
      */
     public boolean equals(Square s) {

@@ -6,12 +6,9 @@
 package collisionvisualizer;
 
 // Imports
-import java.awt.Color;
 import java.awt.Graphics2D;
 
-/**
- * Circle class representing a circular shape in a 2D space with specific attributes and behaviors.
- */
+
 public class Circle extends AbstractShape {
 
     // Encapsulation of attributes of a circle
@@ -45,7 +42,7 @@ public class Circle extends AbstractShape {
      * Tertiary constructor initializing the circle with a specific radius.
      * @param radius - radius of the circle
      */
-    public Circle(double mass) {
+    public Circle(double radius) {
         this.radius = (int)mass * 10; // Sets the radius based off of mass
     }
 
