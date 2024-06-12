@@ -162,7 +162,11 @@ public class DefinitionPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        
+        //display main page
         mainWindow.setVisible(true);
+        
+        //removing page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_backBtnActionPerformed
     /**

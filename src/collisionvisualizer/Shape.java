@@ -32,7 +32,6 @@ public interface Shape {
     //Mutator that sets the x position of the shape
     public void setXPos(double xPos);
     
-    
     //Mutator that sets the y position of the shape
     public void setYPos(double yPos);
     

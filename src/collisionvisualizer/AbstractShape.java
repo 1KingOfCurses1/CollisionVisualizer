@@ -28,7 +28,7 @@ abstract public class AbstractShape implements Shape {
     protected double velocity;
 
     // Color attribute for drawing the shape
-    protected Color color;
+    protected Color colour;
 
     /**
      * Primary constructor setting attributes to default values.
@@ -48,7 +48,7 @@ abstract public class AbstractShape implements Shape {
         velocity = 0.0;    
         
         // Initialize color to black
-        color = Color.BLACK; 
+        colour = Color.BLACK; 
     }
 
     /**
@@ -59,7 +59,7 @@ abstract public class AbstractShape implements Shape {
      * @param velocity - velocity variable
      * @param color - color variable
      */
-    public AbstractShape(int xPos, int yPos, double mass, double velocity, Color color) {
+    public AbstractShape(int xPos, int yPos, double mass, double velocity, Color colour) {
         
         //Call the primary constructor to initialize default values
         this();       
@@ -77,7 +77,7 @@ abstract public class AbstractShape implements Shape {
         this.velocity = velocity; 
         
         //Set the color
-        this.color = color;     
+        this.colour = colour;     
     }
 
     /**
@@ -171,20 +171,20 @@ abstract public class AbstractShape implements Shape {
      * Gets the color of the shape.
      * @return the color of the shape
      */
-    public Color getColor() {
+    public Color getColour() {
         
         //Return the color
-        return color;
+        return colour;
     }
     
     /**
      * Sets the color of the shape.
      * @param color the color to set
      */
-    public void setColor(Color color) {
+    public void setColour(Color colour) {
         
         //Set the color
-        this.color = color; 
+        this.colour = colour; 
     }
     
     /**
@@ -197,18 +197,13 @@ abstract public class AbstractShape implements Shape {
      * @param obj the object to compare with
      * @return true if the objects are equal, false otherwise
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true; // If the objects are the same instance, they are equal
-        if (obj == null || getClass() != obj.getClass()) return false; // If the object is null or not the same class, they are not equal
-
-        AbstractShape that = (AbstractShape) obj; // Cast the object to AbstractShape
-
-        return xPos == that.xPos && // Compare x positions
-                yPos == that.yPos && // Compare y positions
-                Double.compare(that.mass, mass) == 0 && // Compare masses
-                Double.compare(that.velocity, velocity) == 0 && // Compare velocities
-                color.equals(that.color);// Compare colors
+    public boolean equals(AbstractShape s) {
+        
+        return xPos == s.xPos && //Compare x positions
+                yPos == s.yPos && //Compare y positions
+                mass == s.mass && //Comparing mass
+                velocity == s.velocity && //Comparing velocity
+                colour.equals(s.colour); //Compare colors
     }
     
     /**
@@ -223,6 +218,6 @@ abstract public class AbstractShape implements Shape {
                 "\nY-position: " + yPos +         // Include y position in the string
                 "\nMass: " + mass +               // Include mass in the string
                 "\nVelocity: " + velocity +       // Include velocity in the string
-                "\nColor: " + color.toString();   // Include color in the string
+                "\nColor: " + colour.toString();   // Include color in the string
     }
 }
