@@ -1,9 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Definition page that displays all definitions user can select
  */
 package collisionvisualizer;
 
+//imports
 import java.awt.Color;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -17,10 +19,13 @@ import javax.swing.JOptionPane;
  */
 public class DefinitionPage extends javax.swing.JFrame {
 
+    //main window reference
     MainPage mainWindow;
 
+    //Results window reference 
     private ShowResultsPage resultsWindow;
 
+    //
     public static Term sortedList[];
 
     /**

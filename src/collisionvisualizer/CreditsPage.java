@@ -1,26 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Credit page that displays credits to group members
  */
 package collisionvisualizer;
 
+//imports
 import java.awt.Color;
 
 /**
- *
+ *credit page class that extands from a j frame
  * @author arver0606
  */
 public class CreditsPage extends javax.swing.JFrame {
+    
+    //main window reference
     MainPage mainWindow;
+    
+    
     /**
      * Creates new form CreditsPage
-     * @param m
+     * @param m - window input
      */
     public CreditsPage(MainPage m) {
+        
+        //displaying GUI
         initComponents();
         
         //changing background colour to cream
         getContentPane().setBackground(new Color(255, 253, 208));
+        
+        //assigning value to window reference
         mainWindow = m;
     }
 
