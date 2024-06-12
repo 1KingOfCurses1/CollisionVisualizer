@@ -1,3 +1,8 @@
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Circle class that hold all circle attributes and functions
+ */
 package collisionvisualizer;
 
 // Imports

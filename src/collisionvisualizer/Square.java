@@ -1,5 +1,11 @@
+/**
+ * Shan Truong, Aryan Verma, Jerry Wu
+ * June 11, 2024
+ * Square class that holds all square attributes and functions
+ */
 package collisionvisualizer;
 
+//imports
 import java.awt.*;
 
 /**
