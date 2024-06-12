@@ -120,7 +120,6 @@ public class SimulationPage extends javax.swing.JFrame {
     /**
      * Calculates the final velocities of two objects after a collision based on
      * their masses, initial velocities, and the coefficient of restitution.
-     *
      * @param m1 - Mass of the first object
      * @param m2 - Mass of the second object
      * @param vi1 - Initial velocity of the first object
@@ -567,7 +566,6 @@ public class SimulationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Handles the action of the back button, returning to the main window.
-     *
      * @param evt the action event
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -583,7 +581,6 @@ public class SimulationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
     /**
      * Handles the action of the run button, updating the display and running the collision simulation.
-     *
      * @param evt the action event
      */
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
@@ -628,6 +625,8 @@ public class SimulationPage extends javax.swing.JFrame {
                 + "\nRed Initial Velocity: " + velocitySlider1.getValue() + "m/s Blue Initial Velocity: " 
                 + velocitySlider2.getValue() + "m/s\nRed Final Velocity: " + vf1 + "m/s Blue Final Velocity: " 
                 + vf2 + "m/s\nRed Mass: " + massSlider1.getValue() + "kg Blue Mass: " + massSlider2.getValue() + "kg";
+        
+        //adding log entry 
         logs.add(logEntry);
 
         // Write the current log entry to the file
@@ -636,38 +635,46 @@ public class SimulationPage extends javax.swing.JFrame {
 
     /**
      * Handles the action of the reset button, resetting the objects to their initial states.
-     *
      * @param evt the action event
      */
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        
+        //invoking resetObject method 
         resetObjects();
     }//GEN-LAST:event_btnResetActionPerformed
     /**
      * Handles the action of dragging the mass slider for the first object, updating its mass value.
-     *
      * @param evt the mouse event
      */
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
+        
+        //setting mass 1 text area to mass 1 slider value
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
+        
+        //updating parameter values
         ((DrawingSurface) drawDisplay).updateParameters( massSlider1.getValue(), 0,
                 massSlider2.getValue(),  0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider1MouseDragged
     /**
      * Handles the action of dragging the mass slider for the second object, updating its mass value.
-     *
      * @param evt the mouse event
      */
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged
+        
+        //setting mass 2 text area to mass 2 slider value
         txtAreaMass2.setText("" + (massSlider2.getValue()) + " kg");
+        
+        //updating parameter values
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
                 massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider2MouseDragged
     /**
      * Handles the action of dragging the velocity slider for the first object, updating its velocity value.
-     *
      * @param evt the mouse event
      */
     private void velocitySlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider1MouseDragged
+        
+        //setting velocity 1 text area to velocity 1 slider value
         txtAreaVelocity1.setText("" + (velocitySlider1.getValue()) + "m/s");
 
     }//GEN-LAST:event_velocitySlider1MouseDragged
@@ -675,21 +682,25 @@ public class SimulationPage extends javax.swing.JFrame {
 
     /**
      * Handles the action of dragging the velocity slider for the second object, updating its velocity value.
-     *
      * @param evt the mouse event
      */
     private void velocitySlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider2MouseDragged
+        
+        //setting velocity 2 text area to velocity 2 slider value
         txtAreaVelocity2.setText("" + (velocitySlider2.getValue()) + "m/s");
 
     }//GEN-LAST:event_velocitySlider2MouseDragged
 
     /**
      * Handles the action of dragging the elasticity slider, updating its value.
-     *
      * @param evt the mouse event
      */
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
+        
+        //setting elasticity text area to elasticity slider value
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
+        
+        //updating parameter values
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
                 0, massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_elasticitySliderMouseDragged
@@ -697,13 +708,11 @@ public class SimulationPage extends javax.swing.JFrame {
      * Updates the display objects with the current parameters from the sliders.
      */
     private void displayObjects() {
-        int mass1 = massSlider1.getValue();
-        int mass2 = massSlider2.getValue();
-        int velocity1 = velocitySlider1.getValue();
-        int velocity2 = velocitySlider2.getValue();
-        double elasticity = elasticitySlider.getValue() / 100.0;
 
-        ((DrawingSurface) drawDisplay).updateParameters(mass1, velocity1, mass2, velocity2, elasticity);
+        //updating parameter values
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 
+                velocitySlider1.getValue(), massSlider2.getValue(), velocitySlider2.getValue(),
+                (elasticitySlider.getValue() / 100.0));
     }
 
     /**
@@ -711,24 +720,55 @@ public class SimulationPage extends javax.swing.JFrame {
      */
     private void resetObjects() {
 
+        //reseting mass 1 slider to max value (default value) 
         massSlider1.setValue(massSlider1.getMaximum());
+        
+        //reseting mass 2 slider to max value (default value) 
         massSlider2.setValue(massSlider2.getMaximum());
+        
+        //reseting velocity 1 slider to max value (default value) 
         velocitySlider1.setValue(velocitySlider1.getMaximum());
+        
+        //reseting velocity 2 slider to max value (default value) 
         velocitySlider2.setValue(velocitySlider2.getMaximum());
+        
+        //reseting elasticity slider to 0.5 (default value) 
         elasticitySlider.setValue(50);
 
+        //reseting mass 1 text area to max value (default value) 
         txtAreaMass1.setText("10 kg");
+        
+        //reseting mass 2 text area to max value (default value)
         txtAreaMass2.setText("10 kg");
+        
+        //reseting velocity 1 text area to max value (default value)
         txtAreaVelocity1.setText("10m/s");
+        
+        //reseting velocity 2 text area to max value (default value)
         txtAreaVelocity2.setText("10m/s");
+        
+        //reseting elasticity text area to 0.5 (default value) 
         txtAreaElas.setText("0.5");
+        
+        //reseting initial energy of object 1 text area to 0 (default value) 
         txtAreaEki1.setText("0J");
+        
+        //reseting initial energy of object 2 text area to 0 (default value) 
         txtAreaEki2.setText("0J");
+        
+        //reseting final energy of object 1 text area to 0 (default value) 
         txtAreaEkf1.setText("0J");
+        
+        //reseting final energy of object 2 text area to 0 (default value) 
         txtAreaEkf2.setText("0J");
+        
+        //reseting final velocity of object 1 text area to 0 (default value) 
         txtAreaVf1.setText("0m/s");
+        
+        //reseting final velocity of object 2 text area to 0 (default value) 
         txtAreaVf2.setText("0m/s");
 
+        //updating parameter values
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getMaximum(), 0, massSlider2.getMaximum(), 0, 0.5);
     }
 
