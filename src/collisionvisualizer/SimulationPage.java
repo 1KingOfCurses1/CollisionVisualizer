@@ -8,118 +8,150 @@ package collisionvisualizer;
 
 //imports
 import java.awt.Color;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * SimulationPage class provides a GUI window for running and visualizing collision simulations.
- * It includes controls for setting the masses and velocities of two objects and for running
- * the simulation.
+ * SimulationPage class provides a GUI window for running and visualizing
+ * collision simulations. It includes controls for setting the masses and
+ * velocities of two objects and for running the simulation.
  */
 public class SimulationPage extends javax.swing.JFrame {
 
     //Final velocity of the first object
     private double vf1;
-    
+
     //Final velocity of the second object
     private double vf2;
-    
+
     //Initial kinetic energy of the first object
     private double Eki1;
-    
+
     //Initial kinetic energy of the second object
     private double Eki2;
-    
+
     //Final kinetic energy of the first object
     private double Ekf1;
-    
+
     //Final kinetic energy of the second object
     private double Ekf2;
-    
+
     //Array List used for logging data
-    private ArrayList<String> logs = new ArrayList<> (); 
-    
+    private ArrayList<String> logs = new ArrayList<>();
+
     //Reference to the main window
-    MainPage mainWindow; 
+    MainPage mainWindow;
 
     //Counter used to count the number of runs
-    private int run; 
+    private int run;
 
     /**
      * Creates new form SimulationPage
+     *
      * @param m - MainPage instance to return to when 'Back' button is pressed.
      */
     public SimulationPage(MainPage m) {
-        
+
         //Display GUI
         initComponents();
-        
+
         //changing background colour to cream
-        getContentPane().setBackground(new Color(255,253,208));
-        
+        getContentPane().setBackground(new Color(255, 253, 208));
+
         //assigning value to reference
         mainWindow = m;
-        
+
         //setting run counter to default value of zero 
         run = 0;
-        
+
         //Initialize first object initial energy value text area with default value
         txtAreaEki1.setText("0J");
-        
+
         //Initialize second object initial energy value text area with default value
         txtAreaEki2.setText("0J");
-        
+
         //Initialize first object final energy value text area with default value
         txtAreaEkf1.setText("0J");
-        
+
         //Initialize second object final energy value text area with default value
         txtAreaEkf2.setText("0J");
-        
+
         //Initialize first object final velocity text area with default value
         txtAreaVf1.setText("0m/s");
-        
+
         //Initialize second object final velocity text area with default value
         txtAreaVf2.setText("0m/s");
-        
+
         //Initialize first object mass text area with default value
         txtAreaMass1.setText("10 kg");
-        
+
         //Initialize second object mass text area with default value
         txtAreaMass2.setText("10 kg");
-        
+
         //Initialize first object initial velocity text area with default value
         txtAreaVelocity1.setText("10m/s");
-        
+
         //Initialize second object initial velocity text area with default value
         txtAreaVelocity2.setText("10m/s");
-        
+
         //Initialize type of collision between objects text area with default value
         txtAreaElas.setText("0.5");
     }
+
     /**
-     * Writes the current run log data to a text file.
+     * Writes the current run log data to a text file and asks user where to
+     * save the file.
      */
-    public void writeCurrentLogToFile(String logEntry) {
-        
-        //true to append to the file
-        try (FileWriter writer = new FileWriter("collision_logs.txt", true)) {
-            
-            // Write the current log entry followed by a newline
-            writer.write(logEntry + "\n");
-        } 
-        
-        //If an error occurs
-        catch (IOException e) {
-            
-            //display error message
-            System.out.println("An error occurred while writing to the log file: " + e.getMessage());
+    public void writeCurrentLogToFile() {
+
+// Create a file chooser instance
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Set the title of the file chooser dialog
+        fileChooser.setDialogTitle("Specify a file to save");
+
+        // Set a file filter to only show text files
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt"));
+
+        // Show the save dialog and store the user's selection
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        // Check if the user approved the file selection
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // Get the file chosen by the user
+            File fileToSave = fileChooser.getSelectedFile();
+
+            // Ensure the file has a .txt extension
+            if (!fileToSave.getAbsolutePath().endsWith(".txt")) {
+                // Append .txt extension if not present
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".txt");
+            }
+
+            // Try-with-resources to auto-close FileWriter
+            try (FileWriter writer = new FileWriter(fileToSave, true)) {
+                // Loop through the logs and write each one to the file
+                for (int i = 0; i < logs.size(); i++) {
+                    // Write the current log entry followed by a newline
+                    writer.write(logs.get(i) + "\n");
+                }
+            } catch (IOException e) {
+                // Handle any IO exceptions that occur
+                // Display error message to the user
+                JOptionPane.showMessageDialog(null,"An error occurred while writing to the log file: " + e.getMessage());
+            }
         }
     }
+
     /**
      * Calculates the final velocities of two objects after a collision based on
      * their masses, initial velocities, and the coefficient of restitution.
+     *
      * @param m1 - Mass of the first object
      * @param m2 - Mass of the second object
      * @param vi1 - Initial velocity of the first object
@@ -127,28 +159,29 @@ public class SimulationPage extends javax.swing.JFrame {
      * @param e - Coefficient of restitution
      */
     public void collision(double m1, double m2, double vi1, double vi2, double e) {
-        
+
         //Calculating final velocity of mass 1
         vf1 = ((m1 * vi1) + (m2 * vi2) + (m2 * (e / 100) * (vi2 - vi1))) / (m1 + m2);
-        
+
         //Calculating final velocity of mass 2
         vf2 = ((m1 * vi1) + (m2 * vi2) + (m1 * (e / 100) * (vi1 - vi2))) / (m1 + m2);
 
         //Calculating initial kinetic energy of mass 1
         Eki1 = 0.5 * m1 * (Math.pow(vi1, 2));
-        
+
         //Calculating initial kinetic energy of mass 2
         Eki2 = 0.5 * m2 * (Math.pow(vi2, 2));
 
         //Calculating final kinetic energy of mass 1
         Ekf1 = 0.5 * m1 * (Math.pow(vf1, 2));
-        
+
         //Calculating final kinetic energy of mass 2
         Ekf2 = 0.5 * m2 * (Math.pow(vf2, 2));
     }
 
     /**
      * Accessor that gets the final velocity of shape 1
+     *
      * @return - final velocity of shape 1
      */
     public double getVf1() {
@@ -159,6 +192,7 @@ public class SimulationPage extends javax.swing.JFrame {
 
     /**
      * Accessor that gets the final velocity of shape 2
+     *
      * @return - final velocity of shape 2
      */
     public double getVf2() {
@@ -169,46 +203,51 @@ public class SimulationPage extends javax.swing.JFrame {
 
     /**
      * Accessor that gets the initial energy of shape 1
+     *
      * @return - inital energy value of shape 1
      */
-    public double getEKi1(){
-        
+    public double getEKi1() {
+
         //return inital energy value of shape 1
         return Eki1;
     }
-    
+
     /**
      * Accessor that gets the initial energy of shape 2
+     *
      * @return - inital energy value of shape 2
      */
-    public double getEki2(){
-        
+    public double getEki2() {
+
         //return inital energy value of shape 2
         return Eki2;
     }
-    
+
     /**
      * Accessor that gets the final energy of shape 1
+     *
      * @return - final energy value of shape 1
      */
-    public double getEkf1(){
-        
+    public double getEkf1() {
+
         //return final energy value of shape 1
         return Ekf1;
     }
-    
+
     /**
      * Accessor that gets the final energy of shape 2
+     *
      * @return - final energy value of shape 2
      */
-    public double getEkf2(){
-        
+    public double getEkf2() {
+
         //return final energy value of shape 2
         return Ekf2;
     }
-    
+
     /**
      * Mutator that sets the final velocity of shape 1
+     *
      * @param vf1 - inputed value of the final velocity of shape 1
      */
     public void setVf1(double vf1) {
@@ -219,6 +258,7 @@ public class SimulationPage extends javax.swing.JFrame {
 
     /**
      * Mutator that sets the final velocity of shape 2
+     *
      * @param vf2 - inputed value of the final velocity of shape 2
      */
     public void setVf2(double vf2) {
@@ -226,47 +266,51 @@ public class SimulationPage extends javax.swing.JFrame {
         //setting final velocity of shape 2 to inputed value 
         this.vf1 = vf2;
     }
-    
+
     /**
-     *  Mutator that sets the initial energy of shape 1
+     * Mutator that sets the initial energy of shape 1
+     *
      * @param Eki1 - inputed value for initial energy of shape 1
      */
-    public void setEki1(double Eki1){
-        
+    public void setEki1(double Eki1) {
+
         //setting initial energy of shape 1 to inputed value
         this.Eki1 = Eki1;
     }
-    
+
     /**
      * Mutator that sets the initial energy of shape 2
+     *
      * @param Eki2 - inputed value for initial energy of shape 2
      */
-    public void setEki2(double Eki2){
-        
+    public void setEki2(double Eki2) {
+
         //setting initial energy of shape 1 to inputed value
         this.Eki2 = Eki2;
     }
-    
+
     /**
      * Mutator that sets the final energy of shape 1
+     *
      * @param Ekf1 - inputed value for final energy of shape 1
      */
-    public void setEkf1(double Ekf1){
-        
+    public void setEkf1(double Ekf1) {
+
         //setting final energy of shape 1 to inputed value
         this.Ekf1 = Ekf1;
     }
-    
+
     /**
      * Mutator that sets the final energy of shape 2
+     *
      * @param Ekf2 - inputed value for final energy of shape 2
      */
-    public void setEkf2(double Ekf2){
-        
+    public void setEkf2(double Ekf2) {
+
         //setting final energy of shape 1 to inputed value
         this.Eki2 = Ekf2;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -686,25 +730,30 @@ public class SimulationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Handles the action of the back button, returning to the main window.
+     *
      * @param evt the action event
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
+
         //invoking resetObjects method 
         resetObjects();
-        
+        // Write the current log entry to the file
+        writeCurrentLogToFile();
+        run = 0;
         //display main page
         mainWindow.setVisible(true);
-        
+
         //removing page visibility 
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
     /**
-     * Handles the action of the run button, updating the display and running the collision simulation.
+     * Handles the action of the run button, updating the display and running
+     * the collision simulation.
+     *
      * @param evt the action event
      */
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-        
+
         //invoking displayObjects method
         displayObjects();
 
@@ -718,94 +767,100 @@ public class SimulationPage extends javax.swing.JFrame {
 
         //invoking drawCollision method
         ((DrawingSurface) drawDisplay).drawCollision(vf1, vf2, elasticitySlider.getValue());
-        
+
         //Updating initial energy of object 1 text area with calculated value
         txtAreaEki1.setText(num.format(Eki1) + "J");
-        
+
         //Updating initial energy of object 2 text area with calculated value
         txtAreaEki2.setText(num.format(Eki2) + "J");
-        
+
         //Updating final energy of object 1 text area with calculated value
         txtAreaEkf1.setText(num.format(Ekf1) + "J");
-        
+
         //Updating final energy of object 2 text area with calculated value
         txtAreaEkf2.setText(num.format(Ekf2) + "J");
-        
+
         //Updating final velocity of object 1 text area with calculated value
         txtAreaVf1.setText(num.format(vf1) + "m/s");
-        
+
         //Updating final velocity of object 2 text area with calculated value
         txtAreaVf2.setText(num.format(vf2) + "m/s");
-        
+
         //adding to run counter
         run++;
-        
+
         // Create the log entry for the current run
-        String logEntry = "Run: " + run + "\nCoefficient Of Restitution: " + elasticitySlider.getValue() 
-                + "\nRed Initial Velocity: " + velocitySlider1.getValue() + "m/s Blue Initial Velocity: " 
-                + velocitySlider2.getValue() + "m/s\nRed Final Velocity: " + vf1 + "m/s Blue Final Velocity: " 
+        String logEntry = "Run: " + run + "\nCoefficient Of Restitution: " + elasticitySlider.getValue()
+                + "\nRed Initial Velocity: " + velocitySlider1.getValue() + "m/s Blue Initial Velocity: "
+                + velocitySlider2.getValue() + "m/s\nRed Final Velocity: " + vf1 + "m/s Blue Final Velocity: "
                 + vf2 + "m/s\nRed Mass: " + massSlider1.getValue() + "kg Blue Mass: " + massSlider2.getValue() + "kg";
-        
+
         //adding log entry 
         logs.add(logEntry);
-
-        // Write the current log entry to the file
-        writeCurrentLogToFile(logEntry);
     }//GEN-LAST:event_btnRunActionPerformed
 
     /**
-     * Handles the action of the reset button, resetting the objects to their initial states.
+     * Handles the action of the reset button, resetting the objects to their
+     * initial states.
+     *
      * @param evt the action event
      */
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        
+
         //invoking resetObject method 
         resetObjects();
     }//GEN-LAST:event_btnResetActionPerformed
     /**
-     * Handles the action of dragging the mass slider for the first object, updating its mass value.
+     * Handles the action of dragging the mass slider for the first object,
+     * updating its mass value.
+     *
      * @param evt the mouse event
      */
     private void massSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider1MouseDragged
-        
+
         //setting mass 1 text area to mass 1 slider value
         txtAreaMass1.setText("" + (massSlider1.getValue()) + " kg");
-        
+
         //updating parameter values
-        ((DrawingSurface) drawDisplay).updateParameters( massSlider1.getValue(), 0,
-                massSlider2.getValue(),  0, elasticitySlider.getValue());
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
+                massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider1MouseDragged
     /**
-     * Handles the action of dragging the mass slider for the second object, updating its mass value.
+     * Handles the action of dragging the mass slider for the second object,
+     * updating its mass value.
+     *
      * @param evt the mouse event
      */
     private void massSlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_massSlider2MouseDragged
-        
+
         //setting mass 2 text area to mass 2 slider value
         txtAreaMass2.setText("" + (massSlider2.getValue()) + " kg");
-        
+
         //updating parameter values
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 0,
                 massSlider2.getValue(), 0, elasticitySlider.getValue());
     }//GEN-LAST:event_massSlider2MouseDragged
     /**
-     * Handles the action of dragging the velocity slider for the first object, updating its velocity value.
+     * Handles the action of dragging the velocity slider for the first object,
+     * updating its velocity value.
+     *
      * @param evt the mouse event
      */
     private void velocitySlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider1MouseDragged
-        
+
         //setting velocity 1 text area to velocity 1 slider value
         txtAreaVelocity1.setText("" + (velocitySlider1.getValue()) + "m/s");
 
     }//GEN-LAST:event_velocitySlider1MouseDragged
 
-
     /**
-     * Handles the action of dragging the velocity slider for the second object, updating its velocity value.
+     * Handles the action of dragging the velocity slider for the second object,
+     * updating its velocity value.
+     *
      * @param evt the mouse event
      */
     private void velocitySlider2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_velocitySlider2MouseDragged
-        
+
         //setting velocity 2 text area to velocity 2 slider value
         txtAreaVelocity2.setText("" + (velocitySlider2.getValue()) + "m/s");
 
@@ -813,13 +868,14 @@ public class SimulationPage extends javax.swing.JFrame {
 
     /**
      * Handles the action of dragging the elasticity slider, updating its value.
+     *
      * @param evt the mouse event
      */
     private void elasticitySliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elasticitySliderMouseDragged
-        
+
         //setting elasticity text area to elasticity slider value
         txtAreaElas.setText("" + ((elasticitySlider.getValue() / 100.0)));
-        
+
         //updating parameter values
         ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
                 0, massSlider2.getValue(), 0, elasticitySlider.getValue());
@@ -830,7 +886,7 @@ public class SimulationPage extends javax.swing.JFrame {
     private void displayObjects() {
 
         //updating parameter values
-        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(), 
+        ((DrawingSurface) drawDisplay).updateParameters(massSlider1.getValue(),
                 velocitySlider1.getValue(), massSlider2.getValue(), velocitySlider2.getValue(),
                 (elasticitySlider.getValue() / 100.0));
     }
@@ -842,49 +898,49 @@ public class SimulationPage extends javax.swing.JFrame {
 
         //reseting mass 1 slider to max value (default value) 
         massSlider1.setValue(massSlider1.getMaximum());
-        
+
         //reseting mass 2 slider to max value (default value) 
         massSlider2.setValue(massSlider2.getMaximum());
-        
+
         //reseting velocity 1 slider to max value (default value) 
         velocitySlider1.setValue(velocitySlider1.getMaximum());
-        
+
         //reseting velocity 2 slider to max value (default value) 
         velocitySlider2.setValue(velocitySlider2.getMaximum());
-        
+
         //reseting elasticity slider to 0.5 (default value) 
         elasticitySlider.setValue(50);
 
         //reseting mass 1 text area to max value (default value) 
         txtAreaMass1.setText("10 kg");
-        
+
         //reseting mass 2 text area to max value (default value)
         txtAreaMass2.setText("10 kg");
-        
+
         //reseting velocity 1 text area to max value (default value)
         txtAreaVelocity1.setText("10m/s");
-        
+
         //reseting velocity 2 text area to max value (default value)
         txtAreaVelocity2.setText("10m/s");
-        
+
         //reseting elasticity text area to 0.5 (default value) 
         txtAreaElas.setText("0.5");
-        
+
         //reseting initial energy of object 1 text area to 0 (default value) 
         txtAreaEki1.setText("0J");
-        
+
         //reseting initial energy of object 2 text area to 0 (default value) 
         txtAreaEki2.setText("0J");
-        
+
         //reseting final energy of object 1 text area to 0 (default value) 
         txtAreaEkf1.setText("0J");
-        
+
         //reseting final energy of object 2 text area to 0 (default value) 
         txtAreaEkf2.setText("0J");
-        
+
         //reseting final velocity of object 1 text area to 0 (default value) 
         txtAreaVf1.setText("0m/s");
-        
+
         //reseting final velocity of object 2 text area to 0 (default value) 
         txtAreaVf2.setText("0m/s");
 

@@ -1,0 +1,144 @@
+Run: 1
+Coefficient Of Restitution: 91
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+Run: 2
+Coefficient Of Restitution: 0
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+Run: 3
+Coefficient Of Restitution: 0
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 6kg Blue Mass: 10kg
+Run: 4
+Coefficient Of Restitution: 0
+Red Initial Velocity: 10m/s Blue Initial Velocity: -1m/s
+Red Final Velocity: 3.125m/s Blue Final Velocity: 3.125m/s
+Red Mass: 6kg Blue Mass: 10kg
+Run: 5
+Coefficient Of Restitution: 0
+Red Initial Velocity: 1m/s Blue Initial Velocity: -1m/s
+Red Final Velocity: -0.25m/s Blue Final Velocity: -0.25m/s
+Red Mass: 6kg Blue Mass: 10kg
+Run: 1
+Coefficient Of Restitution: 100
+Red Initial Velocity: 10m/s Blue Initial Velocity: -10m/s
+Red Final Velocity: -10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+Run: 3
+Coefficient Of Restitution: 50
+Red Initial Velocity: -10m/s Blue Initial Velocity: -10m/s
+Red Final Velocity: -10.0m/s Blue Final Velocity: -10.0m/s
+Red Mass: 1kg Blue Mass: 10kg
+nullRun: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kgRun: 2
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 1kg Blue Mass: 10kgRun: 3
+Coefficient Of Restitution: 50
+Red Initial Velocity: -10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 17.272727272727273m/s Blue Final Velocity: 7.2727272727272725m/s
+Red Mass: 1kg Blue Mass: 10kg
+
+nullRun: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 2
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 3
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+nullRun: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 2
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 3kg Blue Mass: 10kg
+
+Run: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 2
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 1kg Blue Mass: 10kg
+
+Run: 3
+Coefficient Of Restitution: 50
+Red Initial Velocity: -8m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 5.5m/s Blue Final Velocity: -3.5m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 2
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 6kg Blue Mass: 10kg
+
+Run: 3
+Coefficient Of Restitution: 50
+Red Initial Velocity: -10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 8.75m/s Blue Final Velocity: -1.25m/s
+Red Mass: 6kg Blue Mass: 10kg
+
+Run: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
+
+Run: 2
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 1kg Blue Mass: 10kg
+
+Run: 3
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 1kg Blue Mass: 1kg
+
+Run: 1
+Coefficient Of Restitution: 50
+Red Initial Velocity: 10m/s Blue Initial Velocity: 10m/s
+Red Final Velocity: 10.0m/s Blue Final Velocity: 10.0m/s
+Red Mass: 10kg Blue Mass: 10kg
