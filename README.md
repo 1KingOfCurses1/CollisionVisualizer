@@ -9,7 +9,11 @@ A lightweight Java desktop app for **visualizing 2D collision detection** betwee
 ## Features
 - Real-time **2D collision visualization** (e.g., circles / Squares)
 - Step-through / play-pause simulation to inspect exact contact frames
-- Adjustable sizes, velocities, and restitution (elasticity of objects)
+- Adjustable weight (sizes), velocities, and restitution (elasticity of objects)
+- **Collision physics calculations**:
+  - Initial kinetic energy of each shape
+  - Final kinetic energy of each shape after collision
+  - Final velocities (magnitude and direction) of each shape
 - **Collision logging** to `collision_logs.txt` for reproducible test cases
 - Minimal UI with clear overlays: contact points, normals, bounding boxes
 
