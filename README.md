@@ -28,7 +28,7 @@ A lightweight Java desktop app for **visualizing 2D collision detection** betwee
 ---
 
 ## Tech Stack
-- **Java** (desktop app)
+- **Java** 
 - **Ant / NetBeans** project structure (`nbproject/`, `build.xml`)
 - Standard Java2D/Swing for rendering ([or JavaFX if used])
 
