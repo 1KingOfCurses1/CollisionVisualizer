@@ -1,49 +1,30 @@
-/**
- * Shan Truong, Aryan Verma, Jerry Wu
- * June 11, 2024
- * Shape interface that sets all methods abstract shape should implement
- */
 package collisionvisualizer;
 
-//imports
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/**
+ * The Shape interface defines the contract for all physical objects in the simulation.
+ */
 public interface Shape {
+    /** Draws the shape on the provided graphics context. */
+    void draw(Graphics2D g);
     
-    //Abstract method to be implemented by subclasses for drawing the shape
-    public void draw(Graphics2D g);
+    /** Physics update loop for position based on velocity. */
+    void update();
     
-    //Accessor that gets the x position of the shape
-    public double getXPos();
+    // Getters and Setters
+    double getXPos();
+    double getYPos();
+    double getMass();
+    double getVX();
+    double getVY();
+    Color getColour();
     
-    //Accessor that gets the y position of the shape
-    public double getYPos();
-    
-    //Accessor that gets the mass of the shape
-    public double getMass();
-    
-    //Accessor that gets the velocity of the shape
-    public double getVelocity();
-    
-    //Accessor that gets the colour of the shape
-    public Color getColour();
-    
-    //Mutator that sets the x position of the shape
-    public void setXPos(double xPos);
-    
-    //Mutator that sets the y position of the shape
-    public void setYPos(double yPos);
-    
-    //Mutator that sets the mass of the shape
-    public void setMass(double mass);
-    
-    //Mutator that sets the velocity of the shape
-    public void setVelocity(double velocity);
-    
-    //Mutator that sets the colour of the shape
-    public void setColour(Color colour);
-    
-    //to string method to display all attribtues of class 
-    public String toString();
+    void setXPos(double xPos);
+    void setYPos(double yPos);
+    void setMass(double mass);
+    void setVX(double vx);
+    void setVY(double vy);
+    void setColour(Color colour);
 }

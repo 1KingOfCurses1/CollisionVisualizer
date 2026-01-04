@@ -1,402 +1,224 @@
-/**
- * Shan Truong, Aryan Verma, Jerry Wu
- * June 11, 2024
- * Drawing  surface that draws and animates collision
- */
 package collisionvisualizer;
 
-//imports
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JOptionPane;
+import java.awt.RenderingHints;
 import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * A class representing the drawing surface for visualizing collisions.
- * This class extends JPanel and implements Runnable to allow for animation.
+ * Advanced 2D Physics Engine and Drawing Surface.
+ * Handles real-time elastic collisions between bodies and boundary constraints.
  */
 public class DrawingSurface extends JPanel implements Runnable {
 
-    //Final velocity of the first square
-    private double vf1; 
+    // Simulation settings
+    private final int FPS = 60;
+    private final int DELAY = 1000 / FPS;
     
-    //Final velocity of the second square
-    private double vf2; 
+    // Physics Bodies (Using Circles for professional 2D interaction)
+    private List<Circle> bodies = new ArrayList<>();
+    private Circle redBody, blueBody;
     
-    //Elasticity (determines type of elasticity) 
-    private double e;
-    
-    //Thread for handling animation
-    private Thread animator; 
-    
-    //Delay between animation frames in milliseconds
-    private final int DELAY = 3; 
+    // Simulation state
+    private Thread animator;
+    private boolean isRunning = false;
+    private double elasticity = 0.5;
 
-    //Two squares representing the objects in the simulation
-    private Square redSquare, blueSquare; 
-    
-    //Logs for the two x position of two square
-    private String logXPos; 
-    
-    /**
-     * Constructor initializes the drawing surface and the squares.
-     */
     public DrawingSurface() {
-        
-        //Make the panel focusable
-        this.setFocusable(true); 
-        
-        //Request focus for the panel
-        this.requestFocus();
-        
-        //Initialize squares with default values and initial positions (for lines 56 - 62)
-        
-        //Default mass for red square
-        redSquare = new Square(10); 
-        
-        //Default mass for blue square
-        blueSquare = new Square(10);
-
-        //Center red square at (250, 150)
-        centerSquare(redSquare, 250, 150); 
-        
-        //Center blue square at (450, 150)
-        centerSquare(blueSquare, 450, 150); 
+        this.setFocusable(true);
+        initSimulation();
     }
 
-    /**
-     * Accessor that gets the current x location of the red square
-     * @return Current x position of the red square
-     */
-    public double getRedXPos(){
+    private void initSimulation() {
+        bodies.clear();
         
-        //returning red square x posision
-        return redSquare.getXPos();
+        // Initialize professional-grade physics bodies
+        redBody = new Circle(10.0); // Mass 10
+        redBody.setColour(new Color(255, 71, 87));
+        redBody.setRadius(25);
+        
+        blueBody = new Circle(10.0); // Mass 10
+        blueBody.setColour(new Color(30, 144, 255));
+        blueBody.setRadius(25);
+        
+        resetPositions();
+        
+        bodies.add(redBody);
+        bodies.add(blueBody);
     }
 
-    /**
-     * Accessor that gets the current y location of the blue square
-     * @return Current x position of the blue square
-     */
-    public double getBlueXPos(){
+    public void preview(double m1, double m2) {
+        redBody.setMass(m1);
+        redBody.setRadius((int)(m1 * 3) + 15);
+        blueBody.setMass(m2);
+        blueBody.setRadius((int)(m2 * 3) + 15);
         
-        //returning blue square x posision
-        return blueSquare.getXPos();
+        isRunning = false; 
+        resetPositions();
+        repaint();
     }
-    /**
-     * Accessor that returns the log of x positions
-     * @return - string presentation of x position of the squares
-     */
-    public String getLogXPos(){
+
+    private void resetPositions() {
+        int h = getHeight() > 0 ? getHeight() : 200;
+        int w = getWidth() > 0 ? getWidth() : 700;
         
-        //returning log x posision
-        return logXPos;
-    }
-    
-    /**
-     * Mutator for red X Position 
-     * @param redXPos - inputed red x position
-     */
-    public void setRedXPos(double redXPos){
+        redBody.setXPos(100);
+        redBody.setYPos(h / 2 - redBody.getRadius());
         
-        //setting red square x posision
-        redSquare.setXPos(redXPos);
+        blueBody.setXPos(w - 100 - blueBody.getRadius()*2);
+        // Ensure non-zero Y offset for 2D interaction
+        blueBody.setYPos(h / 2 - blueBody.getRadius() + (Math.random() * 40 - 20)); 
     }
-    
-    /**
-     * Mutator for blue X Position
-     * @param blueXPos - inputed blue x position
-     */
-    public void setBlueXPos(double blueXPos){
-        
-        //setting blue square x posision
-        blueSquare.setXPos(blueXPos);
-    }
-    
-    /**
-     * Mutator for log X Position
-     * @param logXPos - inputed log x position
-     */
-    public void setLogXPos(String logXPos){
-        
-        //setting log x posision
-        this.logXPos = logXPos;
-    }
-    
-    /**
-     * Accessor that gets the final velocity of shape 1
-     * @return - final velocity of shape 1
-     */
-    public double getVf1(){
-        
-        //return final velocity of shape 1
-        return vf1;
-    }
-    
-    /**
-     * Accessor that gets the final velocity of shape 2
-     * @return - final velocity of shape 2
-     */
-    public double getVf2(){
-        
-        //return final velocity of shape 2
-        return vf2;
-    }
-    
-    /**
-     * Accessor that gets the type of elasticity (type of collision) 
-     * @return - type of elasticity
-     */
-    public double getE(){
-        
-        //return type of elasticity
-        return e;
-    }
-    
-    /**
-     * Mutator that sets the final velocity of shape 1
-     * @param vf1 - inputed value of the final velocity of shape 1
-     */
-    public void setVf1(double vf1){
-        
-        //setting final velocity of shape 1 to inputed value 
-        this.vf1 = vf1;
-    }
-    
-    /**
-     * Mutator that sets the final velocity of shape 2
-     * @param vf2 - inputed value of the final velocity of shape 2
-     */
-    public void setVf2(double vf2){
-        
-        //setting final velocity of shape 2 to inputed value 
-        this.vf1= vf2;
-    }
-    
-    /**
-     * Mutator that sets the type of elasticity (type of collision) 
-     * @param e - inputed value of the type of elasticity 
-     */
-    public void setE(double e){
-        
-        //setting elasticity to inputed value
-        this.e = e;
-    }
-    
-    /**
-     * Updates the parameters of the squares with new masses and velocities.
-     * @param m1 mass of the red square
-     * @param v1 velocity of the red square
-     * @param m2 mass of the blue square
-     * @param v2 velocity of the blue square
-     * @param e coefficient of restitution (unused in this implementation)
-     */
+
     public void updateParameters(double m1, double v1, double m2, double v2, double e) {
+        this.elasticity = e / 100.0;
         
-        //Update squares with new masses and velocities
-        
-        //updating mass of red square
-        redSquare = new Square(m1);
-        
-        //Update velocity based on input
-        redSquare.setVelocity(v1 / 5); 
-        
-        //updating mass of blue square
-        blueSquare = new Square(m2);
-        
-        //Update velocity based on input
-        blueSquare.setVelocity(v2 / 5); 
+        preview(m1, m2); // Sync sizes and positions
 
-        //Set initial positions to separate the squares
+        // Set velocities
+        redBody.setVX(v1 / 2.0); 
+        redBody.setVY((Math.random() - 0.5) * 3.0); 
         
-        //Set initial position of red square 
-        centerSquare(redSquare, 250, 150);
-        
-        //Set initial position of blue square 
-        centerSquare(blueSquare, 450, 150);
+        blueBody.setVX(v2 / 2.0);
+        blueBody.setVY((Math.random() - 0.5) * 3.0);
 
-        //Repaint the panel to reflect changes
-        repaint(); 
+        isRunning = true;
+        repaint();
     }
 
-    /**
-     * Sets the final velocities of the squares after collision.
-     * @param vf1 final velocity of the red square
-     * @param vf2 final velocity of the blue square
-     */
-    public void drawCollision(double vf1, double vf2,double e) {
-        
-        //Set final velocity for red square
-        this.vf1 = vf1; 
-        
-        //Set final velocity for blue square
-        this.vf2 = vf2; 
-        
-        //set elasticity type 
-        this.e = e;
-    }
-
-    /**
-     * Centers the square at the specified coordinates.
-     *
-     * @param square the square to be centered
-     * @param centerX the x-coordinate of the center position
-     * @param centerY the y-coordinate of the center position
-     */
-    private void centerSquare(Square square, int centerX, int centerY) {
-        
-        //Calculate new x position
-        int newXPos = centerX - (int) (square.getWidth() / 2); 
-        
-        //Calculate new y position
-        int newYPos = centerY - (int) (square.getLength() / 2); 
-        
-        //Set new x position
-        square.setXPos(newXPos);
-        
-        //Set new y position
-        square.setYPos(newYPos); 
-    }
-
-    /**
-     * Performs the drawing operations for the squares.
-     * @param g the Graphics object used for drawing
-     */
-    private void doDrawing(Graphics g) {
-        
-        //casting graphics to graphics2d and assigning to g2s
-        Graphics2D g2d = (Graphics2D) g;
-
-        //Clear the panel
-        g2d.setColor(Color.WHITE);
-        
-        //creating rectangle
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-
-        //Draw the squares at their updated positions
-        
-        //setting colour to red 
-        g2d.setColor(Color.RED);
-        
-        //drawing red square
-        redSquare.draw(g2d);
-        
-        //setting colour to blue
-        g2d.setColor(Color.BLUE);
-        
-        //drawing blue square 
-        blueSquare.draw(g2d);
-    }
-
-    /**
-     * Overrides the paintComponent method to perform custom painting.
-     * @param g the Graphics object used for painting
-     */
     @Override
     protected void paintComponent(Graphics g) {
-        
-        //
         super.paintComponent(g);
-        doDrawing(g);
+        render((Graphics2D) g);
     }
 
-    /**
-     * Updates the positions of the squares.
-     */
-    public void moveObject() {
+    private void render(Graphics2D g2d) {
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        //Update red square's position
-        redSquare.update(); 
+        // Background
+        g2d.setColor(UIUtils.BG_DARK);
+        g2d.fillRect(0, 0, getWidth(), getHeight());
         
-        //Update blue square's position
-        blueSquare.update();
+        drawGrid(g2d);
+
+        for (Circle c : bodies) {
+            drawNeonCircle(g2d, c);
+        }
     }
 
-    /**
-     * Overrides the addNotify method to start the animation thread.
-     */
+    private void drawGrid(Graphics2D g2d) {
+        g2d.setStroke(new java.awt.BasicStroke(1));
+        g2d.setColor(new Color(255, 255, 255, 10)); // Subtle grid matching UIUtils
+        for (int i = 0; i < getWidth(); i += 40) {
+            g2d.drawLine(i, 0, i, getHeight());
+        }
+        for (int j = 0; j < getHeight(); j += 40) {
+            g2d.drawLine(0, j, getWidth(), j);
+        }
+    }
+
+    private void drawNeonCircle(Graphics2D g2d, Circle c) {
+        int x = (int) c.getXPos();
+        int y = (int) c.getYPos();
+        int r = c.getRadius();
+        Color col = c.getColour();
+
+        // Glow
+        for (int i = 1; i <= 8; i++) {
+            g2d.setColor(new Color(col.getRed(), col.getGreen(), col.getBlue(), 40 / i));
+            g2d.drawOval(x - i, y - i, r*2 + i*2, r*2 + i*2);
+        }
+
+        g2d.setColor(col);
+        g2d.fillOval(x, y, r*2, r*2);
+        
+        // Shine
+        g2d.setColor(new Color(255, 255, 255, 80));
+        g2d.drawArc(x + 5, y + 5, r*2 - 10, r*2 - 10, 100, 50);
+    }
+
     @Override
     public void addNotify() {
         super.addNotify();
-        
-        //Create a new thread for animation
-        animator = new Thread(this); 
-        
-        //Start the animation thread
+        animator = new Thread(this);
         animator.start();
     }
 
-    /**
-     * The run method for the animation thread.
-     * This method updates the squares' positions and repaints the screen at regular intervals.
-     */
     @Override
     public void run() {
-        long beforeTime, timeDiff, sleep;
-        
-        //Record the start time
-        beforeTime = System.currentTimeMillis(); 
-        
-        //loop while true
         while (true) {
-            
-            // Update the squares' positions
-            moveObject();
-            
-            //keeping a log of the positions not implemented
-            logXPos += "Red: " + redSquare.getXPos () + " Blue: " + redSquare.getXPos () + "\n";
-
-            // Check squares are within a +-5 range of each other 
-            if ((redSquare.getXPos() + redSquare.getLength()) <=  (blueSquare.getXPos() + 5)
-                    && (redSquare.getXPos() + redSquare.getLength()) >=  (blueSquare.getXPos() - 5)){
-                
-                //if the square values are not equal and the collision is completely inelastic 
-                if((redSquare.getXPos() + redSquare.getLength()) !=  blueSquare.getXPos() && e == 0){
-                    
-                    //set red square to blue square posision (right side of red square to left side of blue square) 
-                    redSquare.setXPos(blueSquare.getXPos() - (int)(redSquare.getLength()));
-                }
-                
-                //setting red square velocity to its finial velocity 
-                redSquare.setVelocity(vf1 / 5);
-                
-                //setting blue square velocity to its finial velocity 
-                blueSquare.setVelocity(vf2 / 5);
+            if (isRunning) {
+                updatePhysics();
             }
-
-            // Redraw the screen
             repaint();
-
-            //Calculate time difference
-            timeDiff = System.currentTimeMillis() - beforeTime;
-            
-            //Calculate sleep time
-            sleep = DELAY - timeDiff; 
-
-            //if sleep time is less than zero 
-            if (sleep < 0) {
-                
-                //Set minimum sleep time
-                sleep = 2; 
-            }
-
-            //trying to control frame rate
             try {
-                
-                //Sleep to control frame rate
-                Thread.sleep(sleep); 
-            } 
-            
-            //if an error occurs 
-            catch (InterruptedException e) {
-                
-                //display error message
-                JOptionPane.showMessageDialog(this, "Thread interrupted: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+                Thread.sleep(DELAY);
+            } catch (InterruptedException ex) {}
+        }
+    }
 
-            //Record the start time of the next frame
-            beforeTime = System.currentTimeMillis(); 
+    private void updatePhysics() {
+        // 1. Boundary Collisions
+        for (Circle c : bodies) {
+            c.update();
+            
+            // Wall bounce X
+            if (c.getXPos() <= 0 || c.getXPos() + c.getRadius()*2 >= getWidth()) {
+                c.setVX(-c.getVX() * 0.95); // Slight energy loss on wall hit
+                c.setXPos(c.getXPos() <= 0 ? 0 : getWidth() - c.getRadius()*2);
+            }
+            // Wall bounce Y
+            if (c.getYPos() <= 0 || c.getYPos() + c.getRadius()*2 >= getHeight()) {
+                c.setVY(-c.getVY() * 0.95);
+                c.setYPos(c.getYPos() <= 0 ? 0 : getHeight() - c.getRadius()*2);
+            }
+        }
+
+        // 2. Circle-Circle Collision (2D Elastic)
+        checkCollision(redBody, blueBody);
+    }
+
+    private void checkCollision(Circle c1, Circle c2) {
+        double dx = (c2.getXPos() + c2.getRadius()) - (c1.getXPos() + c1.getRadius());
+        double dy = (c2.getYPos() + c2.getRadius()) - (c1.getYPos() + c1.getRadius());
+        double distance = Math.sqrt(dx*dx + dy*dy);
+        double minDistance = c1.getRadius() + c2.getRadius();
+
+        if (distance < minDistance) {
+            // Resolve overlap (static resolution)
+            double overlap = minDistance - distance;
+            double nx = dx / distance; // Normal X
+            double ny = dy / distance; // Normal Y
+            
+            c1.setXPos(c1.getXPos() - nx * overlap / 2);
+            c1.setYPos(c1.getYPos() - ny * overlap / 2);
+            c2.setXPos(c2.getXPos() + nx * overlap / 2);
+            c2.setYPos(c2.getYPos() + ny * overlap / 2);
+
+            // Resolve velocity (dynamic resolution)
+            // Normal velocity components
+            double v1n = c1.getVX() * nx + c1.getVY() * ny;
+            double v2n = c2.getVX() * nx + c2.getVY() * ny;
+
+            // Elastic collision formula for normal components
+            double m1 = c1.getMass();
+            double m2 = c2.getMass();
+            
+            double v1nAfter = (v1n * (m1 - m2) + 2 * m2 * v2n) / (m1 + m2);
+            double v2nAfter = (v2n * (m2 - m1) + 2 * m1 * v1n) / (m1 + m2);
+
+            // Apply elasticity (coefficient of restitution)
+            v1nAfter *= elasticity;
+            v2nAfter *= elasticity;
+
+            // Convert back to X,Y components
+            c1.setVX(c1.getVX() + (v1nAfter - v1n) * nx);
+            c1.setVY(c1.getVY() + (v1nAfter - v1n) * ny);
+            c2.setVX(c2.getVX() + (v2nAfter - v2n) * nx);
+            c2.setVY(c2.getVY() + (v2nAfter - v2n) * ny);
         }
     }
 }

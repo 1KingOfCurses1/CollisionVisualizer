@@ -18,15 +18,9 @@ public class Square extends AbstractShape {
      * Default constructor initializing the square to default values.
      */
     public Square() {
-        
-        //invoking primary method of super class
         super();
-        
-        //assigning default value to length 
-        this.length = 0;
-        
-        //assigning default value to width 
-        this.width = 0;
+        this.length = 20;
+        this.width = 20;
     }
 
     /**
@@ -46,14 +40,11 @@ public class Square extends AbstractShape {
         this.width = width;
     }
 
-    /**
-     * Secondary constructor initializing the square with a specific mass and deriving its dimensions.
-     * @param mass - the mass of the square
-     */
     public Square(double mass){
-        
-        length = (int) mass * 10; // Size derived from mass for visualization
-        width = (int) mass * 10;  // Size derived from mass for visualization
+        this();
+        this.mass = mass;
+        this.length = (int) (mass * 10);
+        this.width = (int) (mass * 10);
     }
     /**
      * Gets the length of the square.
@@ -93,12 +84,7 @@ public class Square extends AbstractShape {
         //assigning inputed value to width 
         this.width = width;
     }
-    /**
-     * Updates the position of the square in 1D space based on its velocity.
-     */
-    public void update() {
-        this.xPos += this.velocity; // Update position in 1D space
-    }
+    // Inherited update() handles 2D movement now
     /**
      * Creates a clone of the current square.
      * @return a new Square object with the same attributes as the current one
@@ -112,14 +98,15 @@ public class Square extends AbstractShape {
         return clone;
     }
     /**
-     * Checks if the current square is equal to another object.
-     * @param s - shape to check equals
-     * @return true if the objects are equal, false otherwise
+     * Checks if the current square is equal to another square.
+     * Compares both inherited attributes and square-specific dimensions.
+     * @param s - square to compare with
+     * @return true if the squares are equal, false otherwise
      */
     public boolean equals(Square s) {
         
-        //returning if the other square has the same attribute values as this square
-        return s.length == length && s.width == width;
+        // Compare inherited attributes and square-specific dimensions
+        return super.equals(s) && s.length == length && s.width == width;
     }
     /**
      * Provides a string representation of the square.
@@ -137,7 +124,10 @@ public class Square extends AbstractShape {
      */
     public void draw(Graphics2D g2d) {
         
-        //drawing square with specific position and size
-        g2d.fillRect(((int) (Math.round(xPos))), ((int) (Math.round(yPos))), width, length);
+        // Set the color for the square
+        g2d.setColor(colour);
+        
+        // Draw the filled rectangle at the current position with the specified dimensions
+        g2d.fillRect((int) Math.round(xPos), (int) Math.round(yPos), width, length);
     }
 }

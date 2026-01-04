@@ -6,6 +6,7 @@
 package collisionvisualizer;
 
 // Imports
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 
@@ -19,31 +20,27 @@ public class Circle extends AbstractShape {
      * Primary constructor initializing the circle to default values.
      */
     public Circle() {
-        
-        //invoking primary method of super class
         super();
-        
-        radius = 0; // Radius is set to 0
+        radius = 10; 
     }
 
     /**
-     * Secondary 
-     * @param radius 
+     * Secondary constructor to set a specific integer radius.
+     * @param radius - the radius of the circle
      */
-    public Circle(int radius){
+    public Circle(int radius) {
         
-        //Chains to the primary constructor
+        // Chain to the primary constructor to initialize inherited attributes
         this();
         
-        //setting value to radius attribute to inputed value
+        // Set the radius to the inputted value
         this.radius = radius;
     }
-    /**
-     * Tertiary constructor initializing the circle with a specific radius.
-     * @param radius - radius of the circle
-     */
-    public Circle(double radius) {
-        this.radius = (int)mass * 10; // Sets the radius based off of mass
+
+    public Circle(double mass) {
+        this();
+        this.mass = mass;
+        this.radius = (int) (mass * 5); // Balanced scaling
     }
 
     /**
@@ -103,11 +100,19 @@ public class Circle extends AbstractShape {
         g2d.fillOval(((int)(Math.round(xPos))), ((int)(Math.round(yPos))), radius * 2, radius * 2); // Draw a filled oval representing the circle
     }
 
+    // inherited update() from AbstractShape is sufficient now for 2D movement
+    
     /**
-     * Update method to update the circle's position based on its velocity.
+     * Helper to draw glowing shapes
      */
-    public void update() {
-        xPos += velocity; // Update the x position based on the velocity
+    protected void drawGlow(Graphics2D g2d, int x, int y, int size, Color c) {
+        float[] fractions = {0.0f, 1.0f};
+        Color[] colors = {new Color(c.getRed(), c.getGreen(), c.getBlue(), 100), new Color(c.getRed(), c.getGreen(), c.getBlue(), 0)};
+        java.awt.RadialGradientPaint paint = new java.awt.RadialGradientPaint(x + size/2, y + size/2, size, fractions, colors);
+        g2d.setPaint(paint);
+        g2d.fillOval(x - size/2, y - size/2, size * 2, size * 2);
+        g2d.setColor(c);
+        g2d.fillRect(x, y, size, size);
     }
 
 }
